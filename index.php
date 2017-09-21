@@ -1,5 +1,6 @@
 <?php include 'head.php'; ?>
 <?php 
+//PRUEBA DE FETCH GITHUB
 session_start();
 if(isset($_SESSION['tipo_usu']))
 {
