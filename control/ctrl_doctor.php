@@ -15,16 +15,6 @@ function insertPaciente()
 	include 'conexion.php';
 	$con = new Conexion();
 	$edad = CalcularEdad($_POST['naci_paci']);
-	if($_POST['ref_exp']=='SI')
-	{
-		//enviar notif
-		require 'ctrl_notificacion.php';
-		enviarNotificacion($_POST['nombre_paci'].' '.$_POST['paterno_paci'].' '.$_POST['materno_paci']);
-		date_default_timezone_set('America/Mexico_City');
-  		$ref_exp=date('Y-m-d H:i:s');
-	}else{
-		$ref_exp=NULL;
-	}
 	$sql="INSERT INTO paciente (
 		fecha_reg,
 		nombre_paci,
@@ -76,9 +66,11 @@ function insertPaciente()
 		dir_cont,
 		par_cont,
 		tel_cont,
-		com_cont,	
+		com_cont,
+
 		pase_id,
 		pase_tot,
+
 		part_a,
 		part_b,
 		part_c,
@@ -87,7 +79,7 @@ function insertPaciente()
 		axa_sant,
 		axa_condu,
 		banor,
-		bance,
+		banse,
 		bnci,
 		emp,
 		gpo_med,
@@ -105,6 +97,7 @@ function insertPaciente()
 		vita_bancom_san,
 		vita_memb,
 		zurich,
+
 		d_a1,
 		d_b2,
 		d_c3,
@@ -133,17 +126,19 @@ function insertPaciente()
 		d_a26,
 		d_b27,
 		d_c28,
+
 		edo_exp,
+
 		hc_peso,
 		hc_talla,
 		hc_ta,
 		hc_fc,
 		hc_fr,
-		hc_temp,
+		hc_tem,
 		hc_fum,
 		hc_ant_fam,
-		hc_atn_per_no_p,
-		hc_atn_per_p,
+		hc_ant_per_no_p,
+		hc_ant_per_p,
 		hc_pad,
 		hc_exp_fis,
 		hc_otros,
@@ -203,8 +198,10 @@ function insertPaciente()
 		'$_POST[par_cont]',
 		'$_POST[tel_cont]',
 		'$_POST[com_cont]',
+
 		'$_POST[pase_id]',
 		'$_POST[pase_tot]',
+
 		'$_POST[part_a]',
 		'$_POST[part_b]',
 		'$_POST[part_c]',
@@ -213,7 +210,7 @@ function insertPaciente()
 		'$_POST[axa_sant]',
 		'$_POST[axa_condu]',
 		'$_POST[banor]',
-		'$_POST[bance]',
+		'$_POST[banse]',
 		'$_POST[bnci]',
 		'$_POST[emp]',
 		'$_POST[gpo_med]',
@@ -231,11 +228,11 @@ function insertPaciente()
 		'$_POST[vita_bancom_san]',
 		'$_POST[vita_memb]',
 		'$_POST[zurich]',
+
 		'$_POST[d_a1]',
 		'$_POST[d_b2]',
 		'$_POST[d_c3]',
 		'$_POST[d_d4]',
-		'$_POST[d_e5]',
 		'$_POST[d_e5]',
 		'$_POST[d_f6]',
 		'$_POST[d_g7]',
@@ -260,24 +257,25 @@ function insertPaciente()
 		'$_POST[d_a26]',
 		'$_POST[d_b27]',
 		'$_POST[d_c28]',
+
 		'$_POST[edo_exp]',
+
 		'$_POST[hc_peso]',
 		'$_POST[hc_talla]',
 		'$_POST[hc_ta]',
 		'$_POST[hc_fc]',
 		'$_POST[hc_fr]',
-		'$_POST[hc_temp]',
+		'$_POST[hc_tem]',
 		'$_POST[hc_fum]',
 		'$_POST[hc_ant_fam]',
-		'$_POST[hc_atn_per_no_p]',
-		'$_POST[hc_atn_per_p]',
+		'$_POST[hc_ant_per_no_p]',
+		'$_POST[hc_ant_per_p]',
 		'$_POST[hc_pad]',
 		'$_POST[hc_exp_fis]',
 		'$_POST[hc_otros]',
 		'$_POST[hc_rx]',
 		'$_POST[hc_dx]',
 		'$_POST[hc_tx]'
-
 	)";
 	if($con->insert($sql))
 	{
@@ -285,5 +283,9 @@ function insertPaciente()
 	}else{
 		echo "Error: ".$sql;
 	}
+}
+function CalcularEdad( $fecha ) {
+    list($Y,$m,$d) = explode("-",$fecha);
+    return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 }
  ?>

@@ -370,7 +370,7 @@ if(isset($_SESSION['tipo_usu']))
 <tr>
 <td colspan="3">
 <label>FUM</label>
-<input type="date"  name="hc_fun" class="form-control">
+<input type="date"  name="hc_fum" class="form-control">
 </td>
 </tr>
 </table>
