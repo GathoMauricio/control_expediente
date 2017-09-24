@@ -31,9 +31,15 @@ if(isset($_SESSION['tipo_usu']))
 <h4>Menú de Asistente.</h4>
 Estas son las opciones  disponibles para el menú de asistente.
 <br><br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="openNuevoPaciente();">Nuevo paciente</button>
+<button style="width:100%;" class="btn btn-primary" onclick="openNuevoPaciente();">
+  <span class="icon-user-plus"></span> 
+  Nuevo paciente
+</button>
 <br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="expedientes();">Enviar a buzón</button>
+<button style="width:100%;" class="btn btn-primary" onclick="expedientes();">
+  <span class="icon-users"></span> 
+  Catálogo de pacientes
+</button>
 <br><br><br>
 </div>
 </center>

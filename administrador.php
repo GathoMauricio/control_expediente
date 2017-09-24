@@ -31,9 +31,25 @@ if(isset($_SESSION['tipo_usu']))
 <h4>Menú de administración.</h4>
 Estas son las opciones que tenemos disponibles para el menú de administración.
 <br><br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="openNuevoUsuario();">Crear nuevo usuario</button>
+<button style="width:100%;" class="btn btn-primary" onclick="openNuevoUsuario();"> 
+	<span class="icon-user-plus"></span> 
+	Crear nuevo usuario
+</button>
 <br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="openVerUsuarios();">Ver usuarios</button>
+<button style="width:100%;" class="btn btn-primary" onclick="openVerUsuarios();">
+	<span class="icon-users"></span> 
+	Catálogo de usuarios
+</button>
+<br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="openImportarBd();">
+	<span class="icon-upload3"></span> 
+	Importar base de datos
+</button>
+<br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="ExportarBd();">
+	<span class="icon-download3"></span> 
+	Exportar base de datos
+</button>
 <!--	<br><br>
 <button style="width:100%;" class="btn btn-primary">Cambiar contraseña</button>-->
 <br><br><br>

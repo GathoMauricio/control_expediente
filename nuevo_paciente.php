@@ -153,6 +153,186 @@ Enviar a lista de espera (Buzón):
 </td>
 </tr>
 </table>
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Otros datos</label></td></tr>
+<tr>
+<td>
+<label>Escolaridad</label>
+<input type="text"  name="esco" class="form-control" >
+</td>
+<td>
+<label>Religión</label>
+<input type="text"  name="reli" class="form-control" >
+</td>
+</tr>
+<tr>
+<td>
+<label>Ocupación</label>
+<input type="text"  name="ocupa" class="form-control" >
+</td>
+<td>
+<label>¿Comó conoció?</label>
+<input type="text"  name="conocio" class="form-control" >
+</td>
+</tr>
+<tr>
+<td>
+<label>Estado civil</label>
+<input type="text"  name="edo_civ" class="form-control" >
+</td>
+<td>
+<label>Correo electrónico</label>
+<input type="text"  name="correo" class="form-control" >
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<label>Comentarios</label>
+<textarea class="form-control" name="comenta"></textarea>
+</td>
+</tr>
+</table>
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Datos del padre</label></td></tr>
+<tr>
+<td>
+<label>Nombre</label>
+<input type="text"  name="nom_pad" class="form-control" >
+</td>
+<td>
+<label>Ocupación</label>
+<input type="text"  name="ocu_pad" class="form-control" >
+</td>
+</tr>
+<tr>
+<td>
+<label>Edad</label>
+<input type="text"  name="edad_pad" class="form-control" >
+</td>
+<td>
+<label>Teléfono</label>
+<input type="text"  name="tel_pad" class="form-control" >
+</td>
+</tr>
+</table>
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Datos del madre</label></td></tr>
+<tr>
+<td>
+<label>Nombre</label>
+<input type="text"  name="nom_mad" class="form-control" >
+</td>
+<td>
+<label>Ocupación</label>
+<input type="text"  name="ocu_mad" class="form-control" >
+</td>
+</tr>
+<tr>
+<td>
+<label>Edad</label>
+<input type="text"  name="edad_mad" class="form-control" >
+</td>
+<td>
+<label>Teléfono</label>
+<input type="text"  name="tel_mad" class="form-control" >
+</td>
+</tr>
+</table>
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Datos del cónyuge</label></td></tr>
+<tr>
+<td>
+<label>Nombre</label>
+<input type="text"  name="nom_cony" class="form-control" >
+</td>
+<td>
+<label>Ocupación</label>
+<input type="text"  name="ocu_cony" class="form-control" >
+</td>
+</tr>
+<tr>
+<td>
+<label>Edad</label>
+<input type="text"  name="edad_cony" class="form-control" >
+</td>
+<td>
+<label>Teléfono</label>
+<input type="text"  name="tel_cony" class="form-control" >
+</td>
+</tr>
+</table>
+
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Hermanos</label></td></tr>
+<tr>
+<td>
+<label>Detalle de hermanos</label>
+<textarea class="form-control" name="det_hero"></textarea>
+</td>
+<td>
+<label>Detalle de hermanas</label>
+<textarea class="form-control" name="det_hera"></textarea>
+</td>
+</tr>
+<tr><td colspan="2" style="text-align:center;"><label>Hijos</label></td></tr>
+<tr>
+<td>
+<label>Detalle de hijos</label>
+<textarea class="form-control" name="det_hijo"></textarea>
+</td>
+<td>
+<label>Detalle de hijas</label>
+<textarea class="form-control" name="det_hija"></textarea>
+</td>
+</tr>
+</table>
+
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Sangre y alergias</label></td></tr>
+<tr>
+<td>
+<label>Tipo de sangro</label>
+<input type="text"  name="sangre" class="form-control" >
+</td>
+<td>
+<label>Alergias</label>
+<input type="text"  name="alergia" class="form-control" >
+</td>
+</tr>
+<tr>
+</tr>
+</table>
+<table class="table" style="width:100%;">
+<tr><td colspan="2" style="text-align:center;"><label>Contacto en caso de urgencias</label></td></tr>
+<tr>
+<td colspan="2">
+<label>Nombre</label>
+<input type="text"  name="nom_cont" class="form-control">
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<label>Dirección</label>
+<textarea class="form-control" name="dir_cont"></textarea>
+</td>
+</tr>
+<tr>
+<td>
+<label>Parentezco</label>
+<input type="text"  name="par_cont" class="form-control">
+</td>
+<td>
+<label>Teléfono</label>
+<input type="text"  name="tel_cont" class="form-control">
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<label>Comentarios</label>
+<textarea class="form-control" name="com_cont"></textarea>
+</td>
+</tr>
+</table>
 <input type="submit" class="btn btn-primary" style="width:100%;">
 </form>
 <?php include 'footer.php'; ?> 
