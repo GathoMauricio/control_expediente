@@ -291,7 +291,7 @@ Enviar a lista de espera (Buzón):
 <tr><td colspan="2" style="text-align:center;"><label>Sangre y alergias</label></td></tr>
 <tr>
 <td>
-<label>Tipo de sangro</label>
+<label>Tipo de sangre</label>
 <input type="text"  name="sangre" class="form-control" >
 </td>
 <td>
@@ -342,6 +342,7 @@ $(document).ready(function(){
     e.preventDefault();
     $.post('control/ctrl_asistente.php?e=insertPaciente',$("#form_nuevo_paciente_asistente").serialize(),function(data){
       swal('Aviso',data);
+      //console.log(data);
       $("#form_nuevo_paciente_asistente")[0].reset();
     });
   });

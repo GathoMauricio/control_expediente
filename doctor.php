@@ -12,7 +12,46 @@ if(isset($_SESSION['tipo_usu']))
 	header('Location: index.php');
 }
  ?>
- <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
+
+<style type="text/css">
+.contenedor_menu_asistente{
+  padding: 20px;
+  width: 60%;
+  background-color: white;
+  text-align: left;
+  opacity: 0.9;
+  box-shadow: 5px 5px 15px #0080FF;
+  border-style: outset;
+}
+</style>
+<center>
+<br><br><br><br>
+<div class="contenedor_menu_asistente">
+<label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
+<label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
+<h4>Menú de Doctor.</h4>
+Estas son las opciones  disponibles para el menú de doctor.
+<br><br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="openNuevoPaciente();">
+  <span class="icon-user-plus"></span> 
+  Nuevo paciente
+</button>
+<br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="expedientes();">
+  <span class="icon-users"></span> 
+  Catálogo de pacientes
+</button>
+<br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="expedientes();">
+  <span class="icon-file-excel"></span> 
+  Exportar lista de pacientes
+</button>
+<br><br><br>
+</div>
+</center>
+
+
+<audio id="tono_mensaje" src="sound/tono.mp3"></audio>
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
   <script>
     // Enable pusher logging - don't include this in production
@@ -59,5 +98,13 @@ if(isset($_SESSION['tipo_usu']))
          		pedirPermisoNotificar();
 			}
 		});
+	}
+	function openNuevoPaciente()
+	{
+	  window.location="nuevo_paciente_doc.php";
+	}
+	function expedientes()
+	{
+	  window.location="expedientes_doc.php";
 	}
   </script>
