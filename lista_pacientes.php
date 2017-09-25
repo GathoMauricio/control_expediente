@@ -1,7 +1,7 @@
 <?php
 
 header("Content-type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=Reporte_Personal_usuarios.xls");
+header("Content-Disposition: attachment; filename=Catalogo_de_pacientes.xls");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -52,7 +52,7 @@ header("Content-Disposition: attachment; filename=Reporte_Personal_usuarios.xls"
     <td><strong>Ocupación de conyuge</strong></td>
     <td><strong>Edad de conyuge</strong></td>
     <td><strong>Teléfono de conyuge</strong></td>
-    <td><strong>Detalles de hermanos</strong></td>40
+    <td><strong>Detalles de hermanos</strong></td>
     <td><strong>Detalles de hermanas</strong></td>
     <td><strong>Detalles de hijos</strong></td>
     <td><strong>Detalles de hijas</strong></td>
@@ -148,6 +148,130 @@ while($fila=mysqli_fetch_array($datos))
 	echo 
 "<tr>
     <td>".$fila['nombre_paci']."</td>
+    <td>".$fila['paterno_paci']."</td>
+    <td>".$fila['materno_paci']."</td>
+    <td>".$fila['sex_paci']."</td>
+    <td>".$fila['naci_paci']."</td>
+    <td>".$fila['edad_paci']."</td>
+    <td>".$fila['lugar_paci']."</td>
+    <td>".$fila['rfc_paci']."</td>
+    <td>".$fila['curp_paci']."</td>
+    <td>".$fila['titular']."</td>
+    <td>".$fila['tel_cel']."</td>
+    <td>".$fila['tel_cas']."</td>
+    <td>".$fila['tel_ofi']."</td>
+    <td>".$fila['tel_otro']."</td>
+    <td>".$fila['calle']."</td>
+    <td>".$fila['no_ext']."</td>
+    <td>".$fila['no_int']."</td>
+    <td>".$fila['col']."</td>
+    <td>".$fila['mun']."</td>
+    <td>".$fila['edo_dir']."</td>
+    <td>".$fila['esco']."</td>
+    <td>".$fila['ocupa']."</td>
+    <td>".$fila['edo_civ']."</td>
+    <td>".$fila['comenta']."</td>
+    <td>".$fila['reli']."</td>
+    <td>".$fila['conocio']."</td>
+    <td>".$fila['correo']."</td>
+    <td>".$fila['nom_pad']."</td>
+    <td>".$fila['ocu_pad']."</td>
+    <td>".$fila['edad_pad']."</td>
+    <td>".$fila['tel_pad']."</td>
+    <td>".$fila['nom_mad']."</td>
+    <td>".$fila['ocu_mad']."</td>
+    <td>".$fila['edad_mad']."</td>
+    <td>".$fila['tel_mad']."</td>
+    <td>".$fila['nom_cony']."</td>
+    <td>".$fila['ocu_cony']."</td>
+    <td>".$fila['edad_cony']."</td>
+    <td>".$fila['tel_cony']."</td>
+    <td>".$fila['det_hero']."</td>
+    <td>".$fila['det_hera']."</td>
+    <td>".$fila['det_hijo']."</td>
+    <td>".$fila['det_hija']."</td>
+    <td>".$fila['alergia']."</td>
+    <td>".$fila['sangre']."</td>
+    <td>".$fila['nom_cont']."</td>
+    <td>".$fila['dir_cont']."</td>
+    <td>".$fila['par_cont']."</td>
+    <td>".$fila['tel_cont']."</td>
+    <td>".$fila['com_cont']."</td>
+    <td>".$fila['pase_id']."</td>
+    <td>".$fila['pase_tot']."</td>
+    <td>".$fila['part_a']."</td>
+    <td>".$fila['part_b']."</td>
+    <td>".$fila['part_c']."</td>
+    <td>".$fila['altec']."</td>
+    <td>".$fila['altes']."</td>
+    <td>".$fila['axa_sant']."</td>
+    <td>".$fila['axa_condu']."</td>
+    <td>".$fila['banor']."</td>
+    <td>".$fila['banse']."</td>
+    <td>".$fila['bnci']."</td>
+    <td>".$fila['emp']."</td>
+    <td>".$fila['gpo_med']."</td>
+    <td>".$fila['gpo_med_doc']."</td>
+    <td>".$fila['gpo_med_pro']."</td>
+    <td>".$fila['gpo_med_alm']."</td>
+    <td>".$fila['inse']."</td>
+    <td>".$fila['s_inves_cob']."</td>
+    <td>".$fila['s_inves_no_cob']."</td>
+    <td>".$fila['serfin']."</td>
+    <td>".$fila['tepe']."</td>
+    <td>".$fila['vita_afo']."</td>
+    <td>".$fila['vita_bancom_ope']."</td>
+    <td>".$fila['vita_banam']."</td>
+    <td>".$fila['vita_bancom_san']."</td>
+    <td>".$fila['vita_memb']."</td>
+    <td>".$fila['zurich']."</td>
+    <td>".$fila['d_a1']."</td>
+    <td>".$fila['d_a1']."</td>
+    <td>".$fila['d_b2']."</td>
+    <td>".$fila['d_c3']."</td>
+    <td>".$fila['d_d4']."</td>
+    <td>".$fila['d_e5']."</td>
+    <td>".$fila['d_f6']."</td>
+    <td>".$fila['d_g7']."</td>
+    <td>".$fila['d_h8']."</td>
+    <td>".$fila['d_i9']."</td>
+    <td>".$fila['d_j10']."</td>
+    <td>".$fila['d_k11']."</td>
+    <td>".$fila['d_l12']."</td>
+    <td>".$fila['d_m13']."</td>
+    <td>".$fila['d_n14']."</td>
+    <td>".$fila['d_o15']."</td>
+    <td>".$fila['d_p16']."</td>
+    <td>".$fila['d_q17']."</td>
+    <td>".$fila['d_r18']."</td>
+    <td>".$fila['d_s19']."</td>
+    <td>".$fila['d_t20']."</td>
+    <td>".$fila['d_u21']."</td>
+    <td>".$fila['d_v22']."</td>
+    <td>".$fila['d_x23']."</td>
+    <td>".$fila['d_y24']."</td>
+    <td>".$fila['d_z25']."</td>
+    <td>".$fila['d_a26']."</td>
+    <td>".$fila['d_b27']."</td>
+    <td>".$fila['d_c28']."</td>
+    <td>".$fila['edo_exp']."</td>
+    <td>".$fila['ref_exp']."</td>
+    <td>".$fila['hc_peso']."</td>
+    <td>".$fila['hc_talla']."</td>
+    <td>".$fila['hc_ta']."</td>
+    <td>".$fila['hc_fc']."</td>
+    <td>".$fila['hc_fr']."</td>
+    <td>".$fila['hc_tem']."</td>
+    <td>".$fila['hc_fum']."</td>
+    <td>".$fila['hc_ant_fam']."</td>
+    <td>".$fila['hc_ant_per_no_p']."</td>
+    <td>".$fila['hc_ant_per_p']."</td>
+    <td>".$fila['hc_pad']."</td>
+    <td>".$fila['hc_exp_fis']."</td>
+    <td>".$fila['hc_otros']."</td>
+    <td>".$fila['hc_rx']."</td>
+    <td>".$fila['hc_dx']."</td>
+    <td>".$fila['hc_tx']."</td>
 </tr>";
 }
  ?> 
