@@ -114,7 +114,7 @@ function enviarBuzon(id_paciente)
 }
 function verConsultas(id_paciente)
 {
-
+  window.location = "consultas.php?id_paciente="+id_paciente;
 }
 function editarPacienteAsistente(id_paciente)
 {
