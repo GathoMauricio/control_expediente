@@ -5,7 +5,7 @@ switch ($_GET['e']) {
 	case 'insertPaciente': insertPaciente(); break;
 	//case 'buscarPaciente': buscarPaciente(); break;
 	//case 'enviarBuzon': enviarBuzon(); break;
-	//case 'updatePaciente': updatePaciente(); break;
+	case 'updatePaciente': updatePaciente(); break;
 	//case 'deletePaciente': deletePaciente(); break;
 }	
 }
@@ -283,6 +283,149 @@ function insertPaciente()
 	}else{
 		echo "Error: ".$sql;
 	}
+}
+function updatePaciente()
+{
+	include 'conexion.php';
+	$con = new Conexion();
+	$edad = CalcularEdad($_POST['naci_paci']);
+	$sql="UPDATE paciente SET
+		nombre_paci='$_POST[nombre_paci]',
+		paterno_paci='$_POST[paterno_paci]',
+		materno_paci='$_POST[materno_paci]',
+		sex_paci='$_POST[sex_paci]',
+		naci_paci='$_POST[naci_paci]',
+		edad_paci='$edad',
+		lugar_paci='$_POST[lugar_paci]',
+		rfc_paci='$_POST[rfc_paci]',
+		curp_paci='$_POST[curp_paci]',
+		titular='$_POST[titular]',
+		tel_cel='$_POST[tel_cel]',
+		tel_cas='$_POST[tel_cas]',
+		tel_ofi='$_POST[tel_ofi]',
+		tel_otro='$_POST[tel_otro]',
+		calle='$_POST[calle]',
+		no_ext='$_POST[no_ext]',
+		no_int='$_POST[no_int]',
+		col='$_POST[col]',
+		mun='$_POST[mun]',
+		edo_dir='$_POST[edo_dir]',
+		esco='$_POST[esco]',
+		ocupa='$_POST[ocupa]',
+		edo_civ='$_POST[edo_civ]',
+		comenta='$_POST[comenta]',
+		reli='$_POST[reli]',
+		conocio='$_POST[conocio]',
+		correo='$_POST[correo]',
+		nom_pad='$_POST[nom_pad]',
+		ocu_pad='$_POST[ocu_pad]',
+		edad_pad='$_POST[edad_pad]',
+		tel_pad='$_POST[tel_pad]',
+		nom_mad='$_POST[nom_mad]',
+		ocu_mad='$_POST[ocu_mad]',
+		edad_mad='$_POST[edad_mad]',
+		tel_mad='$_POST[tel_mad]',
+		nom_cony='$_POST[nom_cony]',
+		ocu_cony='$_POST[ocu_cony]',
+		edad_cony='$_POST[edad_cony]',
+		tel_cony='$_POST[tel_cony]',
+		det_hero='$_POST[det_hero]',
+		det_hera='$_POST[det_hera]',
+		det_hijo='$_POST[det_hijo]',
+		det_hija='$_POST[det_hija]',
+		sangre='$_POST[sangre]',
+		alergia='$_POST[alergia]',
+		nom_cont='$_POST[nom_cont]',
+		dir_cont='$_POST[dir_cont]',
+		par_cont='$_POST[par_cont]',
+		tel_cont='$_POST[tel_cont]',
+		com_cont='$_POST[com_cont]',
+
+		pase_id='$_POST[pase_id]',
+		pase_tot='$_POST[pase_tot]',
+
+		part_a='$_POST[part_a]',
+		part_b='$_POST[part_b]',
+		part_c='$_POST[part_c]',
+		altec='$_POST[altec]',
+		altes='$_POST[altes]',
+		axa_sant='$_POST[axa_sant]',
+		axa_condu='$_POST[axa_condu]',
+		banor='$_POST[banor]',
+		banse='$_POST[banse]',
+		bnci='$_POST[bnci]',
+		emp='$_POST[emp]',
+		gpo_med='$_POST[gpo_med]',
+		gpo_med_doc='$_POST[gpo_med_doc]',
+		gpo_med_pro='$_POST[gpo_med_pro]',
+		gpo_med_alm='$_POST[gpo_med_alm]',
+		inse='$_POST[inse]',
+		s_inves_cob='$_POST[s_inves_cob]',
+		s_inves_no_cob='$_POST[s_inves_no_cob]',
+		serfin='$_POST[serfin]',
+		tepe='$_POST[tepe]',
+		vita_afo='$_POST[vita_afo]',
+		vita_bancom_ope='$_POST[vita_bancom_ope]',
+		vita_banam='$_POST[vita_banam]',
+		vita_bancom_san='$_POST[vita_bancom_san]',
+		vita_memb='$_POST[vita_memb]',
+		zurich='$_POST[zurich]',
+
+		d_a1='$_POST[d_a1]',
+		d_b2='$_POST[d_b2]',
+		d_c3='$_POST[d_c3]',
+		d_d4='$_POST[d_d4]',
+		d_e5='$_POST[d_e5]',
+		d_f6='$_POST[d_f6]',
+		d_g7='$_POST[d_g7]',
+		d_h8='$_POST[d_h8]',
+		d_i9='$_POST[d_i9]',
+		d_j10='$_POST[d_j10]',
+		d_k11='$_POST[d_k11]',
+		d_l12='$_POST[d_l12]',
+		d_m13='$_POST[d_m13]',
+		d_n14='$_POST[d_n14]',
+		d_o15='$_POST[d_o15]',
+		d_p16='$_POST[d_p16]',
+		d_q17='$_POST[d_q17]',
+		d_r18='$_POST[d_r18]',
+		d_s19='$_POST[d_s19]',
+		d_t20='$_POST[d_t20]',
+		d_u21='$_POST[d_u21]',
+		d_v22='$_POST[d_v22]',
+		d_x23='$_POST[d_x23]',
+		d_y24='$_POST[d_y24]',
+		d_z25='$_POST[d_z25]',
+		d_a26='$_POST[d_a26]',
+		d_b27='$_POST[d_b27]',
+		d_c28='$_POST[d_c28]',
+
+		edo_exp='$_POST[edo_exp]',
+
+		hc_peso='$_POST[hc_peso]',
+		hc_talla='$_POST[hc_talla]',
+		hc_ta='$_POST[hc_ta]',
+		hc_fc='$_POST[hc_fc]',
+		hc_fr='$_POST[hc_fr]',
+		hc_tem='$_POST[hc_tem]',
+		hc_fum='$_POST[hc_fum]',
+		hc_ant_fam='$_POST[hc_ant_fam]',
+		hc_ant_per_no_p='$_POST[hc_ant_per_no_p]',
+		hc_ant_per_p='$_POST[hc_ant_per_p]',
+		hc_pad='$_POST[hc_pad]',
+		hc_exp_fis='$_POST[hc_exp_fis]',
+		hc_otros='$_POST[hc_otros]',
+		hc_rx='$_POST[hc_rx]',
+		hc_dx='$_POST[hc_dx]',
+		hc_tx='$_POST[hc_tx]'
+		WHERE id_paciente=".$_POST['id_paciente'];
+		if($con->update($sql))
+		{
+			echo "Información actualizada!";
+		}else{
+			echo 'error: '.$sql;
+		}
+
 }
 function CalcularEdad( $fecha ) {
     list($Y,$m,$d) = explode("-",$fecha);

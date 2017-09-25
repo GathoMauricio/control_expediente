@@ -541,12 +541,10 @@ if(isset($_SESSION['tipo_usu']))
 <input type="text" class="form-control" name="zurich"/>
 </td>
 <td>
-<label>Part. C</label>
-<input type="text" class="form-control" name="part_c"/>
+
 </td>
 <td>
-<label>Altec</label>
-<input type="text" class="form-control" name="altec"/>
+
 </td>
 </tr>
 <tr>
@@ -681,9 +679,37 @@ if(isset($_SESSION['tipo_usu']))
 
 <input type="submit" class="btn btn-primary" style="width:100%;">
 </form>
+<audio id="tono_mensaje" src="sound/tono.mp3"></audio>
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+    var notif;
+    var pusher = new Pusher('be16aa8bec249ddd5126', {
+      cluster: 'us2',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('canal_doctor');
+    channel.bind('e_nuevo_paciente', function(data) {
+      //actualizar lista de buzon (lista de espera)
+
+      var options = {
+      body: data.mensaje,
+      icon: "img/fondo.jpg"
+    };
+    document.getElementById('tono_mensaje').play();
+    notif = new Notification("Nuevo paciente en espera", options);
+    notif.addEventListener("click",function(){
+      alert("Abrir buzón (Lista de espera)");
+    });
+    //setTimeout(notif.close, 3000);
+    });
+  </script>
 <?php include 'footer.php'; ?> 
 <script type="text/javascript">
 $(document).ready(function(){
+  pedirPermisoNotificar();
   $("#form_nuevo_paciente_doctor").submit(function(e){
     e.preventDefault();
     $.post('control/ctrl_doctor.php?e=insertPaciente',$("#form_nuevo_paciente_doctor").serialize(),function(data){
@@ -693,4 +719,20 @@ $(document).ready(function(){
     });
   });
 });
+function pedirPermisoNotificar()
+  {
+    Notification.requestPermission( function(status) {
+        if (status == "granted"){
+            //console.log("permiso concedido");
+      }
+      if (status == "denied"){
+            alert("Considere activar las notificaciones en la configuración del navegador para un correcto funcionamiento.");
+      }
+      if (status == "default"){
+            //console.log("no ha respondido explicar y mostrar de nuevo");
+            alert("Para que el sistema funcione de manera correcta se necesitan los permisos de Notification");
+            pedirPermisoNotificar();
+      }
+    });
+  }
 </script>

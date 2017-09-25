@@ -42,7 +42,12 @@ Estas son las opciones  disponibles para el menú de doctor.
   Catálogo de pacientes
 </button>
 <br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="expedientes();">
+<button style="width:100%;" class="btn btn-primary" onclick="abrirBuzon();">
+  <span class="icon-envelop"></span> 
+  Buzón de pacientes (Lista de espera)
+</button>
+<br><br>
+<button style="width:100%;" class="btn btn-primary" onclick="exportarListaPacientes();">
   <span class="icon-file-excel"></span> 
   Exportar lista de pacientes
 </button>
@@ -55,7 +60,7 @@ Estas son las opciones  disponibles para el menú de doctor.
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
   <script>
     // Enable pusher logging - don't include this in production
-    //Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
     var notif;
     var pusher = new Pusher('be16aa8bec249ddd5126', {
       cluster: 'us2',
@@ -107,4 +112,12 @@ Estas son las opciones  disponibles para el menú de doctor.
 	{
 	  window.location="expedientes_doc.php";
 	}
+  function abrirBuzon()
+  {
+    //abrir modal de buzón
+  }
+  function exportarListaPacientes()
+  {
+    window.open('lista_pacientes.php');
+  }
   </script>
