@@ -114,7 +114,7 @@ Estas son las opciones  disponibles para el menú de doctor.
 	}
   function abrirBuzon()
   {
-    $.post('control/ctrl_doctor.php',{},function(data){  
+    $.post('control/ctrl_doctor.php?e=getBuzon',{},function(data){  
       $("#contenedor_buzon").html(data);
       $("#modal_buzon").modal('show');
     });

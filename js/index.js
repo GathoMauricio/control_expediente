@@ -88,3 +88,11 @@ function cerrarSesion()
         window.location="control/ctrl_usuario.php?e=cerrarSesion";
     }
 }
+function iniciarConsulta(id_paciente)
+{
+    window.location="nueva_consulta.php?id_paciente="+id_paciente;
+}
+function removerBuzon(id_paciente)
+{
+    //remover
+}

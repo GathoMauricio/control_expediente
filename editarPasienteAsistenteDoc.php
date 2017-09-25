@@ -40,7 +40,7 @@ if($fila=mysqli_fetch_array($datos))
 <label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
 <label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Nuevo paciente.</h4>
+<h4>Editar expediente.</h4>
 <form class="form" id="form_actualizar_paciente_doctor">
   <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">
 Estatus del expediente:
@@ -723,6 +723,36 @@ if($data['sex_paci']=='H'){
 
 <input type="submit" class="btn btn-primary" style="width:100%;">
 </form>
+</div>
+</center>
+<?php include 'forms/frm_buzon.php'; ?>
+<audio id="tono_mensaje" src="sound/tono.mp3"></audio>
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+    var notif;
+    var pusher = new Pusher('be16aa8bec249ddd5126', {
+      cluster: 'us2',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('canal_doctor');
+    channel.bind('e_nuevo_paciente', function(data) {
+      //actualizar lista de buzon (lista de espera)
+
+      var options = {
+      body: data.mensaje,
+      icon: "img/fondo.jpg"
+    };
+    document.getElementById('tono_mensaje').play();
+    notif = new Notification("Nuevo paciente en espera", options);
+    notif.addEventListener("click",function(){
+      abrirBuzon();
+    });
+    //setTimeout(notif.close, 3000);
+    });
+  </script>
 <?php include 'footer.php'; ?> 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -736,4 +766,12 @@ $(document).ready(function(){
     });
   });
 });
+  function abrirBuzon()
+  {
+    $.post('control/ctrl_doctor.php?e=getBuzon',{},function(data){  
+      $("#contenedor_buzon").html(data);
+      $("#modal_buzon").modal('show');
+    });
+    
+  }
 </script>

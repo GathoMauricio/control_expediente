@@ -1,5 +1,3 @@
-
-
 CREATE TABLE `archivo` (
   `id_archivo` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
@@ -8,8 +6,6 @@ CREATE TABLE `archivo` (
   `ubi_arc` text COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-
-
 CREATE TABLE `consulta` (
   `id_consulta` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
@@ -17,11 +13,9 @@ CREATE TABLE `consulta` (
   `edad_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `pase_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `fum_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `no_evo` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `no_evo` int(11) NOT NULL DEFAULT '0',
   `desc_evo` text COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-
 
 CREATE TABLE `paciente` (
   `id_paciente` bigint(255) NOT NULL,
@@ -33,7 +27,7 @@ CREATE TABLE `paciente` (
   `naci_paci` date DEFAULT NULL,
   `edad_paci` text COLLATE utf8mb4_spanish_ci,
   `lugar_paci` text COLLATE utf8mb4_spanish_ci,
-  `rfc_paci` text COLLATE utf8mb4_spanish_ci,
+  `rfc_paci` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `curp_paci` text COLLATE utf8mb4_spanish_ci,
   `titular` text COLLATE utf8mb4_spanish_ci,
   `tel_cel` text COLLATE utf8mb4_spanish_ci,
@@ -53,13 +47,17 @@ CREATE TABLE `paciente` (
   `reli` text COLLATE utf8mb4_spanish_ci,
   `conocio` text COLLATE utf8mb4_spanish_ci,
   `correo` text COLLATE utf8mb4_spanish_ci,
-  `num_mad` text COLLATE utf8mb4_spanish_ci,
+  `nom_pad` text COLLATE utf8mb4_spanish_ci,
+  `ocu_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `edad_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `tel_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nom_mad` text COLLATE utf8mb4_spanish_ci,
   `ocu_mad` text COLLATE utf8mb4_spanish_ci,
   `edad_mad` text COLLATE utf8mb4_spanish_ci,
   `tel_mad` text COLLATE utf8mb4_spanish_ci,
-  `num_cony` text COLLATE utf8mb4_spanish_ci,
+  `nom_cony` text COLLATE utf8mb4_spanish_ci,
   `ocu_cony` text COLLATE utf8mb4_spanish_ci,
-  `edad_coy` text COLLATE utf8mb4_spanish_ci,
+  `edad_cony` text COLLATE utf8mb4_spanish_ci,
   `tel_cony` text COLLATE utf8mb4_spanish_ci,
   `det_hero` text COLLATE utf8mb4_spanish_ci,
   `det_hera` text COLLATE utf8mb4_spanish_ci,
@@ -91,7 +89,7 @@ CREATE TABLE `paciente` (
   `gpo_med_alm` text COLLATE utf8mb4_spanish_ci,
   `inse` text COLLATE utf8mb4_spanish_ci,
   `s_inves_cob` text COLLATE utf8mb4_spanish_ci,
-  `s_conves_no_cob` text COLLATE utf8mb4_spanish_ci,
+  `s_inves_no_cob` text COLLATE utf8mb4_spanish_ci,
   `serfin` text COLLATE utf8mb4_spanish_ci,
   `tepe` text COLLATE utf8mb4_spanish_ci,
   `vita_afo` text COLLATE utf8mb4_spanish_ci,
@@ -129,7 +127,7 @@ CREATE TABLE `paciente` (
   `d_b27` text COLLATE utf8mb4_spanish_ci,
   `d_c28` text COLLATE utf8mb4_spanish_ci,
   `edo_exp` text COLLATE utf8mb4_spanish_ci,
-  `ref_exp` text COLLATE utf8mb4_spanish_ci,
+  `ref_exp` datetime DEFAULT NULL,
   `hc_peso` text COLLATE utf8mb4_spanish_ci,
   `hc_talla` text COLLATE utf8mb4_spanish_ci,
   `hc_ta` text COLLATE utf8mb4_spanish_ci,
@@ -139,7 +137,7 @@ CREATE TABLE `paciente` (
   `hc_fum` text COLLATE utf8mb4_spanish_ci,
   `hc_ant_fam` text COLLATE utf8mb4_spanish_ci,
   `hc_ant_per_no_p` text COLLATE utf8mb4_spanish_ci,
-  `hc_per_p` text COLLATE utf8mb4_spanish_ci,
+  `hc_ant_per_p` text COLLATE utf8mb4_spanish_ci,
   `hc_pad` text COLLATE utf8mb4_spanish_ci,
   `hc_exp_fis` text COLLATE utf8mb4_spanish_ci,
   `hc_otros` text COLLATE utf8mb4_spanish_ci,
@@ -147,7 +145,6 @@ CREATE TABLE `paciente` (
   `hc_dx` text COLLATE utf8mb4_spanish_ci,
   `hc_tx` text COLLATE utf8mb4_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
 
 CREATE TABLE `usuario` (
   `id_usuario` bigint(255) NOT NULL,
@@ -182,19 +179,15 @@ ALTER TABLE `usuario`
 
 ALTER TABLE `archivo`
   MODIFY `id_archivo` bigint(255) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` bigint(255) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_consulta` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 ALTER TABLE `archivo`
   ADD CONSTRAINT `fk_paciente_archivo` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `consulta`
   ADD CONSTRAINT `fk_paciente_consulta` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+COMMIT;

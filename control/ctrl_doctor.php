@@ -11,7 +11,45 @@ function getBuzon()
 {
 	include 'conexion.php';
 	$con = new Conexion();
-	$sql="";
+	$sql="SELECT * FROM paciente WHERE ref_exp != '' ORDER BY ref_exp";
+	$datos=$con->select($sql);
+	echo "<table class='table' style='width:100%;'>";
+	echo'
+	<tr>
+	<th>Nombre</th>
+	<th>A. paterno</th>
+	<th>A. materno</th>
+	<th>Referencia</th>
+	<th></th>
+	<th>Opciones</th>
+	</tr>';
+	while($fila=mysqli_fetch_array($datos))
+	{
+		$sql2="SELECT count(*) as total_consultas FROM consulta WHERE id_paciente=".$fila['id_paciente'];
+		$total_consultas='';
+		$datos2=$con->select($sql2);
+		if($fila2=mysqli_fetch_array($datos2))
+		{
+			if($fila2['total_consultas']<=0){
+				$link = '"editarPasienteAsistenteDoc.php?id_paciente='.$fila['id_paciente'].'")';
+				$total_consultas = "<a href='#' title='Abrir expediente...' onclick='window.open($link '><span class='icon-user-check'></span>Nuevo!!!</a>";
+			}
+		}
+
+		echo "
+		<tr>
+			<td>$fila[nombre_paci]</td>
+			<td>$fila[paterno_paci]</td>
+			<td>$fila[materno_paci]</td>
+			<td>$fila[ref_exp]</td>
+			<td>$total_consultas</td>
+			<td>
+			<button onclick='iniciarConsulta($fila[id_paciente]);' title='Iniciar consulta...' class='btn btn-default'><span class='icon-share'></span></button>
+			<button onclick='removerBuzon($fila[id_paciente]);' title='Remover del buzón...' class='btn btn-default'><span class='icon-bin'></span></button>
+			</td>
+		</tr>";
+	}
+	echo "</table>";
 }
 function insertPaciente()
 {

@@ -679,7 +679,10 @@ if(isset($_SESSION['tipo_usu']))
 
 <input type="submit" class="btn btn-primary" style="width:100%;">
 </form>
+</div>
+</center>
 <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
+<?php include 'forms/frm_buzon.php'; ?>
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
   <script>
     // Enable pusher logging - don't include this in production
@@ -701,7 +704,7 @@ if(isset($_SESSION['tipo_usu']))
     document.getElementById('tono_mensaje').play();
     notif = new Notification("Nuevo paciente en espera", options);
     notif.addEventListener("click",function(){
-      alert("Abrir buzón (Lista de espera)");
+      abrirBuzon();
     });
     //setTimeout(notif.close, 3000);
     });
@@ -734,5 +737,13 @@ function pedirPermisoNotificar()
             pedirPermisoNotificar();
       }
     });
+  }
+  function abrirBuzon()
+  {
+    $.post('control/ctrl_doctor.php?e=getBuzon',{},function(data){  
+      $("#contenedor_buzon").html(data);
+      $("#modal_buzon").modal('show');
+    });
+    
   }
 </script>

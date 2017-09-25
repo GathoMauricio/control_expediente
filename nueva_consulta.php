@@ -12,6 +12,12 @@ if(isset($_SESSION['tipo_usu']))
   header('Location: index.php');
 }
  ?>
+ <?php 
+
+//Remover del buzón
+
+//Obtener datos
+  ?>
 <style type="text/css">
 .contenedor_nuevo_paciente{
   padding: 20px;
@@ -29,45 +35,29 @@ if(isset($_SESSION['tipo_usu']))
 <label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
 <label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Expedientes.</h4>
-<br>  
-<input class="form-control" placeholder="Buscar..."  onkeyup="buscarExpedienteAsistente(this.value);" style="width:100%;">
+<h4>Nueva consulta.</h4>
+<form class="form" id="form_consulta">
+<input type="hidden" name="id_paciente" value="<?php echo $_POST['id_paciente']; ?>">
+<label>Fecha de consulta</label><br>
+<input type="date" name="fecha_cons" style="border:none;" value="<?php echo date('Y-m-d'); ?>" readonly>
 <br>
-<table class="table" style="width:100%;">
-<tr>
-<th>Nombre</th>
-<th>A. Paterno</th>
-<th>A. Materno</th>
-<th>Estatus</th>
-<th>Opciones</th>
-</tr>
-<tbody id="tb_expedientes_asistente">
+<label>Paciente: </label>Nombre del paciente
+<br>
+<label>N° de consulta</label>
+<input type="number" name="pase_cons" class="form-control">
+<label>Edad</label>
+<input type="number" name="edad_cons" class="form-control">
+<label>Pase</label>
+<input type="text" name="pase_cons" class="form-control">
 <?php 
-include "control/conexion.php";
-$con = new Conexion();
-$sql = "SELECT * FROM paciente LIMIT 10";
-$datos=$con->select($sql);
-while ($fila=mysqli_fetch_array($datos)) {
-  echo '
-  <tr>
-    <td>'.$fila['nombre_paci'].'</td>
-    <td>'.$fila['paterno_paci'].'</td>
-    <td>'.$fila['materno_paci'].'</td>
-    <td>'.$fila['edo_exp'].'</td>
-    <td>
-      <button class="btn btn-default" title="Enviar a buzón de espera..." onclick="enviarBuzon('.$fila['id_paciente'].');"><span class="icon-share"></span></button>
-      <button class="btn btn-default" title="Editar paciente..." onclick="editarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-pencil"></span></button>
-      <button class="btn btn-default" title="Eliminar paciente..." onclick="eliminarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-bin"></span></button>
-    </td>
- </tr>
-  ';
-}
+
  ?>
- </tbody>
-</table>
-</div>
-</center>
-  <?php include 'forms/frm_buzon.php'; ?>
+ <label>N° de Evolución</label>
+<input type="text" name="no_evo" class="form-control">
+ <label>Descripcion de Evolución</label>
+<input type="text" name="desc_evo" class="form-control">
+</form>
+<?php include 'forms/frm_buzon.php'; ?>
   <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
   <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
     <script>
@@ -95,34 +85,19 @@ while ($fila=mysqli_fetch_array($datos)) {
       //setTimeout(notif.close, 3000);
       });
     </script>
-  <?php include 'footer.php'; ?>	
+</div>
+</center>
+<?php include 'footer.php'; ?>
+
 <script type="text/javascript">
 $(document).ready(function(){
   pedirPermisoNotificar();
 });
-function buscarExpedienteAsistente(valor)
-{
-  $.post('control/ctrl_asistente.php?e=buscarPaciente',{valor:valor},function(data){ $("#tb_expedientes_asistente").html(data); })
-}
 function enviarBuzon(id_paciente)
 {
   if(confirm("¿Enviar a la lista de espera?"))
   {
     $.post('control/ctrl_asistente.php?e=enviarBuzon',{id_paciente:id_paciente},function(data){ swal('Aviso',data); })
-  }
-}
-function editarPacienteAsistente(id_paciente)
-{
-  window.location = "editarPasienteAsistenteDoc.php?id_paciente="+id_paciente;
-}
-function eliminarPacienteAsistente(id_paciente)
-{
-  if(confirm("¿Realmente desea eliminar este registro?"))
-  {
-    $.post('control/ctrl_asistente.php?e=deletePaciente',{id_paciente:id_paciente},function(data){ 
-      alert(data);
-      window.location.reload(); 
-    })
   }
 }
 function pedirPermisoNotificar()
