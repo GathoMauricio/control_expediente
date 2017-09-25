@@ -13,11 +13,25 @@ if(isset($_SESSION['tipo_usu']))
 }
  ?>
  <?php 
-
-//Remover del buzón
-
+include 'control/conexion.php';
+$con = new Conexion();
+//Remover de la lista de espera
+$con->update("UPDATE paciente SET ref_exp=NULL WHERE id_paciente=".$_GET['id_paciente']);
 //Obtener datos
-  ?>
+$datos=$con->select("SELECT * FROM paciente WHERE id_paciente=".$_GET['id_paciente']);
+$data;
+if($fila=mysqli_fetch_array($datos))
+{
+  $data=$fila;
+}
+//Obtener numero de consultas
+$datos=$con->select("SELECT count(*) AS numero_consultas FROM consulta WHERE id_paciente=".$_GET['id_paciente']);
+$numero_consultas;
+if($fila=mysqli_fetch_array($datos))
+{
+  $numero_consultas=$fila['numero_consultas'];
+}
+?>
 <style type="text/css">
 .contenedor_nuevo_paciente{
   padding: 20px;
@@ -37,25 +51,33 @@ if(isset($_SESSION['tipo_usu']))
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
 <h4>Nueva consulta.</h4>
 <form class="form" id="form_consulta">
-<input type="hidden" name="id_paciente" value="<?php echo $_POST['id_paciente']; ?>">
+<input type="hidden" name="id_paciente" value="<?php echo $_GET['id_paciente']; ?>">
 <label>Fecha de consulta</label><br>
 <input type="date" name="fecha_cons" style="border:none;" value="<?php echo date('Y-m-d'); ?>" readonly>
 <br>
-<label>Paciente: </label>Nombre del paciente
+<label>Paciente: </label><?php echo $data['nombre_paci']." ".$data['paterno_paci']." ".$data['materno_paci']; ?>
 <br>
 <label>N° de consulta</label>
-<input type="number" name="pase_cons" class="form-control">
+<input type="number" name="no_cons" value="<?php echo ($numero_consultas+1); ?>" class="form-control" readonly>
 <label>Edad</label>
 <input type="number" name="edad_cons" class="form-control">
 <label>Pase</label>
 <input type="text" name="pase_cons" class="form-control">
 <?php 
-
+if($data['sex_paci']=='M')
+{
+  echo '<label>Fecha de última menstruación</label>';
+  echo '<input type="date" name="fum_cons" class="form-control">';
+}else{
+    echo '<input type="hidden" name="fum_cons" class="form-control">';
+}
  ?>
  <label>N° de Evolución</label>
-<input type="text" name="no_evo" class="form-control">
+<input type="text" name="no_evo" value="<?php echo $numero_consultas; ?>" class="form-control" readonly>
  <label>Descripcion de Evolución</label>
-<input type="text" name="desc_evo" class="form-control">
+<textarea  name="desc_evo" class="form-control"></textarea><br><br>
+<input type="submit" class="btn btn-primary" style="width:100%;">
+<br><br>
 </form>
 <?php include 'forms/frm_buzon.php'; ?>
   <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
@@ -91,6 +113,17 @@ if(isset($_SESSION['tipo_usu']))
 
 <script type="text/javascript">
 $(document).ready(function(){
+  $("#form_consulta").submit(function(e){
+    e.preventDefault();
+    if(confirm("¿Guardar consulta?"))
+    {
+      $.post('control/ctrl_consulta.php?e=insertConsulta',$("#form_consulta").serialize(),function(data){
+        alert(data);
+        console.log(data);
+        window.location="doctor.php";
+      });
+    }
+  });
   pedirPermisoNotificar();
 });
 function enviarBuzon(id_paciente)
