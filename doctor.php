@@ -54,7 +54,7 @@ Estas son las opciones  disponibles para el menú de doctor.
 <br><br><br>
 </div>
 </center>
-
+<?php include 'forms/frm_buzon.php'; ?>
 
 <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
@@ -114,7 +114,11 @@ Estas son las opciones  disponibles para el menú de doctor.
 	}
   function abrirBuzon()
   {
-    //abrir modal de buzón
+    $.post('control/ctrl_doctor.php',{},function(data){  
+      $("#contenedor_buzon").html(data);
+      $("#modal_buzon").modal('show');
+    });
+    
   }
   function exportarListaPacientes()
   {

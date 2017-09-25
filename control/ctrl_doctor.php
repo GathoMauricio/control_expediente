@@ -3,13 +3,16 @@ if(isset($_GET['e']))
 {
 switch ($_GET['e']) {
 	case 'insertPaciente': insertPaciente(); break;
-	//case 'buscarPaciente': buscarPaciente(); break;
-	//case 'enviarBuzon': enviarBuzon(); break;
+	case 'getBuzon': getBuzon(); break;
 	case 'updatePaciente': updatePaciente(); break;
-	//case 'deletePaciente': deletePaciente(); break;
 }	
 }
-
+function getBuzon()
+{
+	include 'conexion.php';
+	$con = new Conexion();
+	$sql="";
+}
 function insertPaciente()
 {
 	include 'conexion.php';
