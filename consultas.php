@@ -38,6 +38,7 @@ if($fila=mysqli_fetch_array($datos))
 <center>
 <br><br><br><br>
 <div class="contenedor_menu_asistente">
+  <label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
 <label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
 <h4>Consultas.</h4>
@@ -125,7 +126,17 @@ while($fila=mysqli_fetch_array($datos))
   }
   function abrirConsulta(id_consulta)
   {
-    $.post('control/ctrl_consulta.php?e=getConsulta',{id_consulta},function(data){
+    $.post('control/ctrl_consulta.php?e=getConsulta',{id_consulta:id_consulta},function(data){
+      console.log(data);
+      var json = JSON.parse(data);
+      $("#nombre_paci").text(json.nombre_paci);
+      $("#fecha_cons").text(json.fecha_cons);
+      $("#no_cons").text(json.no_cons);
+      $("#edad_cons").text(json.edad_cons);
+      $("#pase_cons").text(json.pase_cons);
+      $("#fum_cons").text(json.fum_cons);
+      $("#no_evo").text(json.no_evo);
+      $("#desc_evo").text(json.desc_evo);
       $("#modal_consulta").modal('show');
     });
   }
