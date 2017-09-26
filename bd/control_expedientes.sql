@@ -1,51 +1,24 @@
---
-	-- Script generado de forma automatica el dia 25/09/2017 a las 20:03 Hrs.
-	--
-
-DROP TABLE IF EXISTS archivo;
-
 CREATE TABLE `archivo` (
-  `id_archivo` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_archivo` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
   `fecha_arc` date NOT NULL,
   `nom_arc` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `tipo_arc` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `ubi_arc` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  PRIMARY KEY (`id_archivo`),
-  KEY `fk_paciente_archivo` (`id_paciente`),
-  CONSTRAINT `fk_paciente_archivo` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE
+  `ubi_arc` text COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-
-
-
-DROP TABLE IF EXISTS consulta;
-
 CREATE TABLE `consulta` (
-  `id_consulta` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_consulta` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
   `fecha_cons` date NOT NULL,
   `no_cons` int(11) NOT NULL,
   `edad_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `pase_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `fum_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `no_evo` int(11) NOT NULL DEFAULT '0',
-  `desc_evo` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  PRIMARY KEY (`id_consulta`),
-  KEY `fk_paciente_consulta` (`id_paciente`),
-  CONSTRAINT `fk_paciente_consulta` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-INSERT INTO consulta VALUES("6","2","2017-09-26","1","11","uno","2017-09-01","0","Descripción del paciente 1");
-INSERT INTO consulta VALUES("7","4","2017-09-26","1","22","dos","","0","descrpción de 2");
-INSERT INTO consulta VALUES("8","2","2017-09-26","2","21","dosuno","2017-09-13","1","evolucion uno del paciente 2  y consulta 2");
-
-
-
-DROP TABLE IF EXISTS paciente;
-
+  `no_evo` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desc_evo` text COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 CREATE TABLE `paciente` (
-  `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_paciente` bigint(255) NOT NULL,
   `fecha_reg` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `nombre_paci` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `paterno_paci` text COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -54,7 +27,7 @@ CREATE TABLE `paciente` (
   `naci_paci` date DEFAULT NULL,
   `edad_paci` text COLLATE utf8mb4_spanish_ci,
   `lugar_paci` text COLLATE utf8mb4_spanish_ci,
-  `rfc_paci` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `rfc_paci` text COLLATE utf8mb4_spanish_ci,
   `curp_paci` text COLLATE utf8mb4_spanish_ci,
   `titular` text COLLATE utf8mb4_spanish_ci,
   `tel_cel` text COLLATE utf8mb4_spanish_ci,
@@ -75,9 +48,9 @@ CREATE TABLE `paciente` (
   `conocio` text COLLATE utf8mb4_spanish_ci,
   `correo` text COLLATE utf8mb4_spanish_ci,
   `nom_pad` text COLLATE utf8mb4_spanish_ci,
-  `ocu_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `edad_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `tel_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ocu_pad` text COLLATE utf8mb4_spanish_ci,
+  `edad_pad` text COLLATE utf8mb4_spanish_ci,
+  `tel_pad` text COLLATE utf8mb4_spanish_ci,
   `nom_mad` text COLLATE utf8mb4_spanish_ci,
   `ocu_mad` text COLLATE utf8mb4_spanish_ci,
   `edad_mad` text COLLATE utf8mb4_spanish_ci,
@@ -154,7 +127,7 @@ CREATE TABLE `paciente` (
   `d_b27` text COLLATE utf8mb4_spanish_ci,
   `d_c28` text COLLATE utf8mb4_spanish_ci,
   `edo_exp` text COLLATE utf8mb4_spanish_ci,
-  `ref_exp` datetime DEFAULT NULL,
+  `ref_exp` text COLLATE utf8mb4_spanish_ci,
   `hc_peso` text COLLATE utf8mb4_spanish_ci,
   `hc_talla` text COLLATE utf8mb4_spanish_ci,
   `hc_ta` text COLLATE utf8mb4_spanish_ci,
@@ -170,19 +143,10 @@ CREATE TABLE `paciente` (
   `hc_otros` text COLLATE utf8mb4_spanish_ci,
   `hc_rx` text COLLATE utf8mb4_spanish_ci,
   `hc_dx` text COLLATE utf8mb4_spanish_ci,
-  `hc_tx` text COLLATE utf8mb4_spanish_ci,
-  PRIMARY KEY (`id_paciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-INSERT INTO paciente VALUES("2","2017-09-24","Paciente1","Test","Lorem","M","1998-09-28","18","Ciudad de México","ASDFFG4561ASD","","","","","","","","","","","","NULL","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","asd","Activo","","","","","","","","","","","","","","","","","sdfdfgfdg");
-INSERT INTO paciente VALUES("4","2017-09-25","Paciente2","Test","Ipsum","H","2017-09-13","0","NULL","","","","","","","","","","","","","NULL","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","Activo","","","","","","","","","","","","","","","","","");
-
-
-
-DROP TABLE IF EXISTS usuario;
-
+  `hc_tx` text COLLATE utf8mb4_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 CREATE TABLE `usuario` (
-  `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_usuario` bigint(255) NOT NULL,
   `tipo_usu` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `nom_usu` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `con_usu` text COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -195,13 +159,28 @@ CREATE TABLE `usuario` (
   `cedula_p` text COLLATE utf8mb4_spanish_ci,
   `matricula` text COLLATE utf8mb4_spanish_ci,
   `fecha_naci` date DEFAULT NULL,
-  `cedula_esp` text COLLATE utf8mb4_spanish_ci,
-  PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
-INSERT INTO usuario VALUES("1","Administrador","admin","admin","","LOREM","IPSUM","DOLO","","M","","","0000-00-00","");
-INSERT INTO usuario VALUES("2","Asistente","asistente","asistente","","Test","Asistente","Account","","M","","","0000-00-00","");
-INSERT INTO usuario VALUES("3","Doctor","doctor","doctor","","Test","Doctor","Account","","M","","","0000-00-00","");
-
-
-
+  `cedula_esp` text COLLATE utf8mb4_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+ALTER TABLE `archivo`
+  ADD PRIMARY KEY (`id_archivo`),
+  ADD KEY `fk_paciente_archivo` (`id_paciente`);
+ALTER TABLE `consulta`
+  ADD PRIMARY KEY (`id_consulta`),
+  ADD KEY `fk_paciente_consulta` (`id_paciente`);
+ALTER TABLE `paciente`
+  ADD PRIMARY KEY (`id_paciente`);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
+ALTER TABLE `archivo`
+  MODIFY `id_archivo` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `consulta`
+  MODIFY `id_consulta` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `paciente`
+  MODIFY `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `archivo`
+  ADD CONSTRAINT `fk_paciente_archivo` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `consulta`
+  ADD CONSTRAINT `fk_paciente_consulta` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
