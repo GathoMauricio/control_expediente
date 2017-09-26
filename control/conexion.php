@@ -8,7 +8,7 @@ if(isset($_GET['e']))
 switch ($_GET['e']) {
 	case 'existeBD': $obj->existeBD(); break;
 	case 'crearBase': $obj->crearBase(); break;
-	case 'exportarBD': $obj->exportarBD('*'); break;
+	case 'exportarBD': $obj->exportarBD('usuario,paciente,consulta,archivo'); break;
 	case 'importarBD': $obj->importarBD(); break;
 }	
 }
@@ -104,7 +104,7 @@ function importarBD()
 							$sentencias = explode(";",$sql);
 							$conexion->select_db($this->base);
 							$contador = 0;
-							set_time_limit(3000);
+							set_time_limit(8000);
 							foreach($sentencias as $sentencia) {
 								//echo $sentencia.";<br><br>";
 								if($conexion->query($sentencia.";"))
@@ -221,7 +221,8 @@ function exportarBD($tables)
    
    //cycle through
    date_default_timezone_set('America/Mexico_City');
-   $return="--
+   $return=
+   "--
 	-- Script generado de forma automatica el dia ".date('d/m/Y')." a las ".date('H:i')." Hrs.
 	--\n\n";
    foreach($tables as $table)

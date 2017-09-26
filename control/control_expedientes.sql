@@ -1,22 +1,22 @@
 CREATE TABLE `archivo` (
   `id_archivo` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
+  `fecha_arc` date NOT NULL,
   `nom_arc` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `tipo_arc` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `ubi_arc` text COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
 CREATE TABLE `consulta` (
   `id_consulta` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,
   `fecha_cons` date NOT NULL,
+  `no_cons` int(11) NOT NULL,
   `edad_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `pase_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `fum_cons` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `no_evo` int(11) NOT NULL DEFAULT '0',
+  `no_evo` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `desc_evo` text COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
 CREATE TABLE `paciente` (
   `id_paciente` bigint(255) NOT NULL,
   `fecha_reg` text COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `paciente` (
   `naci_paci` date DEFAULT NULL,
   `edad_paci` text COLLATE utf8mb4_spanish_ci,
   `lugar_paci` text COLLATE utf8mb4_spanish_ci,
-  `rfc_paci` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `rfc_paci` text COLLATE utf8mb4_spanish_ci,
   `curp_paci` text COLLATE utf8mb4_spanish_ci,
   `titular` text COLLATE utf8mb4_spanish_ci,
   `tel_cel` text COLLATE utf8mb4_spanish_ci,
@@ -48,9 +48,9 @@ CREATE TABLE `paciente` (
   `conocio` text COLLATE utf8mb4_spanish_ci,
   `correo` text COLLATE utf8mb4_spanish_ci,
   `nom_pad` text COLLATE utf8mb4_spanish_ci,
-  `ocu_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `edad_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `tel_pad` text COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ocu_pad` text COLLATE utf8mb4_spanish_ci,
+  `edad_pad` text COLLATE utf8mb4_spanish_ci,
+  `tel_pad` text COLLATE utf8mb4_spanish_ci,
   `nom_mad` text COLLATE utf8mb4_spanish_ci,
   `ocu_mad` text COLLATE utf8mb4_spanish_ci,
   `edad_mad` text COLLATE utf8mb4_spanish_ci,
@@ -127,7 +127,7 @@ CREATE TABLE `paciente` (
   `d_b27` text COLLATE utf8mb4_spanish_ci,
   `d_c28` text COLLATE utf8mb4_spanish_ci,
   `edo_exp` text COLLATE utf8mb4_spanish_ci,
-  `ref_exp` datetime DEFAULT NULL,
+  `ref_exp` text COLLATE utf8mb4_spanish_ci,
   `hc_peso` text COLLATE utf8mb4_spanish_ci,
   `hc_talla` text COLLATE utf8mb4_spanish_ci,
   `hc_ta` text COLLATE utf8mb4_spanish_ci,
@@ -145,7 +145,6 @@ CREATE TABLE `paciente` (
   `hc_dx` text COLLATE utf8mb4_spanish_ci,
   `hc_tx` text COLLATE utf8mb4_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
 CREATE TABLE `usuario` (
   `id_usuario` bigint(255) NOT NULL,
   `tipo_usu` text COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -162,32 +161,26 @@ CREATE TABLE `usuario` (
   `fecha_naci` date DEFAULT NULL,
   `cedula_esp` text COLLATE utf8mb4_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
 ALTER TABLE `archivo`
   ADD PRIMARY KEY (`id_archivo`),
   ADD KEY `fk_paciente_archivo` (`id_paciente`);
-
 ALTER TABLE `consulta`
   ADD PRIMARY KEY (`id_consulta`),
   ADD KEY `fk_paciente_consulta` (`id_paciente`);
-
 ALTER TABLE `paciente`
   ADD PRIMARY KEY (`id_paciente`);
-
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
-
 ALTER TABLE `archivo`
-  MODIFY `id_archivo` bigint(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_archivo` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 ALTER TABLE `consulta`
   MODIFY `id_consulta` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_paciente` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_usuario` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 ALTER TABLE `archivo`
   ADD CONSTRAINT `fk_paciente_archivo` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 ALTER TABLE `consulta`
   ADD CONSTRAINT `fk_paciente_consulta` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
