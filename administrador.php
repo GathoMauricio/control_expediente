@@ -46,7 +46,7 @@ Estas son las opciones que tenemos disponibles para el menú de administración.
 	Importar base de datos
 </button>
 <br><br>
-<button style="width:100%;" class="btn btn-primary" onclick="ExportarBd();">
+<button style="width:100%;" class="btn btn-primary" onclick="exportarBd();">
 	<span class="icon-download3"></span> 
 	Exportar base de datos
 </button>
@@ -58,6 +58,7 @@ Estas son las opciones que tenemos disponibles para el menú de administración.
 <?php include 'forms/frm_ver_usuarios.php'; ?>
 <?php include 'forms/frm_nuevo_usuario.php'; ?>
 <?php include 'forms/frm_actualizar_usuario.php'; ?>
+<?php include 'forms/frm_importar_bd.php'; ?>
  <?php include 'footer.php'; ?>	
  <script type="text/javascript">
  $(document).ready(function(){
@@ -142,8 +143,12 @@ function buscarUsuario(nombre)
 		$("#contenedor_ver_usuarios").html(data);
 	});
 }
-function ExportarBd()
+function exportarBd()
 {
 	window.location ="control/conexion.php?e=exportarBD";
+}
+function openImportarBd()
+{
+	$("#modal_importar_bd").modal('show');
 }
  </script>

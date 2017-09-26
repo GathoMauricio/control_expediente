@@ -1,13 +1,16 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_buzon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_importar_bd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Buzón (Lista de espera)</h4>
+        <h4 class="modal-title" id="myModalLabel">Seleccione el archivo(.sql) para importar.</h4>
       </div>
-      <div class="modal-body" id="contenedor_buzon" style="height:400px;overflow: scroll; overflow-x:hidden;">
-        
+      <div class="modal-body">
+        <form class="form" method="POST" id="form_importar_bd">
+          <input type="file" class="form-control" name="archivo" required><br>
+          <input type="submit" class="btn btn-primary" style="width:100%;">
+        </form>
       </div>
     </div>
   </div>
