@@ -3,7 +3,7 @@
 
 });*/
 $(document).ready(function(){
-	
+    $("#form_subir_archivos")[0].reset();	
 
     /*$(".messages").hide();
     //queremos que esta variable sea global

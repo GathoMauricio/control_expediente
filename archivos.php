@@ -12,6 +12,18 @@ if(isset($_SESSION['tipo_usu']))
   header('Location: index.php');
 }
  ?>
+  <?php 
+include 'control/conexion.php';
+$con = new Conexion();
+//Obtener datos
+$datos=$con->select("SELECT * FROM paciente  WHERE id_paciente=".$_GET['id_paciente']);
+$data;
+if($fila=mysqli_fetch_array($datos))
+{
+  $data=$fila;
+}
+
+?>
 <style type="text/css">
 .contenedor_nuevo_paciente{
   padding: 20px;
@@ -29,45 +41,37 @@ if(isset($_SESSION['tipo_usu']))
 <label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
 <label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Expedientes.</h4>
-<br>  
-<input class="form-control" placeholder="Buscar..."  onkeyup="buscarExpedienteAsistente(this.value);" style="width:100%;">
-<br>
+<h4>Archivos.</h4>
+
+<label>Paciente: </label> <?php echo $data['nombre_paci']." ".$data['paterno_paci']." ".$data['materno_paci']; ?>
+
 <table class="table" style="width:100%;">
 <tr>
-<th>Nombre</th>
-<th>A. Paterno</th>
-<th>A. Materno</th>
-<th>Estatus</th>
+<th>Fecha de subida</th>
+<th>Nombre del archivo</th>
+<th>Tipo de archivo</th>
 <th>Opciones</th>
 </tr>
-<tbody id="tb_expedientes_asistente">
 <?php 
-include "control/conexion.php";
-$con = new Conexion();
-$sql = "SELECT * FROM paciente LIMIT 10";
-$datos=$con->select($sql);
-while ($fila=mysqli_fetch_array($datos)) {
-  echo '
+$sql="SELECT * FROM archivo WHERE id_paciente=".$_GET['id_paciente'];
+$datos = $con->select($sql);
+while($fila=mysqli_fetch_array($datos))
+{
+  echo "
   <tr>
-    <td>'.$fila['nombre_paci'].'</td>
-    <td>'.$fila['paterno_paci'].'</td>
-    <td>'.$fila['materno_paci'].'</td>
-    <td>'.$fila['edo_exp'].'</td>
-    <td>
-      <button class="btn btn-default" title="Enviar a buzón de espera..." onclick="enviarBuzon('.$fila['id_paciente'].');"><span class="icon-envelop"></span></button>
-      <button class="btn btn-default" title="Ver consultas..." onclick="verConsultas('.$fila['id_paciente'].');"><span class="icon-share"></span></button>
-      <button class="btn btn-default" title="Subir archivo..." onclick="subirArchivo('.$fila['id_paciente'].');"><span class="icon-cloud-upload"></span></button>
-      <button class="btn btn-default" title="Ver archivos..." onclick="verArchivos('.$fila['id_paciente'].');"><span class="icon-cloud-download"></span></button>
-      <button class="btn btn-default" title="Editar paciente..." onclick="editarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-pencil"></span></button>
-      <button class="btn btn-default" title="Eliminar paciente..." onclick="eliminarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-bin"></span></button>
-    </td>
- </tr>
-  ';
+  <th>$fila[fecha_arc]</th>
+  <th>$fila[nom_arc]</th>
+  <th>$fila[tipo_arc]</th>
+  <th>
+  <a href='archivos/$fila[ubi_arc]' target='_BLANK'><span class='icon-download2'></span> Ver archivo</a>
+  <a href='#' onclick='eliminarArchivo($fila[id_archivo]);' style='color:red'><span class='icon-bin'></span> Eliminar</a>
+  </th>
+  </tr>
+  ";
 }
  ?>
- </tbody>
 </table>
+
 </div>
 </center>
   <?php include 'forms/frm_buzon.php'; ?>
@@ -99,11 +103,10 @@ while ($fila=mysqli_fetch_array($datos)) {
       //setTimeout(notif.close, 3000);
       });
     </script>
-  <?php include 'footer.php'; ?>	
+  <?php include 'footer.php'; ?>  
 <script type="text/javascript">
 $(document).ready(function(){
   pedirPermisoNotificar();
-  $("#form_subir_archivos")[0].reset(); 
 });
 function buscarExpedienteAsistente(valor)
 {
@@ -114,24 +117,6 @@ function enviarBuzon(id_paciente)
   if(confirm("¿Enviar a la lista de espera?"))
   {
     $.post('control/ctrl_asistente.php?e=enviarBuzon',{id_paciente:id_paciente},function(data){ swal('Aviso',data); })
-  }
-}
-function verConsultas(id_paciente)
-{
-  window.location = "consultas.php?id_paciente="+id_paciente;
-}
-function editarPacienteAsistente(id_paciente)
-{
-  window.location = "editarPasienteAsistenteDoc.php?id_paciente="+id_paciente;
-}
-function eliminarPacienteAsistente(id_paciente)
-{
-  if(confirm("¿Realmente desea eliminar este registro?"))
-  {
-    $.post('control/ctrl_asistente.php?e=deletePaciente',{id_paciente:id_paciente},function(data){ 
-      alert(data);
-      window.location.reload(); 
-    })
   }
 }
 function pedirPermisoNotificar()
@@ -158,13 +143,11 @@ function pedirPermisoNotificar()
     });
     
   }
-  function subirArchivo(id_paciente)
+  function eliminarArchivo(id_archivo)
   {
-    $("#txt_id_paciente_subir_archivo").prop('value',id_paciente);
-    $("#modal_subir_archivo").modal('show');
-  }
-  function verArchivos(id_paciente)
-  {
-    window.location = "archivos.php?id_paciente="+id_paciente;
+    if(confirm('¿Eliminar archivo?'))
+    {
+      window.location="control/ctrl_archivo.php?e=eliminarArchivo&id_archivo="+id_archivo;
+    }
   }
 </script>
