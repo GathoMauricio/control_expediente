@@ -142,4 +142,8 @@ function buscarUsuario(nombre)
 		$("#contenedor_ver_usuarios").html(data);
 	});
 }
+function ExportarBd()
+{
+	window.location ="control/conexion.php?e=exportarBD";
+}
  </script>
