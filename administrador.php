@@ -59,9 +59,78 @@ Estas son las opciones que tenemos disponibles para el menú de administración.
 <?php include 'forms/frm_nuevo_usuario.php'; ?>
 <?php include 'forms/frm_actualizar_usuario.php'; ?>
 <?php include 'forms/frm_importar_bd.php'; ?>
+<?php include 'forms/frm_load.php'; ?>
  <?php include 'footer.php'; ?>	
  <script type="text/javascript">
  $(document).ready(function(){
+
+
+
+
+$(".messages").hide();
+    //queremos que esta variable sea global
+    var fileExtension = "";
+        //función que observa los cambios del campo file y obtiene información
+    $('#input_importar').change(function()
+    {
+        //obtenemos un array con los datos del archivo
+        var file = $("#input_importar")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        //mensaje con la información del archivo
+        console.log("Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes. Extensión: "+fileExtension);
+    });
+   $("#form_importar_bd").submit(function(e){
+        e.preventDefault();
+        
+        var formData = new FormData($("#form_importar_bd")[0]);
+        var message = ""; 
+        if(isSql(fileExtension)){
+        //hacemos la petición ajax 
+        	showLoad(); // mensaje cargando
+	        $.ajax({
+	            url: 'control/conexion.php?e=importarBD',  
+	            type: 'POST',
+	            // Form data
+	            //datos del formulario
+	            data: formData,
+	            //necesario para subir archivos via ajax
+	            cache: false,
+	            contentType: false,
+	            processData: false,
+	            //mientras enviamos el archivo
+	            beforeSend: function(){
+	                       
+	            },
+	            //una vez finalizado correctamente
+	            success: function(data){
+	            	hideLoad();
+	                swal('Aviso',data);
+	                $("#modal_importar_bd").modal('hide');
+	            },
+	            //si ha ocurrido un error
+	            error: function(error){
+	            	hideLoad();
+	                swal('Aviso',error);
+	                $("#modal_importar_bd").modal('hide');   
+	            }
+	        });
+		}else{ swal('Aviso',"El archivo que intenta cargar no parece ser un script válido!",'error'); }
+
+ 	});
+
+
+
+
+
+
+
  	$("#frm_nuevo_usuario").submit(function(e){
  		e.preventDefault();
  		var contrasena = $("#txt_contrasena_usuario_nuevo").prop('value');
@@ -94,6 +163,15 @@ Estas son las opciones que tenemos disponibles para el menú de administración.
  		}
  	});
  });
+function isSql(extension)
+{
+    if(extension.toLowerCase()=='sql') 
+    {
+    	return true;
+    }else{
+    	return false;
+    }
+}
  function openVerUsuarios()
 {
 	$.post('control/ctrl_usuario.php?e=selectUsuarios',{},function(data){
@@ -150,5 +228,13 @@ function exportarBd()
 function openImportarBd()
 {
 	$("#modal_importar_bd").modal('show');
+}
+function showLoad()
+{
+	$("#modal_load").modal('show');
+}
+function hideLoad()
+{
+	$("#modal_load").modal('hide');
 }
  </script>

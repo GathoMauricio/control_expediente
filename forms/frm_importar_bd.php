@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <form class="form" method="POST" id="form_importar_bd">
-          <input type="file" class="form-control" name="archivo" required><br>
+          <input type="file" class="form-control" name="archivo" id="input_importar" required><br>
           <input type="submit" class="btn btn-primary" style="width:100%;">
         </form>
       </div>

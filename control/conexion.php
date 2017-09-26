@@ -142,7 +142,7 @@ function importarBD()
 		$conexion->select_db($this->base);
 		$contador = 0;
 		foreach($sentencias as $sentencia) {
-			//echo $sentencia.";<br><br>";
+			echo $sentencia.";<br><br>";
 			if($conexion->query($sentencia.";"))
 			{
 				//La consulta se ejecutó con éxito
@@ -151,7 +151,7 @@ function importarBD()
 				{
 					$contador++;
 					echo 'Ocurrió un error al crear las tablas!';
-					//echo $conexion->error;
+					echo $conexion->error;
 				}
 			}
 
