@@ -38,7 +38,7 @@ Enviar a lista de espera (Buzón):
 </select>
 <br>
 <label>Fecha de registro</label><br>
-<input type="date" name="fecha_reg" style="border:none;" value="<?php echo date('Y-m-d'); ?>" readonly>
+<input type="date" name="fecha_reg" value="<?php echo date('Y-m-d'); ?>" >
 <table class="table" style="width:100%">
   <tr><td colspan="3" style="text-align:center;"><label>Información general</label></td></tr>
 <tr>
@@ -63,15 +63,16 @@ Enviar a lista de espera (Buzón):
 <option value="H">Hombre</option><option value="M">Mujer</option>
 </select>
 </td>
-<td colspan="2">
+<td>
 <label>Fecha de nacimiento</label>
 <input type="date" name="naci_paci" class="form-control" required>
 </td>
-<!--<td>
+<td>
 <label>Edad</label>
-<input type="number" name="edad_paci" class="form-control" required>
-</td>-->
+<input type="number" name="edad_paci" class="form-control">
+</td>
 </tr>
+<tr><td colspan="3">Si el campo edad se encuentra vacio, el sistema calculará la edad automáticamente...</td></tr>
 
 <tr>
 <td>

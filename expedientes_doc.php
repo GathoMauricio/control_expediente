@@ -31,7 +31,7 @@ if(isset($_SESSION['tipo_usu']))
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
 <h4>Expedientes.</h4>
 <br>  
-<input class="form-control" placeholder="Buscar..."  onkeyup="buscarExpedienteAsistente(this.value);" style="width:100%;">
+<input class="form-control" placeholder="Buscar..."  onkeyup="buscarExpedienteDoc(this.value);" style="width:100%;">
 <br>
 <table class="table" style="width:100%;">
 <tr>
@@ -41,7 +41,7 @@ if(isset($_SESSION['tipo_usu']))
 <th>Estatus</th>
 <th>Opciones</th>
 </tr>
-<tbody id="tb_expedientes_asistente">
+<tbody id="tb_expedientes_doc">
 <?php 
 include "control/conexion.php";
 $con = new Conexion();
@@ -108,6 +108,10 @@ $(document).ready(function(){
 function buscarExpedienteAsistente(valor)
 {
   $.post('control/ctrl_asistente.php?e=buscarPaciente',{valor:valor},function(data){ $("#tb_expedientes_asistente").html(data); })
+}
+function buscarExpedienteDoc(valor)
+{
+  $.post('control/ctrl_doctor.php?e=buscarPaciente',{valor:valor},function(data){ $("#tb_expedientes_doc").html(data); })
 }
 function enviarBuzon(id_paciente)
 {

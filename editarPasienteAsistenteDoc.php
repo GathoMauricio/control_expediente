@@ -21,6 +21,8 @@ $data;
 if($fila=mysqli_fetch_array($datos))
 {
   $data=$fila;
+  $sql="UPDATE paciente SET ref_exp=NULL WHERE id_paciente=$_GET[id_paciente]";
+  if(!$con->update($sql)) echo $sql;
 }
 ?>
 <style type="text/css">
@@ -40,7 +42,7 @@ if($fila=mysqli_fetch_array($datos))
 <label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
 <label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
 <label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Editar expediente.</h4>
+<h4>Expediente.</h4>
 <form class="form" id="form_actualizar_paciente_doctor">
   <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">
 Estatus del expediente:
@@ -94,16 +96,16 @@ if($data['sex_paci']=='H'){
 <option value="H" <?php echo $sex_paci_h; ?>>Hombre</option><option value="M" <?php echo $sex_paci_m; ?>>Mujer</option>
 </select>
 </td>
-<td colspan="2">
+<td>
 <label>Fecha de nacimiento</label>
 <input type="date" name="naci_paci" value="<?php echo $data['naci_paci']; ?>" class="form-control" required>
 </td>
-<!--<td>
+<td >
 <label>Edad</label>
-<input type="number" name="edad_paci" class="form-control" required>
-</td>-->
+<input type="number" name="edad_paci" value="<?php echo $data['edad_paci']; ?>" class="form-control">
+</td>
 </tr>
-
+<tr><td colspan="3">Si el campo edad se encuentra vacio, el sistema calculará la edad automáticamente...</td></tr>
 <tr>
 <td>
 <label>Lugar de nacimiento</label>
@@ -379,7 +381,7 @@ if($data['sex_paci']=='H'){
 </tr>
 </table>
 
-<table class="table" style="width:100%">
+<table class="table" style="width:100%" id="historia_clinica">
 <tr><td colspan="3" style="text-align:center;"><label>Datos de historia clínica</label></td></tr>
 <tr>
 <td>
@@ -418,16 +420,20 @@ if($data['sex_paci']=='H'){
 </table>
 
 <table class="table" style="width:100%">
-<tr><td colspan="3" style="text-align:center;"><label>Antecedentes</label></td></tr>
+<tr><td style="text-align:center;"><label>Antecedentes</label></td></tr>
 <tr>
 <td>
 <label>Antecedentes familiares</label>
 <textarea class="form-control"  name="hc_ant_fam"><?php echo $data['hc_ant_fam']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Antecedentes personales patológicos</label>
 <textarea class="form-control" name="hc_ant_per_p"><?php echo $data['hc_ant_per_p']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Antecedentes personales no patológicos</label>
 <textarea class="form-control" name="hc_ant_per_no_p"><?php echo $data['hc_ant_per_no_p']; ?></textarea>
@@ -438,10 +444,14 @@ if($data['sex_paci']=='H'){
 <label>Padecimiento actual</label>
 <textarea class="form-control" name="hc_pad"><?php echo $data['hc_pad']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Exploración física</label>
 <textarea class="form-control" name="hc_exp_fis"><?php echo $data['hc_exp_fis']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Otros datos</label>
 <textarea class="form-control" name="hc_otros"><?php echo $data['hc_otros']; ?></textarea>
@@ -452,16 +462,22 @@ if($data['sex_paci']=='H'){
 <label>RX</label>
 <textarea class="form-control" name="hc_rx"><?php echo $data['hc_rx']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Diagnóstico</label>
 <textarea class="form-control" name="hc_dx"><?php echo $data['hc_dx']; ?></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Tratamiento</label>
 <textarea class="form-control" name="hc_tx"><?php echo $data['hc_tx']; ?></textarea>
 </td>
 </tr>
 </table>
+
+
 
 <table class="table" style="width:100%;">
 <tr><td colspan="4" style="text-align:center;"><label>Datos adicionales</label></td></tr>
@@ -721,7 +737,7 @@ if($data['sex_paci']=='H'){
 
 
 
-<input type="submit" class="btn btn-primary" style="width:100%;">
+<input type="submit" class="btn btn-primary" value="Guardar cambios" style="width:100%;">
 </form>
 </div>
 </center>

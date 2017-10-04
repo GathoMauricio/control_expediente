@@ -32,9 +32,14 @@ if(isset($_SESSION['tipo_usu']))
 <h4>Nuevo paciente.</h4>
 <form class="form" id="form_nuevo_paciente_doctor">
 <input type="hidden" name="edo_exp" value="Activo">
+Enviar a lista de espera (Buzón):
+<select name="ref_exp" style="border:none;">
+<option value="SI" selected>SI</option>
+<option value="NO">NO</option>
+</select>
 <br>
 <label>Fecha de registro</label><br>
-<input type="date" name="fecha_reg" style="border:none;" value="<?php echo date('Y-m-d'); ?>" readonly>
+<input type="date" name="fecha_reg" value="<?php echo date('Y-m-d'); ?>" >
 <table class="table" style="width:100%">
   <tr><td colspan="3" style="text-align:center;"><label>Información general</label></td></tr>
 <tr>
@@ -59,12 +64,16 @@ if(isset($_SESSION['tipo_usu']))
 <option value="H">Hombre</option><option value="M">Mujer</option>
 </select>
 </td>
-<td colspan="2">
+<td >
 <label>Fecha de nacimiento</label>
 <input type="date" name="naci_paci" class="form-control" required>
 </td>
+<td >
+<label>Edad</label>
+<input type="number" name="edad_paci" class="form-control">
+</td>
 </tr>
-
+<tr><td colspan="3">Si el campo edad se encuentra vacio, el sistema calculará la edad automáticamente...</td></tr>
 <tr>
 <td>
 <label>Lugar de nacimiento</label>
@@ -376,16 +385,20 @@ if(isset($_SESSION['tipo_usu']))
 </table>
 
 <table class="table" style="width:100%">
-<tr><td colspan="3" style="text-align:center;"><label>Antecedentes</label></td></tr>
+<tr><tdstyle="text-align:center;"><label>Antecedentes</label></td></tr>
 <tr>
 <td>
 <label>Antecedentes familiares</label>
 <textarea class="form-control" name="hc_ant_fam"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Antecedentes personales patológicos</label>
 <textarea class="form-control" name="hc_ant_per_p"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Antecedentes personales no patológicos</label>
 <textarea class="form-control" name="hc_ant_per_no_p"></textarea>
@@ -396,10 +409,14 @@ if(isset($_SESSION['tipo_usu']))
 <label>Padecimiento actual</label>
 <textarea class="form-control" name="hc_pad"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Exploración física</label>
 <textarea class="form-control" name="hc_exp_fis"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Otros datos</label>
 <textarea class="form-control" name="hc_otros"></textarea>
@@ -410,16 +427,22 @@ if(isset($_SESSION['tipo_usu']))
 <label>RX</label>
 <textarea class="form-control" name="hc_rx"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Diagnóstico</label>
 <textarea class="form-control" name="hc_dx"></textarea>
 </td>
+</tr>
+<tr>
 <td>
 <label>Tratamiento</label>
 <textarea class="form-control" name="hc_tx"></textarea>
 </td>
 </tr>
 </table>
+
+
 
 <table class="table" style="width:100%;">
 <tr><td colspan="4" style="text-align:center;"><label>Datos adicionales</label></td></tr>

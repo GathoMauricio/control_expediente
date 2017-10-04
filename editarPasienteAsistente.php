@@ -93,16 +93,16 @@ if($data['sex_paci']=='H'){
 <option value="H" <?php echo $sex_paci_h; ?>>Hombre</option><option value="M" <?php echo $sex_paci_m; ?>>Mujer</option>
 </select>
 </td>
-<td colspan="2">
+<td>
 <label>Fecha de nacimiento</label>
 <input type="date" name="naci_paci" value="<?php echo $data['naci_paci']; ?>" class="form-control" required>
 </td>
-<!--<td>
+<td>
 <label>Edad</label>
-<input type="number" name="edad_paci" class="form-control" required>
-</td>-->
+<input type="number" name="edad_paci" value="<?php echo $data['edad_paci']; ?>" class="form-control">
+</td>
 </tr>
-
+<tr><td colspan="3">Si el campo edad se encuentra vacio, el sistema calculará la edad automáticamente...</td></tr>
 <tr>
 <td>
 <label>Lugar de nacimiento</label>

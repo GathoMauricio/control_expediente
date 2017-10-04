@@ -5,7 +5,49 @@ switch ($_GET['e']) {
 	case 'insertPaciente': insertPaciente(); break;
 	case 'getBuzon': getBuzon(); break;
 	case 'updatePaciente': updatePaciente(); break;
+	case 'buscarPaciente': buscarPaciente(); break;
+	case 'removerBuzon' : removerBuzon(); break;
 }	
+}
+function removerBuzon()
+{
+	include "conexion.php";
+	$con = new Conexion();
+	$sql = "UPDATE paciente SET ref_exp=NULL WHERE id_paciente=$_POST[id_paciente]";
+	if($con->update($sql))
+	{
+		echo "Paciente memovido!!";
+	}else{
+		echo "Error: ".$sql;
+	}
+}
+function buscarPaciente()
+{
+	include "conexion.php";
+	$con = new Conexion();
+	$sql = "SELECT * FROM paciente WHERE nombre_paci LIKE '%$_POST[valor]%' OR paterno_paci LIKE '%$_POST[valor]%' OR materno_paci LIKE '%$_POST[valor]%'";
+	$datos=$con->select($sql);
+	$contador=0;
+	while ($fila=mysqli_fetch_array($datos)) {
+	  echo '
+	  <tr>
+	    <td>'.$fila['nombre_paci'].'</td>
+	    <td>'.$fila['paterno_paci'].'</td>
+	    <td>'.$fila['materno_paci'].'</td>
+	    <td>'.$fila['edo_exp'].'</td>
+	    <td>
+	      <button class="btn btn-default" title="Enviar a buzón de espera..." onclick="enviarBuzon('.$fila['id_paciente'].');"><span class="icon-envelop"></span></button>
+	      <button class="btn btn-default" title="Ver consultas..." onclick="verConsultas('.$fila['id_paciente'].');"><span class="icon-share"></span></button>
+	      <button class="btn btn-default" title="Subir archivo..." onclick="subirArchivo('.$fila['id_paciente'].');"><span class="icon-cloud-upload"></span></button>
+	      <button class="btn btn-default" title="Ver archivos..." onclick="verArchivos('.$fila['id_paciente'].');"><span class="icon-cloud-download"></span></button>
+	      <button class="btn btn-default" title="Editar paciente..." onclick="editarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-pencil"></span></button>
+	      <button class="btn btn-default" title="Eliminar paciente..." onclick="eliminarPacienteAsistente('.$fila['id_paciente'].');"><span class="icon-bin"></span></button>
+	    </td>
+	 </tr>
+	  ';
+	  $contador++;
+	}
+	if($contador<=0){ echo '<tr><td colspan="5">No se encontraron coincidencias....</td></tr>'; }
 }
 function getBuzon()
 {
@@ -28,11 +70,13 @@ function getBuzon()
 		$sql2="SELECT count(*) as total_consultas FROM consulta WHERE id_paciente=".$fila['id_paciente'];
 		$total_consultas='';
 		$datos2=$con->select($sql2);
+		$link = '"editarPasienteAsistenteDoc.php?id_paciente='.$fila['id_paciente'].'#historia_clinica"';
+		$link2 = '"editarPasienteAsistenteDoc.php?id_paciente='.$fila['id_paciente'].'"';
 		if($fila2=mysqli_fetch_array($datos2))
 		{
 			if($fila2['total_consultas']<=0){
-				$link = '"editarPasienteAsistenteDoc.php?id_paciente='.$fila['id_paciente'].'")';
-				$total_consultas = "<a href='#' title='Abrir expediente...' onclick='window.open($link '><span class='icon-user-check'></span>Nuevo!!!</a>";
+				
+				$total_consultas = "<a href='#' title='Abrir expediente...' onclick='window.location=$link '><span class='icon-user-check'></span>Nuevo!!!</a>";
 			}
 		}
 
@@ -44,6 +88,7 @@ function getBuzon()
 			<td>$fila[ref_exp]</td>
 			<td>$total_consultas</td>
 			<td>
+			<button onclick='window.location=$link2 ' title='Ver expediente...' class='btn btn-default'><span class='icon-user'></span></button>
 			<button onclick='iniciarConsulta($fila[id_paciente]);' title='Iniciar consulta...' class='btn btn-default'><span class='icon-share'></span></button>
 			<button onclick='removerBuzon($fila[id_paciente]);' title='Remover del buzón...' class='btn btn-default'><span class='icon-bin'></span></button>
 			</td>
@@ -55,7 +100,23 @@ function insertPaciente()
 {
 	include 'conexion.php';
 	$con = new Conexion();
-	$edad = CalcularEdad($_POST['naci_paci']);
+	if($_POST['ref_exp']=='SI')
+	{
+		//enviar notif
+		require 'ctrl_notificacion.php';
+		enviarNotificacion($_POST['nombre_paci'].' '.$_POST['paterno_paci'].' '.$_POST['materno_paci']);
+		date_default_timezone_set('America/Mexico_City');
+  		$ref_exp=date('Y-m-d H:i:s');
+	}else{
+		$ref_exp=NULL;
+	}
+	if(strlen($_POST['edad_paci'])>0)
+	{
+		$edad=$_POST['edad_paci'];
+	}else{
+		$edad = CalcularEdad($_POST['naci_paci']);
+	}
+	
 	$sql="INSERT INTO paciente (
 		fecha_reg,
 		nombre_paci,
@@ -169,6 +230,7 @@ function insertPaciente()
 		d_c28,
 
 		edo_exp,
+		ref_exp,
 
 		hc_peso,
 		hc_talla,
@@ -300,6 +362,7 @@ function insertPaciente()
 		'$_POST[d_c28]',
 
 		'$_POST[edo_exp]',
+		'$ref_exp',
 
 		'$_POST[hc_peso]',
 		'$_POST[hc_talla]',
@@ -329,7 +392,12 @@ function updatePaciente()
 {
 	include 'conexion.php';
 	$con = new Conexion();
-	$edad = CalcularEdad($_POST['naci_paci']);
+	if(strlen($_POST['edad_paci'])>0)
+	{
+		$edad=$_POST['edad_paci'];
+	}else{
+		$edad = CalcularEdad($_POST['naci_paci']);
+	}
 	$sql="UPDATE paciente SET
 		nombre_paci='$_POST[nombre_paci]',
 		paterno_paci='$_POST[paterno_paci]',

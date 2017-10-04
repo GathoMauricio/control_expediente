@@ -14,5 +14,8 @@ function iniciarConsulta(id_paciente)
 }
 function removerBuzon(id_paciente)
 {
-    //remover
+    $.post('control/ctrl_doctor.php?e=removerBuzon',{id_paciente:id_paciente},function(data){
+    	swal('Aviso',data);
+    	abrirBuzon();
+    });
 }

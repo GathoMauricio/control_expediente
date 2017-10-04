@@ -72,7 +72,12 @@ function updatePaciente()
 {
 	include 'conexion.php';
 	$con = new Conexion();
-	$edad = CalcularEdad($_POST['naci_paci']);
+	if(strlen($_POST['edad_paci'])>0)
+	{
+		$edad=$_POST['edad_paci'];
+	}else{
+		$edad = CalcularEdad($_POST['naci_paci']);
+	}
 	$sql="UPDATE paciente SET
 		nombre_paci='$_POST[nombre_paci]',
 		paterno_paci='$_POST[paterno_paci]',
@@ -138,7 +143,12 @@ function insertPaciente()
 {
 	include 'conexion.php';
 	$con = new Conexion();
-	$edad = CalcularEdad($_POST['naci_paci']);
+	if(strlen($_POST['edad_paci'])>0)
+	{
+		$edad=$_POST['edad_paci'];
+	}else{
+		$edad = CalcularEdad($_POST['naci_paci']);
+	}
 	if($_POST['ref_exp']=='SI')
 	{
 		//enviar notif

@@ -78,7 +78,7 @@ Estas son las opciones  disponibles para el menú de doctor.
 		document.getElementById('tono_mensaje').play();
  		notif = new Notification("Nuevo paciente en espera", options);
 		notif.addEventListener("click",function(){
-			alert("Abrir buzón (Lista de espera)");
+			abrirBuzon();
 		});
 		//setTimeout(notif.close, 3000);
     });
