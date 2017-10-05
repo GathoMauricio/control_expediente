@@ -1,18 +1,133 @@
-
-body{ 
-  background: url(../img/fondo.jpg) no-repeat center center fixed; 
+::-webkit-scrollbar {
+    width: 14px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+html,body{ 
+  background: url(../img/background1.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-color: black;
+  margin:0px;
+  height:100%;
 }
-.contenedor_instalacion{
+.login{
+	background: url(../img/fondox.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: black;
+  margin:0px;
+  height:100%;
+	width:80%;
+	height: 350px;
+	background-color: black;
 	padding: 20px;
+}
+.menu{
+	position:absolute;
+	top:0;
+	left:0;
+	background-color: white;
+	width:20%;
+ 	height: 100%;
+ 	opacity: 0.7;
+ 	padding: 20px;
+}
+.item-menu{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.item-menu:hover{
+	color:#5DADE2 ;
+}
+.buzon{
+	position:absolute;
+	top:0;
+	right:0;
+	background-color: white;
+	width:20%;
+ 	height: 100%;
+ 	opacity: 0.7;
+ 	padding: 20px;
+}
+.item-box{
+	width: 100%;
+	height: 85%;
+	overflow: scroll;
+    overflow-x:hidden;
+}
+.cross-item-buzon{
+	float:right;
+	color:#E5E7E9;
+	cursor:pointer;
+}
+.item-buzon{
+	cursor: pointer;
+	padding: 5px;
+}
+.item-buzon:hover{
+	color:blue;
+	background-color:#F8F9F9;
+}
+.buscador{
+	position: absolute;
+	top: 0;
+	left: 20%;
+	background-color: white;
 	width: 60%;
+	height: 12%;
+	padding: 10px;
+}
+
+.buscador input::placeholder{
+	color: #6E6E6E;
+	font-weight: bold;
+	font-size: 16px;
+}
+.contenedor{
+	position: absolute;
+	top: 70px;
+	left: 20%;
+	background-color: #5882FA;
+	width: 60%;
+	height: 89%;
+	opacity: 0.8;
+	overflow: scroll;
+    overflow-x:hidden; 
+    padding: 10px;
+}
+.busqueda{
+	position: absolute;
+	top: 70px;
+	left: 20%;
+	background-color: white;
+	width: 60%;
+	opacity: 0.9;
+    padding: 10px;
+    display: none;
+}
+.item-busqueda{
+	padding: 5px;
+	cursor: pointer;
+}
+.item-busqueda:hover{
+	background-color: #00FF40;
+}
+.expediente,.info_gral{
+	width: 100%;
+	padding: 20px;
 	background-color: white;
 	text-align: left;
-	opacity: 0.9;
-	box-shadow: 5px 5px 15px #0080FF;
-	border-style: outset;
 }

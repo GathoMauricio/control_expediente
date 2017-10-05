@@ -28,9 +28,9 @@ function insert($sql){
 	$con->query($sql);
 	if($con->error)
 	{
-		return false;
+		return 0;
 	}else{
-		return true;
+		return $con->insert_id;
 	}
 }
 function select($sql){
@@ -187,7 +187,7 @@ function crearBase(){
 
 		}
 		if($conexion->query("INSERT INTO usuario (tipo_usu,nom_usu,con_usu,nombre_usu,ape_pat,ape_mat) VALUES (
-			'$_POST[tipo_usuario]','$_POST[usuario]','$_POST[contrasena]','$_POST[nombre]','$_POST[apaterno]','$_POST[amaterno]'
+			'$_POST[tipo_usuario]','$_POST[usuario]','$_POST[contrasena]','".strtoupper($_POST['nombre'])."','".strtoupper($_POST['apaterno'])."','".strtoupper($_POST['amaterno'])."'
 		)"))
 		{
 			echo json_encode(array('error'=>'0','mensaje'=>"Se importó la base de datos con ".$contador." errores.\nPor favor inicie sesión con la cuenta que acaba de crear!"));

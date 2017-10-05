@@ -1,48 +1,19 @@
-<?php include 'head.php'; ?>
+
 <?php 
-session_start();
-if(isset($_SESSION['tipo_usu']))
-{
-  switch($_SESSION['tipo_usu'])
-  {
-    case 'Asistente': header('Location: asistente.php'); break;
-    case 'Administrador': header('Location: administrador.php'); break;
-  }
-}else{
-  header('Location: index.php');
-}
- ?>
-<?php 
-include 'control/conexion.php';
+include '../control/conexion.php';
 $con = new Conexion();
-$sql="SELECT * FROM paciente WHERE id_paciente=".$_GET['id_paciente'];
+$sql="SELECT * FROM paciente WHERE id_paciente=".$_POST['id_expediente'];
 $datos=$con->select($sql);
 $data;
 if($fila=mysqli_fetch_array($datos))
 {
   $data=$fila;
-  $sql="UPDATE paciente SET ref_exp=NULL WHERE id_paciente=$_GET[id_paciente]";
-  if(!$con->update($sql)) echo $sql;
+  
 }
 ?>
-<style type="text/css">
-.contenedor_nuevo_paciente{
-  padding: 20px;
-  width: 60%;
-  background-color: white;
-  text-align: left;
-  opacity: 0.9;
-  box-shadow: 5px 5px 15px #0080FF;
-  border-style: outset;
-}
-</style>
 <center>
-<br><br><br><br>
-<div class="contenedor_nuevo_paciente">
-<label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
-<label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
-<label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Expediente.</h4>
+<div class="info_gral">
+<h4>Información general.</h4>
 <form class="form" id="form_actualizar_paciente_doctor">
   <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">
 Estatus del expediente:
@@ -61,10 +32,9 @@ if($data['edo_exp']=="Activo")
 <option value="Inactivo" <?php echo $edo_exp_inactivo; ?> >Inactivo</option>
 </select>
 <br>
-<label>Fecha de registro</label><br>
-<input type="date" name="fecha_reg" style="border:none;" value="<?php echo $data['fecha_reg']; ?>" readonly>
+<label>Fecha de registro: <?php echo $data['fecha_reg']; ?> </label><br>
+
 <table class="table" style="width:100%">
-  <tr><td colspan="3" style="text-align:center;"><label>Información general</label></td></tr>
 <tr>
 <td>
 <label>Nombre(s)</label>
@@ -110,7 +80,7 @@ if($data['sex_paci']=='H'){
 <td>
 <label>Lugar de nacimiento</label>
 <select name="lugar_paci" id="cbo_lugar_paci" class="form-control">
-<?php include 'forms/options_estados_republica.php'; ?>
+<?php include '../includes/options_estados_republica.php'; ?>
 </select>
 </td>
 <td>
@@ -160,7 +130,7 @@ if($data['sex_paci']=='H'){
 <label>Estado</label>
 
 <select name="edo_dir" id="cbo_edo_dir" class="form-control">
-<?php include 'forms/options_estados_republica.php'; ?>
+<?php include '../includes//options_estados_republica.php'; ?>
 </select>
 </td>
 <td>
@@ -381,6 +351,8 @@ if($data['sex_paci']=='H'){
 </tr>
 </table>
 
+<!--
+
 <table class="table" style="width:100%" id="historia_clinica">
 <tr><td colspan="3" style="text-align:center;"><label>Datos de historia clínica</label></td></tr>
 <tr>
@@ -478,7 +450,7 @@ if($data['sex_paci']=='H'){
 </table>
 
 
-
+-->
 <table class="table" style="width:100%;">
 <tr><td colspan="4" style="text-align:center;"><label>Datos adicionales</label></td></tr>
 <tr>
@@ -741,53 +713,17 @@ if($data['sex_paci']=='H'){
 </form>
 </div>
 </center>
-<?php include 'forms/frm_buzon.php'; ?>
-<audio id="tono_mensaje" src="sound/tono.mp3"></audio>
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-    var notif;
-    var pusher = new Pusher('be16aa8bec249ddd5126', {
-      cluster: 'us2',
-      encrypted: true
-    });
 
-    var channel = pusher.subscribe('canal_doctor');
-    channel.bind('e_nuevo_paciente', function(data) {
-      //actualizar lista de buzon (lista de espera)
 
-      var options = {
-      body: data.mensaje,
-      icon: "img/fondo.jpg"
-    };
-    document.getElementById('tono_mensaje').play();
-    notif = new Notification("Nuevo paciente en espera", options);
-    notif.addEventListener("click",function(){
-      abrirBuzon();
-    });
-    //setTimeout(notif.close, 3000);
-    });
-  </script>
-<?php include 'footer.php'; ?> 
 <script type="text/javascript">
 $(document).ready(function(){
   $("#cbo_lugar_paci").prop('value','<?php echo $data["lugar_paci"]; ?>');
   $("#cbo_edo_dir").prop('value','<?php echo $data["edo_dir"]; ?>');
   $("#form_actualizar_paciente_doctor").submit(function(e){
     e.preventDefault();
-    $.post('control/ctrl_doctor.php?e=updatePaciente',$("#form_actualizar_paciente_doctor").serialize(),function(data){
-      alert(data);
-      window.history.back()
+    $.post('control/ctrl_expediente.php?e=actualizarPaciente',$("#form_actualizar_paciente_doctor").serialize(),function(data){
+      swal('',data);
     });
   });
 });
-  function abrirBuzon()
-  {
-    $.post('control/ctrl_doctor.php?e=getBuzon',{},function(data){  
-      $("#contenedor_buzon").html(data);
-      $("#modal_buzon").modal('show');
-    });
-    
-  }
 </script>

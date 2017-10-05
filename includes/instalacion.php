@@ -1,11 +1,7 @@
-<?php include 'head.php'; ?>
 <center>
-<br><br><br><br>
-<div class="contenedor_instalacion">
-<h4>Bievenido al sistema de control de expedientes.</h4>
 Antes de comenzar necesitamos prepararnos para el primer uso para lo cual vamos a crear un administrador de sistema por favor rellena a continuación los siguientes campos. <br><br>
 <form id="form_crear_administrador" class="form" method="POST">
-	<input type="hidden" name="tipo_usuario" value="Administrador">
+	<input type="hidden" name="tipo_usuario" value="Doctor">
 	<label><span class="icon-user"></span> Ingrese un nombre de usuario.</label>
 	<input type="text" name="usuario" class="form-control" required>
 	<label><span class="icon-lock"></span> Ingrese una contraseña segura.</label>
@@ -21,9 +17,8 @@ Antes de comenzar necesitamos prepararnos para el primer uso para lo cual vamos 
 	<br><br>
 	<input type="submit" class="btn btn-primary" style="width:100%;" value="Registrar cuenta de administrador">
 </form>
-</div>
 </center>
-<?php include 'footer.php'; ?>	
+
 <script type="text/javascript">
 $(document).ready(function(e){
 	$("#form_crear_administrador").submit(function(e){

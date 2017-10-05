@@ -1,4 +1,3 @@
-<option value="NULL">--Seleccione un estado--</option>
 <option value="Aguascalientes">Aguascalientes</option>
 <option value="Baja California">Baja California</option>
 <option value="Baja California Su">Baja California Su</option>

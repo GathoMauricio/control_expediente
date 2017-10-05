@@ -1,59 +1,55 @@
-<?php include 'head.php'; ?>
-<?php 
-session_start();
-if(isset($_SESSION['tipo_usu']))
-{
-  switch($_SESSION['tipo_usu'])
-  {
-    case 'Asistente': header('Location: asistente.php'); break;
-    case 'Administrador': header('Location: administrador.php'); break;
-  }
-}else{
-  header('Location: index.php');
-}
- ?>
-<style type="text/css">
-.contenedor_nuevo_paciente{
-  padding: 20px;
-  width: 60%;
-  background-color: white;
-  text-align: left;
-  opacity: 0.9;
-  box-shadow: 5px 5px 15px #0080FF;
-  border-style: outset;
-}
-</style>
-<center>
-<br><br><br><br>
-<div class="contenedor_nuevo_paciente">
-<label style="float:left;color:blue;cursor:pointer;" title="Inicio" onclick="window.history.back();"><span class='icon-home'></span></label>
-<label style="float:right;color:red;cursor:pointer;" title="Cerrar sesión" onclick="cerrarSesion();"><span class='icon-exit'></span></label><br>
-<label style="float:right;"><?php echo $_SESSION['tipo_usu'].': '.$_SESSION['nombre']; ?></label><br><br>
-<h4>Nuevo paciente.</h4>
-<form class="form" id="form_nuevo_paciente_doctor">
+<script type="text/javascript">
+$(function(){
+	$("#form_nuevo_paciente").submit(function(e){
+    e.preventDefault();
+    $.post('control/ctrl_expediente.php?e=nuevoExpediente',$("#form_nuevo_paciente").serialize(),function(data){
+      var json = JSON.parse(data);
+      if(json.error>0)
+      {
+      	swal('Aviso',);
+      	console.log(json.msg);
+      }else{
+      	swal({
+      	  html:true,	
+		  title: "Aviso",
+		  text: json.msg,
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-primary",
+		  confirmButtonText: "Enviar",
+		  cancelButtonText:"Cancelar",
+		  closeOnConfirm: true
+		},
+		function(){
+		  agregarBuzon(json.insert_id);
+		});
+      }
+      inicio();
+      //$("#form_nuevo_paciente")[0].reset();
+      });
+  	});
+});
+</script>
+<h4 id="up">NUEVO EXPEDIENTE.</h4>
+<form class="form" id="form_nuevo_paciente">
 <input type="hidden" name="edo_exp" value="Activo">
-Enviar a lista de espera (Buzón):
-<select name="ref_exp" style="border:none;">
-<option value="SI" selected>SI</option>
-<option value="NO">NO</option>
-</select>
-<br>
+
 <label>Fecha de registro</label><br>
-<input type="date" name="fecha_reg" value="<?php echo date('Y-m-d'); ?>" >
+<input type="date" class="form-control" name="fecha_reg" style="width:30%;" value="<?php echo date('Y-m-d'); ?>" >
+<br><br>
 <table class="table" style="width:100%">
   <tr><td colspan="3" style="text-align:center;"><label>Información general</label></td></tr>
 <tr>
 <td>
 <label>Nombre(s)</label>
-<input type="text" name="nombre_paci" class="form-control" required>
+<input type="text" name="nombre_paci" class="form-control" style="border:solid 3px green" required>
 </td>
 <td>
 <label>A. paterno</label>
-<input type="text" name="paterno_paci" class="form-control" required>
+<input type="text" name="paterno_paci" class="form-control"style="border:solid 3px green"  required>
 </td>
 <td>
 <label>A. materno</label>
-<input type="text" name="materno_paci" class="form-control" required>
+<input type="text" name="materno_paci" class="form-control"style="border:solid 3px green"  required>
 </td>
 </tr>
 
@@ -66,7 +62,7 @@ Enviar a lista de espera (Buzón):
 </td>
 <td >
 <label>Fecha de nacimiento</label>
-<input type="date" name="naci_paci" class="form-control" required>
+<input type="date" name="naci_paci" style="border:solid 3px green"  class="form-control" required>
 </td>
 <td >
 <label>Edad</label>
@@ -77,8 +73,8 @@ Enviar a lista de espera (Buzón):
 <tr>
 <td>
 <label>Lugar de nacimiento</label>
-<select name="lugar_paci" class="form-control">
-<?php include 'forms/options_estados_republica.php'; ?>
+<select name="lugar_paci" class="form-control" >
+<?php include 'options_estados_republica.php'; ?>
 </select>
 </td>
 <td>
@@ -127,7 +123,7 @@ Enviar a lista de espera (Buzón):
 <td>
 <label>Estado</label>
 <select name="edo_dir" class="form-control">
-<?php include 'forms/options_estados_republica.php'; ?>
+<?php include 'options_estados_republica.php'; ?>
 </select>
 </td>
 <td>
@@ -337,15 +333,15 @@ Enviar a lista de espera (Buzón):
 <tr>
 <td>
 <label>ID pase</label>
-<input type="text"  name="pase_id" class="form-control">
+<input type="number"  name="pase_id" class="form-control" style="border:solid 3px green" required>
 </td>
 <td>
 <label>Total de Consultas Permitidas</label>
-<input type="text"  name="pase_tot" class="form-control">
+<input type="number"  name="pase_tot" class="form-control" style="border:solid 3px green" required>
 </td>
 </tr>
 </table>
-
+<!--
 <table class="table" style="width:100%">
 <tr><td colspan="3" style="text-align:center;"><label>Datos de historia clínica</label></td></tr>
 <tr>
@@ -442,7 +438,7 @@ Enviar a lista de espera (Buzón):
 </tr>
 </table>
 
-
+-->
 
 <table class="table" style="width:100%;">
 <tr><td colspan="4" style="text-align:center;"><label>Datos adicionales</label></td></tr>
@@ -700,73 +696,6 @@ Enviar a lista de espera (Buzón):
 
 </table>
 
-<input type="submit" class="btn btn-primary" style="width:100%;">
+<input type="submit" class="btn btn-primary" value="Guardar expediente" style="width:100%;">
 </form>
-</div>
-</center>
-<audio id="tono_mensaje" src="sound/tono.mp3"></audio>
-<?php include 'forms/frm_buzon.php'; ?>
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-    var notif;
-    var pusher = new Pusher('be16aa8bec249ddd5126', {
-      cluster: 'us2',
-      encrypted: true
-    });
 
-    var channel = pusher.subscribe('canal_doctor');
-    channel.bind('e_nuevo_paciente', function(data) {
-      //actualizar lista de buzon (lista de espera)
-
-      var options = {
-      body: data.mensaje,
-      icon: "img/fondo.jpg"
-    };
-    document.getElementById('tono_mensaje').play();
-    notif = new Notification("Nuevo paciente en espera", options);
-    notif.addEventListener("click",function(){
-      abrirBuzon();
-    });
-    //setTimeout(notif.close, 3000);
-    });
-  </script>
-<?php include 'footer.php'; ?> 
-<script type="text/javascript">
-$(document).ready(function(){
-  pedirPermisoNotificar();
-  $("#form_nuevo_paciente_doctor").submit(function(e){
-    e.preventDefault();
-    $.post('control/ctrl_doctor.php?e=insertPaciente',$("#form_nuevo_paciente_doctor").serialize(),function(data){
-      swal('Aviso',data);
-      //console.log(data);
-      $("#form_nuevo_paciente_doctor")[0].reset();
-    });
-  });
-});
-function pedirPermisoNotificar()
-  {
-    Notification.requestPermission( function(status) {
-        if (status == "granted"){
-            //console.log("permiso concedido");
-      }
-      if (status == "denied"){
-            alert("Considere activar las notificaciones en la configuración del navegador para un correcto funcionamiento.");
-      }
-      if (status == "default"){
-            //console.log("no ha respondido explicar y mostrar de nuevo");
-            alert("Para que el sistema funcione de manera correcta se necesitan los permisos de Notification");
-            pedirPermisoNotificar();
-      }
-    });
-  }
-  function abrirBuzon()
-  {
-    $.post('control/ctrl_doctor.php?e=getBuzon',{},function(data){  
-      $("#contenedor_buzon").html(data);
-      $("#modal_buzon").modal('show');
-    });
-    
-  }
-</script>
