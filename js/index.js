@@ -51,6 +51,17 @@ function historiaClinica (id_expediente)
 {
 	$.post('includes/historia_clinica.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
 }
+function consultas (id_expediente)
+{
+	$.post('includes/consultas.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
+}
+function infoConsulta(id_consulta){
+	$.post('includes/info_consulta.php',{id_consulta:id_consulta},function(data){ $("#contenedor").html(data); });
+}
+function archivos(id_expediente)
+{
+	$.post('includes/archivos.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
+}
 function iniciarConsulta(id_expediente)
 {
 	$.post('control/ctrl_expediente.php?e=validarPase',{id_expediente:id_expediente},function(data){
@@ -153,3 +164,10 @@ function abrirExpediente(id_expediente)
 	$.post('includes/expediente.php?id_expediente='+id_expediente,{},function(data){ $("#contenedor").html(data); $(".busqueda").css('display','none');});
 }
 
+function eliminarArchivo(id_archivo)
+  {
+    if(confirm('¿Eliminar archivo?'))
+    {
+      window.location="control/ctrl_archivo.php?e=eliminarArchivo&id_archivo="+id_archivo;
+    }
+  }
