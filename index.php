@@ -1,4 +1,11 @@
 <?php set_time_limit(3000); ?>
+<?php 
+session_start();
+if(isset($_SESSION['tipo_usu']))
+{
+	header('Location: system.php');
+}
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +74,7 @@ $(document).ready(function(){
 			{
 				swal('Aviso',json.mensaje);
 			}else{
-				window.location='doctor.php';
+				window.location='system.php';
 			}
 		});
 	});
