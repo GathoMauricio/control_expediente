@@ -30,10 +30,12 @@ if(!isset($_SESSION['tipo_usu']))
 		<br><br>
 		<label class="item-menu" onclick="catalogo();"><span class="icon-users"></span> CATÁLOGO</label>
 		<br><br>
+		<?php if ($_SESSION['tipo_usu']=='Doctor'): ?>
 		<label class="item-menu" onclick="exportar();"><span class="icon-file-excel"></span> EXPORTAR</label>
 		<br><br>
 		<label class="item-menu" onclick="ajustes();"><span class="icon-cog"></span> AJUSTES</label>
 		<br><br>
+		<?php endif ?>
 		<label class="item-menu" onclick="cerrarSesion();"><span class="icon-exit"></span> SALIR</label>
 	</div>
 	<div class="buzon">
