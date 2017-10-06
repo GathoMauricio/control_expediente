@@ -121,7 +121,7 @@ function importarBD()
 
 							}
 							
-							echo "Se importó la base de datos con ".$contador." errores";
+							echo "Se importó la base de datos con éxito";
 					    }
 					}else{
 					    throw new Exception("Error Processing Request", 1);   
@@ -150,14 +150,14 @@ function importarBD()
 				if($conexion->error!='Query was empty')
 				{
 					$contador++;
-					echo 'Ocurrió un error al crear las tablas!';
+					//echo 'Ocurrió un error al crear las tablas!';
 					echo $conexion->error;
 				}
 			}
 
 		}
 		
-		echo "Se importó la base de datos con ".$contador." errores";
+		echo "Se importó la base de datos";
 	}
 }
 function crearBase(){
@@ -190,7 +190,7 @@ function crearBase(){
 			'$_POST[tipo_usuario]','$_POST[usuario]','$_POST[contrasena]','".strtoupper($_POST['nombre'])."','".strtoupper($_POST['apaterno'])."','".strtoupper($_POST['amaterno'])."'
 		)"))
 		{
-			echo json_encode(array('error'=>'0','mensaje'=>"Se importó la base de datos con ".$contador." errores.\nPor favor inicie sesión con la cuenta que acaba de crear!"));
+			echo json_encode(array('error'=>'0','mensaje'=>"Se importó la base de datos.\nPor favor inicie sesión con la cuenta que acaba de crear!"));
 		}else{
 			echo json_encode(array('error'=>'1','mensaje'=>$conexion->error));
 		}
@@ -221,10 +221,7 @@ function exportarBD($tables)
    
    //cycle through
    date_default_timezone_set('America/Mexico_City');
-   $return=
-   "--
-	-- Script generado de forma automatica el dia ".date('d/m/Y')." a las ".date('H:i')." Hrs.
-	--\n\n";
+   $return="";
    foreach($tables as $table)
    {
       $result = mysqli_query($link,'SELECT * FROM '.$table);

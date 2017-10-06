@@ -2,7 +2,15 @@
 include '../control/conexion.php';
 $con = new Conexion();
 //Obtener datos
-$datos=$con->select("SELECT * FROM paciente  WHERE id_paciente=".$_POST['id_expediente']);
+$id_expediente;
+if(isset($_POST['id_expediente']))
+{
+  $id_expediente=$_POST['id_expediente'];
+}else{
+  $id_expediente=$_GET['id_expediente'];
+} 
+
+$datos=$con->select("SELECT * FROM paciente  WHERE id_paciente=".$id_expediente);
 $data;
 if($fila=mysqli_fetch_array($datos))
 {
@@ -22,6 +30,22 @@ if($fila=mysqli_fetch_array($datos))
 }
 </style>
 <center>
+<div class="archivos">
+<table style="width:100%;">
+<tr>
+  <td> <button onclick="iniciarConsulta(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+<td> <button onclick="agregarBuzon(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Enviar a buzón</button> </td>
+<td> <button onclick="informacionGral(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Información Gral</button> </td>
+<?php 
+session_start();
+if($_SESSION['tipo_usu']=='Doctor')echo'
+
+<td> <button onclick="historiaClinica('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
+<td> <button onclick="consultas('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+<td> <button onclick="archivos('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+ ?>
+ </tr>
+</table>
 <h4>Archivos.</h4>
 
 <label>Paciente: </label> <?php echo $data['nombre_paci']." ".$data['paterno_paci']." ".$data['materno_paci']; ?>
@@ -47,7 +71,7 @@ if($fila=mysqli_fetch_array($datos))
 <th>Opciones</th>
 </tr>
 <?php 
-$sql="SELECT * FROM archivo WHERE id_paciente=".$_POST['id_expediente'];
+$sql="SELECT * FROM archivo WHERE id_paciente=".$id_expediente;
 $datos = $con->select($sql);
 while($fila=mysqli_fetch_array($datos))
 {
@@ -58,7 +82,7 @@ while($fila=mysqli_fetch_array($datos))
   <th>$fila[tipo_arc]</th>
   <th>
   <a href='archivos/$fila[ubi_arc]' target='_BLANK' style='color:white;'><span class='icon-download2'></span> Ver archivo</a>
-  <a href='#' onclick='eliminarArchivo($fila[id_archivo]);' style='color:red'><span class='icon-bin'></span> Eliminar</a>
+  <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a>
   </th>
   </tr>
   ";

@@ -26,7 +26,7 @@ function subirArchivo()
   if($con->insert($sql))
   {
   	echo "Archivo subido.";
-  	header("Location: ../doctor.php");
+  	header("Location: ../doctor.php?id_expediente=".$_POST['id_paciente']);
   }else{
   	echo "Error: ".$sql;
   }
@@ -43,7 +43,7 @@ function eliminarArchivo()
 			if($con->delete("DELETE FROM archivo WHERE id_archivo=".$_GET['id_archivo']))
 			{
 				echo "Archivo eliminado.";
-  			header("Location: ../doctor.php");
+  			header("Location: ../doctor.php?id_expediente=".$_GET['id_expediente']);
 			}
 		}else{
 			echo "Error: ".$sql;

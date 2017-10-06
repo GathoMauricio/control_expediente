@@ -125,7 +125,7 @@ html,body{
 .item-busqueda:hover{
 	background-color: #00FF40;
 }
-.expediente,.info_gral,.consultas,.archivos{
+.expediente,.info_gral,.consultas,.archivos,.ajustes{
 	width: 100%;
 	padding: 20px;
 	background-color: white;

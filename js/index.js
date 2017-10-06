@@ -43,9 +43,17 @@ function catalogo()
 {
 	$.post('includes/catalogo.php',{},function(data){ $("#contenedor").html(data); });
 }
+function exportar()
+{
+	window.open("control/lista_excel.php");
+}
+function ajustes()
+{
+	$.post('includes/ajustes.php',{},function(data){ $("#contenedor").html(data); });
+}
 function informacionGral(id_expediente)
 {
-	$.post('includes/información_gral.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
+	$.post('includes/informacion_gral.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
 }
 function historiaClinica (id_expediente)
 {
@@ -164,10 +172,39 @@ function abrirExpediente(id_expediente)
 	$.post('includes/expediente.php?id_expediente='+id_expediente,{},function(data){ $("#contenedor").html(data); $(".busqueda").css('display','none');});
 }
 
-function eliminarArchivo(id_archivo)
-  {
-    if(confirm('¿Eliminar archivo?'))
-    {
-      window.location="control/ctrl_archivo.php?e=eliminarArchivo&id_archivo="+id_archivo;
-    }
-  }
+function eliminarArchivo(id_archivo,id_expediente)
+{
+    swal({
+	  title: "Aviso",
+	  text: "¿Eliminar archivo?",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-primary",
+	  confirmButtonText: "Remover",
+	  cancelButtonText:"Cancelar",
+	  closeOnConfirm: true
+	},
+	function(){
+	  window.location="control/ctrl_archivo.php?e=eliminarArchivo&id_archivo="+id_archivo+"&id_expediente="+id_expediente;
+	});	
+}
+function eliminarExpediente(id_expediente)
+{
+  	swal({
+  	  html:true,
+	  title: "Aviso",
+	  text: "¿Eliminar expediente?<br>Este cambio ya no se podrá deshacer!!!",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-danger",
+	  confirmButtonText: "Eliminar",
+	  cancelButtonText:"Cancelar",
+	  closeOnConfirm: true
+	},
+	function(){
+	  $.post('control/ctrl_expediente.php?e=eliminarExpediente',{id_expediente:id_expediente},function(data){ 
+      		inicio();
+      		swal('Aviso',data);
+    	})
+	});
+    
+  
+}

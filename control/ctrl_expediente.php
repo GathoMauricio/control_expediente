@@ -3,6 +3,7 @@ date_default_timezone_set('America/Mexico_City');
 if(isset($_GET['e']))
 {
 	switch ($_GET['e']) {
+		case 'eliminarExpediente': eliminarExpediente(); break;
 		case 'actualizarPacienteHc': actualizarPacienteHc(); break;
 		case 'actualizarPaciente': actualizarPaciente(); break;
 		case 'validarPase': validarPase(); break;
@@ -11,6 +12,18 @@ if(isset($_GET['e']))
 		case 'agregarBuzon': agregarBuzon(); break;
 		case 'cargarBuzon': cargarBuzon(); break;
 		case 'nuevoExpediente': nuevoExpediente(); break;
+	}
+}
+function eliminarExpediente()
+{
+	include "conexion.php";
+	$con = new Conexion();
+	$sql="DELETE FROM paciente WHERE id_paciente=".$_POST['id_expediente'];
+	if($con->delete($sql))
+	{
+		echo "Registro eliminado";
+	}else{
+		echo 'error: '.$sql;
 	}
 }
 function actualizarPacienteHc()

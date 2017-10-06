@@ -67,12 +67,7 @@ $(document).ready(function(){
 			{
 				swal('Aviso',json.mensaje);
 			}else{
-				switch(json.tipo_usuario)
-				{
-					//case 'Administrador': window.location='administrador.php'; break;
-					case 'Doctor': window.location='doctor.php'; break;
-					case 'Asistente': window.location='asistente.php'; break;
-				}
+				window.location='doctor.php';
 			}
 		});
 	});

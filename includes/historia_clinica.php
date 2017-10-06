@@ -13,6 +13,20 @@ if($fila=mysqli_fetch_array($datos))
 ?>
 <center>
 <div class="info_gral">
+	<table style="width:100%;">
+<tr>
+<td> <button onclick="agregarBuzon(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Enviar a buzón</button> </td>
+<td> <button onclick="informacionGral(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Información Gral</button> </td>
+<?php 
+session_start();
+if($_SESSION['tipo_usu']=='Doctor')echo'
+<td> <button onclick="iniciarConsulta('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+<td> <button onclick="historiaClinica('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
+<td> <button onclick="consultas('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+<td> <button onclick="archivos('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+ ?>
+ </tr>
+</table>
 <h4>Historia clínica.</h4>
 <form class="form" id="form_historia_clinica">
 <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">

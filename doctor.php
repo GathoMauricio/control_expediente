@@ -1,3 +1,4 @@
+
 <?php set_time_limit(3000); ?>
 <?php session_start(); ?>
 <!DOCTYPE html>
@@ -48,12 +49,12 @@
 		<input type="text" class="form-control"  id="tags" placeholder="Escriba el nombre del paciente a quien pertenece el expediente..." onkeyup="buscarExpediente(this.value);">
 	</div>	
 	<div class="busqueda">
-		<!--Carga de resultados de una busqueda-->
-		<div class="item-busqueda"><span class="icon-user"></span> FULANITO PERENGANO TEST</div>
-		<div class="item-busqueda"><span class="icon-user"></span> FULANITO PERENGANO TEST</div>
-		<div class="item-busqueda"><span class="icon-user"></span> FULANITO PERENGANO TEST</div>
-		<div class="item-busqueda"><span class="icon-user"></span> FULANITO PERENGANO TEST</div>
 	</div>
+<?php include 'forms/frm_ver_usuarios.php'; ?>
+<?php include 'forms/frm_nuevo_usuario.php'; ?>
+<?php include 'forms/frm_actualizar_usuario.php'; ?>
+<?php include 'forms/frm_importar_bd.php'; ?>
+<?php include 'forms/frm_load.php'; ?>
 <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -80,4 +81,13 @@ $(document).ready(function(){
 	cargarBuzon();
 });
 </script>
+
+<?php if (isset($_GET['id_expediente'])): ?>
+<script type="text/javascript">
+$(function(){
+	swal('Aviso','Se proceso el archivo con éxito');
+	archivos(<?php echo $_GET['id_expediente']; ?>);
+});
+</script>	
+<?php endif ?>
 </html>
