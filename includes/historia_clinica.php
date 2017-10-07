@@ -1,4 +1,4 @@
-
+<?php date_default_timezone_set('America/Mexico_City'); ?>
 <?php 
 include '../control/conexion.php';
 $con = new Conexion();

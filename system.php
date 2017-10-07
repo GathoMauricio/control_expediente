@@ -1,4 +1,5 @@
 <?php set_time_limit(3000); ?>
+<?php date_default_timezone_set('America/Mexico_City'); ?>
 <?php session_start(); ?>
 <?php 
 if(!isset($_SESSION['tipo_usu']))

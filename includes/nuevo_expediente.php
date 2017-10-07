@@ -1,3 +1,4 @@
+<?php date_default_timezone_set('America/Mexico_City'); ?>
 <script type="text/javascript">
 $(function(){
 	$("#form_nuevo_paciente").submit(function(e){
@@ -34,7 +35,6 @@ $(function(){
 <h4 id="up">NUEVO EXPEDIENTE.</h4>
 <form class="form" id="form_nuevo_paciente">
 <input type="hidden" name="edo_exp" value="Activo">
-
 <label>Fecha de registro</label><br>
 <input type="date" class="form-control" name="fecha_reg" style="width:30%;" value="<?php echo date('Y-m-d'); ?>" >
 <br><br>

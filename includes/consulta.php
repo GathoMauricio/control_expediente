@@ -1,3 +1,4 @@
+<?php date_default_timezone_set('America/Mexico_City'); ?>
 <script type="text/javascript">
 $(function(){
 	$("#frm_nueva_consulta").submit(function(e){
