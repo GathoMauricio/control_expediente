@@ -17,6 +17,7 @@ if(!isset($_SESSION['tipo_usu']))
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/font.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link href="css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
 	<title>Control expedientes</title>
 </head>
 <body>
@@ -63,9 +64,18 @@ if(!isset($_SESSION['tipo_usu']))
 <?php include 'forms/frm_actualizar_usuario.php'; ?>
 <?php include 'forms/frm_importar_bd.php'; ?>
 <?php include 'forms/frm_load.php'; ?>
+
+<div class="backdrop"></div>
+<div class="box"><div class="close"><span class="icon-cross"></span></div>
+<label id="title_ligth_box">Title</label>
+<div id="content_ligth_box">
+<img src="img/fondo.jpg" style="width:100%;height:90%;">
+</div>
+
 <audio id="tono_mensaje" src="sound/tono.mp3"></audio>
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="dist/sweetalert.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

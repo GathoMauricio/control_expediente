@@ -56,9 +56,13 @@ if($_SESSION['tipo_usu']=='Doctor')echo'
           <label>Nombre del archivo</label>
           <input type="text" class="form-control" name="nom_arc" required>
           <label>Tipo de archivo</label>
-          <input type="text" class="form-control" name="tipo_arc" required>
+          <select class="form-control" id="tipo_archivo" name="tipo_arc">
+            <option value="1">Imagen</option>
+            <option value="2">Video</option>
+            <option value="3">Audio</option>
+          </select>
           <label>Archivo</label>
-          <input type="file" class="form-control" name="archivo" required>
+          <input type="file" id="archivo_subir" class="form-control" name="archivo" required>
           <br><br>
           <input type="submit" class="btn btn-primary" style="width:100%;">
 </form>
@@ -75,13 +79,18 @@ $sql="SELECT * FROM archivo WHERE id_paciente=".$id_expediente;
 $datos = $con->select($sql);
 while($fila=mysqli_fetch_array($datos))
 {
+  switch ($fila['tipo_arc']) {
+    case 1:$span = '<span class="icon-image"></span> Imagen'; $tipo='Imagen';break;
+    case 2:$span = '<span class="icon-film"></span> Video'; $tipo='Video';break;
+    case 3:$span = '<span class="icon-music"></span> Audio'; $tipo='Audio';break;
+  }
   echo "
   <tr>
   <th>$fila[fecha_arc]</th>
   <th>$fila[nom_arc]</th>
-  <th>$fila[tipo_arc]</th>
+  <th>$span</th>
   <th>
-  <a href='archivos/$fila[ubi_arc]' target='_BLANK' style='color:white;'><span class='icon-download2'></span> Ver archivo</a>
+  <a href='#' onclick='abrirReproductor(\"$fila[tipo_arc]\",\"$tipo - $fila[nom_arc] - $fila[fecha_arc]\",\"archivos/$fila[ubi_arc]\");' id='archivos/$fila[ubi_arc]'  style='color:blue;'><span class='icon-download2'></span> Ver archivo</a>
   <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a>
   </th>
   </tr>
@@ -92,3 +101,37 @@ while($fila=mysqli_fetch_array($datos))
 
 </div>
 </center>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#form_subir_archivos").submit(function(e){
+    var archivo = $("#archivo_subir")[0].files[0];
+    var nombre = archivo.name;
+    var extension = nombre.substring(nombre.lastIndexOf('.') + 1);
+    var tipo = $("#tipo_archivo").prop('value');
+    switch(tipo)
+    {
+      case '1':
+        if(!isImagen(extension))
+        {
+          e.preventDefault();
+          swal("Tipo de imagen inválida","Los formatos de imagen permitidos son: jpg, jpeg, png y gif");
+        }
+      break;
+      case '2':
+        if(!isVideo(extension))
+        {
+          e.preventDefault();
+          swal("Tipo de video inválido","Los formatos de video permitidos son: mp4, webm, m4v y ogv");
+        }
+      break;
+      case '3':
+        if(!isAudio(extension))
+        {
+          e.preventDefault();
+          swal("Tipo de audio inválido","Los formatos de audio permitidos son: mp3, oga, m4a y wav");
+        }
+      break;
+    }
+  });
+});
+</script>

@@ -16,7 +16,7 @@ function subirArchivo()
   else
   {
 }
-  $nombreArchivo="$_POST[id_paciente]_".date('d-m-Y')."_".$_FILES['archivo']['name'];
+  $nombreArchivo="$_POST[id_paciente]_".date('d-m-Y s')."_".$_FILES['archivo']['name'];
   move_uploaded_file($_FILES['archivo']['tmp_name'],"../archivos/".$nombreArchivo);
   date_default_timezone_set('America/Mexico_City');
   include 'conexion.php';
