@@ -58,7 +58,7 @@ if($fila=mysqli_fetch_array($datos)) $num_pase = $fila['num_pase'];
 <input type="hidden" name="no_cons" value="<?php echo ($num_cons+1); ?>">
 </td>
 <td>
-<label>Fecha: </label> <input type="date" name="fecha_cons" value="<?php echo date('Y-m-d'); ?>">
+<label>Fecha: </label> <input type="date" class="form-control" style="30%;" name="fecha_cons" value="<?php echo date('Y-m-d'); ?>">
 </td>
 </tr>
 <tr>
