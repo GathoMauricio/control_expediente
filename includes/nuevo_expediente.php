@@ -43,15 +43,15 @@ $(function(){
 <tr>
 <td>
 <label>Nombre(s)</label>
-<input type="text" name="nombre_paci" class="form-control" style="border:solid 3px green" required>
+<input type="text" name="nombre_paci" id="txt_nombre_paci"  class="form-control" style="border:solid 3px green" required>
 </td>
 <td>
 <label>A. paterno</label>
-<input type="text" name="paterno_paci" class="form-control"style="border:solid 3px green"  required>
+<input type="text" name="paterno_paci" id="txt_paterno_paci" class="form-control"style="border:solid 3px green"  required>
 </td>
 <td>
 <label>A. materno</label>
-<input type="text" name="materno_paci" class="form-control"style="border:solid 3px green"  required>
+<input type="text" name="materno_paci" id="txt_materno_paci" class="form-control"style="border:solid 3px green"  required>
 </td>
 </tr>
 
@@ -64,7 +64,7 @@ $(function(){
 </td>
 <td >
 <label>Fecha de nacimiento</label>
-<input type="date" name="naci_paci" style="border:solid 3px green" onchange="calcularEdad(this.value);"  class="form-control" required>
+<input type="date" name="naci_paci" id="cbo_fecha_nacimiento" style="border:solid 3px green" onchange="calcularEdad(this.value);"  class="form-control" required>
 </td>
 <td >
 <label>Edad</label>
@@ -81,11 +81,11 @@ $(function(){
 </td>
 <td>
 <label>RFC</label>
-<input type="text"  name="rfc_paci" class="form-control">
+<input type="text"  name="rfc_paci" id="txt_rfc_paci" class="form-control">
 </td>
 <td>
 <label>CURP</label>
-<input type="text" name="curp_paci" class="form-control">
+<input type="text" name="curp_paci"  id="txt_curp_paci" class="form-control">
 </td>
 </tr>
 <tr>

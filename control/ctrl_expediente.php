@@ -3,6 +3,7 @@ date_default_timezone_set('America/Mexico_City');
 if(isset($_GET['e']))
 {
 	switch ($_GET['e']) {
+		case 'calcularRfc': calcularRfc(); break;
 		case 'CalcularEdad': echo CalcularEdad($_POST['value']); break;
 		case 'eliminarExpediente': eliminarExpediente(); break;
 		case 'actualizarPacienteHc': actualizarPacienteHc(); break;
@@ -14,6 +15,18 @@ if(isset($_GET['e']))
 		case 'cargarBuzon': cargarBuzon(); break;
 		case 'nuevoExpediente': nuevoExpediente(); break;
 	}
+}
+function calcularRfc()
+{
+	require_once 'Unirest.php';
+	$response = Unirest\Request::get("https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno=".urlencode($_POST['materno_paci'])."&apellido_paterno=".urlencode($_POST['paterno_paci'])."&fecha=".urlencode($_POST['fecha_paci'])."&nombre=".urlencode($_POST['nombre_paci'])."&solo_homoclave=0",
+	  array(
+	    "X-Mashape-Key" => "7oBF4jVvEymshc41oYkO1Zdyim3tp1e42hCjsnyZCOv2m6ohc7",
+	    "Accept" => "application/json"
+	  )
+	);
+	echo json_encode($response);
+	//echo "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno=".urlencode($_POST['materno_paci'])."&apellido_paterno=".urlencode($_POST['paterno_paci'])."&fecha=".urlencode($_POST['fecha_paci'])."&nombre=".urlencode($_POST['nombre_paci'])."&solo_homoclave=0";
 }
 function eliminarExpediente()
 {

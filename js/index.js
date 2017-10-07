@@ -85,7 +85,7 @@ function iniciarConsulta(id_expediente)
 		if(parseInt(json.pase) > 0)
 		{
 			$.post('includes/consulta.php?id_expediente='+id_expediente,{},function(data){ 
-				removerBuzon(id_expediente);
+				//removerBuzon(id_expediente);
 				$("#contenedor").html(data); 
 			});
 		}else{
@@ -349,5 +349,34 @@ function calcularEdad(value)
 	var edad = $("#txt_edad_generar");
 	$.post('control/ctrl_expediente.php?e=CalcularEdad',{value:value},function(data){
 		edad.prop('value',data);
+	});
+	setTimeout(function(){ calcularRfcCurp(); },500);
+	
+}
+function calcularRfcCurp()
+{
+	
+	var fecha_paci = $("#cbo_fecha_nacimiento").prop('value');
+	var nombre_paci = $("#txt_nombre_paci").prop('value');
+	var paterno_paci = $("#txt_paterno_paci").prop('value');
+	var materno_paci = $("#txt_materno_paci").prop('value');
+	console.log(fecha_paci+" "+nombre_paci+" "+paterno_paci+" "+materno_paci);
+	$.post('control/ctrl_expediente.php?e=calcularRfc',{
+		fecha_paci:fecha_paci,
+		nombre_paci:nombre_paci,
+		paterno_paci:paterno_paci,
+		materno_paci:materno_paci
+	},function(data){
+		var json = JSON.parse(data);
+		if(nombre_paci.length>0 && paterno_paci.length>0 && materno_paci.length>0)
+		{
+			var rfc = json.body.response.data.rfc;
+			$("#txt_rfc_paci").prop('value',rfc);
+			var curp = rfc.substring(0, 10);
+			$("#txt_curp_paci").prop('value',curp+'HOMO');
+		}else{
+			swal("","Por favor ingrese el nombre para calcular RFC/CURP");
+			$("#cbo_fecha_nacimiento").prop('value','');
+		}
 	});
 }
