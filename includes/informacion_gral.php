@@ -737,6 +737,8 @@ $(document).ready(function(){
     e.preventDefault();
     $.post('control/ctrl_expediente.php?e=actualizarPaciente',$("#form_actualizar_paciente_doctor").serialize(),function(data){
       swal('',data);
+      window.open("control/conexion.php?e=exportarBD");
+      window.open("control/lista_excel.php");
     });
   });
 });

@@ -100,13 +100,7 @@ $(".messages").hide();
 
  	});
 
-
-
-
-
-
-
- 	$("#frm_nuevo_usuario").submit(function(e){
+	$("#frm_nuevo_usuario").submit(function(e){
  		e.preventDefault();
  		var contrasena = $("#txt_contrasena_usuario_nuevo").prop('value');
  		var recontrasena = $("#txt_recontrasena_usuario_nuevo").prop('value');

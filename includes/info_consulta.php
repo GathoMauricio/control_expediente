@@ -6,6 +6,8 @@ $(function(){
      	console.log(data);
      	swal('Aviso',data);
      	inicio();
+     	window.open("control/conexion.php?e=exportarBD");
+      	window.open("control/lista_excel.php");
       });
   	});
 });

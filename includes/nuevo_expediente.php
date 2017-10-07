@@ -24,6 +24,8 @@ $(function(){
 		});
       }
       inicio();
+      window.open("control/conexion.php?e=exportarBD");
+      window.open("control/lista_excel.php");
       //$("#form_nuevo_paciente")[0].reset();
       });
   	});

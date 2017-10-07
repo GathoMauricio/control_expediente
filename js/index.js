@@ -209,6 +209,8 @@ function eliminarExpediente(id_expediente)
 	  $.post('control/ctrl_expediente.php?e=eliminarExpediente',{id_expediente:id_expediente},function(data){ 
       		inicio();
       		swal('Aviso',data);
+      		window.open("control/conexion.php?e=exportarBD");
+      		window.open("control/lista_excel.php");
     	})
 	});
     

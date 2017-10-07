@@ -1,4 +1,3 @@
-
 <?php set_time_limit(3000); ?>
 <?php session_start(); ?>
 <?php 

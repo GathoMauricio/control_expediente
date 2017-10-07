@@ -3,9 +3,10 @@ $(function(){
 	$("#frm_nueva_consulta").submit(function(e){
     e.preventDefault();
     $.post('control/ctrl_consulta.php?e=nuevaConsulta',$("#frm_nueva_consulta").serialize(),function(data){
-     	//console.log(data);
      	swal('Aviso',data);
      	inicio();
+     	window.open("control/conexion.php?e=exportarBD");
+      	window.open("control/lista_excel.php");
       });
   	});
 });
