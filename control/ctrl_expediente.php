@@ -3,6 +3,7 @@ date_default_timezone_set('America/Mexico_City');
 if(isset($_GET['e']))
 {
 	switch ($_GET['e']) {
+		case 'CalcularEdad': echo CalcularEdad($_POST['value']); break;
 		case 'eliminarExpediente': eliminarExpediente(); break;
 		case 'actualizarPacienteHc': actualizarPacienteHc(); break;
 		case 'actualizarPaciente': actualizarPaciente(); break;

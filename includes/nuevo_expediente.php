@@ -64,11 +64,11 @@ $(function(){
 </td>
 <td >
 <label>Fecha de nacimiento</label>
-<input type="date" name="naci_paci" style="border:solid 3px green"  class="form-control" required>
+<input type="date" name="naci_paci" style="border:solid 3px green" onchange="calcularEdad(this.value);"  class="form-control" required>
 </td>
 <td >
 <label>Edad</label>
-<input type="number" name="edad_paci" class="form-control">
+<input type="number" name="edad_paci" id="txt_edad_generar" class="form-control">
 </td>
 </tr>
 <tr><td colspan="3">Si el campo edad se encuentra vacio, el sistema calculará la edad automáticamente...</td></tr>

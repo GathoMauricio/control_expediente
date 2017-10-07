@@ -344,3 +344,10 @@ function isAudio(extension)
     	return false;
     }
 }
+function calcularEdad(value)
+{
+	var edad = $("#txt_edad_generar");
+	$.post('control/ctrl_expediente.php?e=CalcularEdad',{value:value},function(data){
+		edad.prop('value',data);
+	});
+}
