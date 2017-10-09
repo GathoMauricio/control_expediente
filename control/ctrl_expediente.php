@@ -336,6 +336,15 @@ function nuevoExpediente()
 {
 	include 'conexion.php';
 	$con = new Conexion();
+
+	if(strlen($_POST['pase_id'])>0)
+	{
+		$pase_id=$_POST['pase_id'];
+		$pase_tot=$_POST['pase_tot'];
+	}else{
+		$pase_id = "VIP_".date('His');
+		$pase_tot='10000';
+	}
 	if(strlen($_POST['edad_paci'])>0)
 	{
 		$edad=$_POST['edad_paci'];
@@ -508,8 +517,8 @@ function nuevoExpediente()
 		'$_POST[tel_cont]',
 		'$_POST[com_cont]',
 
-		'$_POST[pase_id]',
-		'$_POST[pase_tot]',
+		'$pase_id',
+		'$pase_tot',
 
 		'$_POST[part_a]',
 		'$_POST[part_b]',

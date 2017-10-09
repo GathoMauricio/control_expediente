@@ -1,6 +1,7 @@
 <?php date_default_timezone_set('America/Mexico_City'); ?>
 <script type="text/javascript">
 $(function(){
+
 	$("#form_nuevo_paciente").submit(function(e){
     e.preventDefault();
     $.post('control/ctrl_expediente.php?e=nuevoExpediente',$("#form_nuevo_paciente").serialize(),function(data){
@@ -24,7 +25,7 @@ $(function(){
 		  agregarBuzon(json.insert_id);
 		});
       }
-      inicio();
+      abrirExpediente(json.insert_id);
       window.open("control/conexion.php?e=exportarBD");
       window.open("control/lista_excel.php");
       //$("#form_nuevo_paciente")[0].reset();
@@ -161,7 +162,9 @@ $(function(){
 </td>
 <td>
 <label>Religión</label>
-<input type="text"  name="reli" class="form-control" >
+<select name="reli" class="form-control" id="cbo_religion_nuevo" onchange="agregarReligion(this.value);">
+<?php include "options_religiones.php";  ?>
+</select>
 </td>
 </tr>
 <tr>
@@ -177,7 +180,9 @@ $(function(){
 <tr>
 <td>
 <label>Estado civil</label>
-<input type="text"  name="edo_civ" class="form-control" >
+<select name="edo_civ" class="form-control" id="cbo_edo_civ_nuevo" onchange="agregarEdoCiv(this.value);">
+<?php include "options_edo_civil.php";  ?>
+</select>
 </td>
 <td>
 <label>Correo electrónico</label>
@@ -335,11 +340,11 @@ $(function(){
 <tr>
 <td>
 <label>ID pase</label>
-<input type="number"  name="pase_id" class="form-control" style="border:solid 3px green" required>
+<input type="text"  name="pase_id" class="form-control" placeholder="Si el pase esta vacio pasa a ser VIP...">
 </td>
 <td>
 <label>Total de Consultas Permitidas</label>
-<input type="number"  name="pase_tot" class="form-control" style="border:solid 3px green" required>
+<input type="number" min="1" value="1"  name="pase_tot" class="form-control" style="border:solid 3px green" required>
 </td>
 </tr>
 </table>

@@ -129,10 +129,10 @@ function nuevaConsulta()
 		WHERE id_paciente=".$_POST['id_paciente'];
 		if($con->update($sql))
 		{
-			echo "La información se almacenó con éxito.";
+			echo json_encode(array('id_expediente'=>$_POST['id_paciente'],'msj'=>"La información se almacenó con éxito."));
 		}
 	}else{
-		echo "Error: ".$sql;
+		echo json_encode(array('id_expediente'=>$_POST['id_paciente'],'msj'=>"Error: ".$sql));
 	}
 	
 }

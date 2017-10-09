@@ -1,16 +1,4 @@
-::-webkit-scrollbar {
-    width: 14px;
-}
- 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 5px;
-}
- 
-::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
+
 html,body{ 
   background: url(../img/background1.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -39,10 +27,9 @@ html,body{
 	position:absolute;
 	top:0;
 	left:0;
-	background-color: white;
+	background-color: #D8D8D8;
 	width:20%;
  	height: 100%;
- 	opacity: 0.7;
  	padding: 20px;
 }
 .item-menu{
@@ -56,10 +43,9 @@ html,body{
 	position:absolute;
 	top:0;
 	right:0;
-	background-color: white;
+	background-color: #D8D8D8;
 	width:20%;
  	height: 100%;
- 	opacity: 0.7;
  	padding: 20px;
 }
 .item-box{
@@ -100,10 +86,10 @@ html,body{
 	position: absolute;
 	top: 70px;
 	left: 20%;
-	background-color: #5882FA;
+	background-color: white;
 	width: 60%;
 	height: 89%;
-	opacity: 0.8;
+	opacity: 0.9;
 	overflow: scroll;
     overflow-x:hidden; 
     padding: 10px;

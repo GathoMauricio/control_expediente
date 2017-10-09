@@ -92,7 +92,7 @@ function iniciarConsulta(id_expediente)
 			swal({
 			  html:true,
 			  title: "Aviso",
-			  text: "El espediente ha alcanzado el total de pases permitidos<br¿Desea editar la información de este expediente?>",
+			  text: "Precaución: revisar total de pases permitido<br>¿Desea editar la información de este expediente?",
 			  showCancelButton: true,
 			  confirmButtonClass: "btn-primary",
 			  confirmButtonText: "Editar",
@@ -141,7 +141,7 @@ function agregarBuzon(insert_id)
 			swal({
 			  html:true,
 			  title: "Aviso",
-			  text: "El espediente ha alcanzado el total de pases permitidos<br¿Desea editar la información de este expediente?>",
+			  text: "Precaución: revisar total de pases permitido<br>¿Desea editar la información de este expediente?",
 			  showCancelButton: true,
 			  confirmButtonClass: "btn-primary",
 			  confirmButtonText: "Editar",
@@ -379,4 +379,52 @@ function calcularRfcCurp()
 			$("#cbo_fecha_nacimiento").prop('value','');
 		}
 	});
+}
+function agregarReligion(value)
+{
+	if(value=='agregar')
+	{
+		swal({
+		  title: "Agregar religión",
+		  text: "Escriba el nombre de la religión",
+		  type: "input",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  inputPlaceholder: "Escribir"
+		}, function (inputValue) {
+		  if (inputValue === false) return false;
+		  if (inputValue === "") {
+		    swal.showInputError("Es necesario escribir algo...");
+		    return false
+		  }
+		  $.post('control/ctrl_religion.php?e=nuevaReligion',{religion:inputValue},function(data){
+		  	swal('Aviso',data);
+		  	$.post('includes/options_religiones.php',{selected:inputValue},function(data){$("#cbo_religion_nuevo").html(data);});
+		  });
+		});
+	}
+}
+function agregarEdoCiv(value)
+{
+	if(value=='agregar')
+	{
+		swal({
+		  title: "Agregar estado civil",
+		  text: "Escriba el nombre del estado civil",
+		  type: "input",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  inputPlaceholder: "Escribir"
+		}, function (inputValue) {
+		  if (inputValue === false) return false;
+		  if (inputValue === "") {
+		    swal.showInputError("Es necesario escribir algo...");
+		    return false
+		  }
+		  $.post('control/ctrl_edo_civil.php?e=nuevoEdoCivil',{edo_civil:inputValue},function(data){
+		  	swal('Aviso',data);
+		  	$.post('includes/options_edo_civil.php',{selected:inputValue},function(data){$("#cbo_edo_civ_nuevo").html(data);});
+		  });
+		});
+	}
 }

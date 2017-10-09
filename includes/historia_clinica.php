@@ -136,6 +136,7 @@ $(document).ready(function(){
     e.preventDefault();
     $.post('control/ctrl_expediente.php?e=actualizarPacienteHc',$("#form_historia_clinica").serialize(),function(data){
       swal('',data);
+      abrirExpediente(<?php echo $_POST['id_expediente']; ?>);
       window.open("control/conexion.php?e=exportarBD");
       window.open("control/lista_excel.php");
     });

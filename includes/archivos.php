@@ -16,7 +16,10 @@ if($fila=mysqli_fetch_array($datos))
 {
   $data=$fila;
 }
-
+$sql = "SELECT count(*) as num_cons FROM consulta WHERE id_paciente=".$_POST['id_expediente'];
+$datos = $con->select($sql);
+$num_cons;
+if($fila=mysqli_fetch_array($datos)) $num_cons = $fila['num_cons'];
 ?>
 <style type="text/css">
 .contenedor_nuevo_paciente{
@@ -33,16 +36,27 @@ if($fila=mysqli_fetch_array($datos))
 <div class="archivos">
 <table style="width:100%;">
 <tr>
-  <td> <button onclick="iniciarConsulta(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Iniciar consulta</button> </td>
 <td> <button onclick="agregarBuzon(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Enviar a buzón</button> </td>
 <td> <button onclick="informacionGral(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Información Gral</button> </td>
 <?php 
 session_start();
-if($_SESSION['tipo_usu']=='Doctor')echo'
-
-<td> <button onclick="historiaClinica('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
-<td> <button onclick="consultas('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
-<td> <button onclick="archivos('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+if($_SESSION['tipo_usu']=='Doctor')
+{
+  if($num_cons<=0)
+  {
+      echo'
+  <td> <button onclick="iniciarConsulta('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="consultas('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }else{
+    echo'
+  <td> <button onclick="iniciarConsulta('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="historiaClinica('.$_POST['id_expediente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
+  <td> <button onclick="consultas('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$_POST['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }
+  
+}
  ?>
  </tr>
 </table>

@@ -4,8 +4,9 @@ $(function(){
 	$("#frm_nueva_consulta").submit(function(e){
     e.preventDefault();
     $.post('control/ctrl_consulta.php?e=nuevaConsulta',$("#frm_nueva_consulta").serialize(),function(data){
-     	swal('Aviso',data);
-     	inicio();
+     	var json = JSON.parse(data);
+     	swal('Aviso',json.msj);
+     	abrirExpediente(json.id_expediente);
      	window.open("control/conexion.php?e=exportarBD");
       	window.open("control/lista_excel.php");
       });
@@ -33,6 +34,34 @@ $datos = $con->select($sql);
 $num_pase;
 if($fila=mysqli_fetch_array($datos)) $num_pase = $fila['num_pase'];
  ?>
+
+ <table style="width:100%;">
+<tr>
+<td> <button onclick="agregarBuzon(<?php echo $_GET['id_expediente']; ?>);" class="btn btn-primary" style="">Enviar a buzón</button> </td>
+<td> <button onclick="informacionGral(<?php echo $_GET['id_expediente']; ?>);" class="btn btn-primary" style="">Información Gral</button> </td>
+<?php 
+session_start();
+if($_SESSION['tipo_usu']=='Doctor')
+{
+  if($num_cons<=0)
+  {
+      echo'
+  <td> <button onclick="iniciarConsulta('.$_GET['id_expediente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="consultas('.$_GET['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$_GET['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }else{
+    echo'
+  <td> <button onclick="iniciarConsulta('.$_GET['id_expediente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="historiaClinica('.$_GET['id_expediente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
+  <td> <button onclick="consultas('.$_GET['id_expediente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$_GET['id_expediente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }
+  
+}
+ ?>
+ </tr>
+</table>
+
 <br><br>
  <?php 
  if($num_cons<=0)
@@ -220,8 +249,10 @@ $sql="SELECT * FROM consulta WHERE id_paciente=$_GET[id_expediente] AND no_evo >
 $datos = $con->select($sql);
 $contador=0;
 while ($fila=mysqli_fetch_array($datos)) {
+	$fecha = explode('-', $fila['fecha_cons']);
+	$fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
 	echo '<tr><td>
-			<label>Evolución n° '.$fila['no_evo'].' ('.$fila['fecha_cons'].')</label><br>
+			<label>Evolución n° '.$fila['no_evo'].' ('.$fecha.')</label><br>
 			<textarea rows="5" class="form-control" readonly>'.$fila['desc_evo'].'</textarea>
 		</td></tr>';
 		$contador++;
