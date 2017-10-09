@@ -104,8 +104,9 @@ while($fila=mysqli_fetch_array($datos))
   <th>$fila[nom_arc]</th>
   <th>$span</th>
   <th>
-  <a href='#' onclick='abrirReproductor(\"$fila[tipo_arc]\",\"$tipo - $fila[nom_arc] - $fila[fecha_arc]\",\"archivos/$fila[ubi_arc]\");' id='archivos/$fila[ubi_arc]'  style='color:blue;'><span class='icon-download2'></span> Ver archivo</a>
-  <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a>
+  <a href='#' onclick='abrirReproductor(\"$fila[tipo_arc]\",\"$tipo - $fila[nom_arc] - $fila[fecha_arc]\",\"archivos/$fila[ubi_arc]\");' id='archivos/$fila[ubi_arc]'  style='color:blue;'><span class='icon-download2'></span> Ver archivo</a><br>
+  <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a><br>
+  <a href='#' onclick='window.open(\"archivos/$fila[ubi_arc]\");' style='color:black'><span class='icon-download'></span> Descargar</a>
   </th>
   </tr>
   ";
