@@ -98,13 +98,15 @@ while($fila=mysqli_fetch_array($datos))
     case 2:$span = '<span class="icon-film"></span> Video'; $tipo='Video';break;
     case 3:$span = '<span class="icon-music"></span> Audio'; $tipo='Audio';break;
   }
+  $fecha = explode('-', $fila['fecha_arc']);
+  $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
   echo "
   <tr>
   <th>$fila[fecha_arc]</th>
   <th>$fila[nom_arc]</th>
   <th>$span</th>
   <th>
-  <a href='#' onclick='abrirReproductor(\"$fila[tipo_arc]\",\"$tipo - $fila[nom_arc] - $fila[fecha_arc]\",\"archivos/$fila[ubi_arc]\");' id='archivos/$fila[ubi_arc]'  style='color:blue;'><span class='icon-download2'></span> Ver archivo</a><br>
+  <a href='#' onclick='abrirReproductor(\"$fila[tipo_arc]\",\"$tipo - $fila[nom_arc] - $fecha\",\"archivos/$fila[ubi_arc]\");' id='archivos/$fila[ubi_arc]'  style='color:blue;'><span class='icon-download2'></span> Ver archivo</a><br>
   <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a><br>
   <a href='#' onclick='window.open(\"archivos/$fila[ubi_arc]\");' style='color:black'><span class='icon-download'></span> Descargar</a>
   </th>
