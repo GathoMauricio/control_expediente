@@ -10,8 +10,17 @@ header("Content-Disposition: attachment; filename=Catalogo_de_pacientes.xls");
 <title>LISTA DE USUARIOS</title>
 </head>
 <body>
-<table width="100%" border="1" cellspacing="0" cellpadding="0">
-  <tr >
+
+
+<?php 
+include "conexion.php";
+$con = new Conexion();
+$datos = $con->select("SELECT * FROM paciente");
+while($fila=mysqli_fetch_array($datos))
+{
+echo "
+<table width='100%'  border='1'cellspacing='0' cellpadding='0'>
+  <tr style='background-color:#5858FA'>
     <td><strong>Fecha de registro</strong></td>
     <td><strong>Nombre</strong></td>
     <td><strong>A. Paterno</strong></td>
@@ -138,15 +147,10 @@ header("Content-Disposition: attachment; filename=Catalogo_de_pacientes.xls");
     <td><strong>Diagnóstico</strong></td>
     <td><strong>Tratamiento</strong></td>
   </tr>
-
-<?php 
-include "control/conexion.php";
-$con = new Conexion();
-$datos = $con->select("SELECT * FROM paciente");
-while($fila=mysqli_fetch_array($datos))
-{
-	echo 
+";	
+    echo 
 "<tr>
+    <td>".$fila['fecha_reg']."</td>
     <td>".$fila['nombre_paci']."</td>
     <td>".$fila['paterno_paci']."</td>
     <td>".$fila['materno_paci']."</td>
@@ -226,7 +230,6 @@ while($fila=mysqli_fetch_array($datos))
     <td>".$fila['vita_memb']."</td>
     <td>".$fila['zurich']."</td>
     <td>".$fila['d_a1']."</td>
-    <td>".$fila['d_a1']."</td>
     <td>".$fila['d_b2']."</td>
     <td>".$fila['d_c3']."</td>
     <td>".$fila['d_d4']."</td>
@@ -272,9 +275,38 @@ while($fila=mysqli_fetch_array($datos))
     <td>".$fila['hc_rx']."</td>
     <td>".$fila['hc_dx']."</td>
     <td>".$fila['hc_tx']."</td>
+</tr></table>";
+$sql = "SELECT * FROM consulta WHERE id_paciente = ".$fila['id_paciente'];
+$datosConsulta = $con->select($sql);
+echo"<table width='100%' border='1'cellspacing='0' cellpadding='0'>
+<tr style='background-color:#D8D8D8' >
+<td><strong>Id consulta</strong></td>
+<td><strong>Fecha de consulta</strong></td>
+<td><strong>N° de consulta</strong></td>
+<td><strong>Edad</strong></td>
+<td><strong>Pase</strong></td>
+<td><strong>Fecha de última menstruación</strong></td>
+<td><strong>N° de evoclución</strong></td>
+<td><strong>Descripción de evolución</strong></td>
+</tr>";
+while($filaCosulta=mysqli_fetch_array($datosConsulta))
+{
+echo "
+<tr>
+<td>$filaCosulta[id_consulta]</td>
+<td>$filaCosulta[fecha_cons]</td>
+<td>$filaCosulta[no_cons]</td>
+<td>$filaCosulta[edad_cons]</td>
+<td>$filaCosulta[pase_cons]</td>
+<td>$filaCosulta[fum_cons]</td>
+<td>$filaCosulta[no_evo]</td>
+<td>$filaCosulta[desc_evo]</td>
 </tr>";
 }
+
+echo "</table>";
+// todas sus consultas
+}
  ?> 
-</table>
 </body>
 </html>

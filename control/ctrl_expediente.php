@@ -16,6 +16,7 @@ if(isset($_GET['e']))
 		case 'nuevoExpediente': nuevoExpediente(); break;
 	}
 }
+
 function calcularRfc()
 {
 	require_once 'Unirest.php';
@@ -26,7 +27,6 @@ function calcularRfc()
 	  )
 	);
 	echo json_encode($response);
-	//echo "https://jfhe88-rfc-generator-mexico.p.mashape.com/rest1/rfc/get?apellido_materno=".urlencode($_POST['materno_paci'])."&apellido_paterno=".urlencode($_POST['paterno_paci'])."&fecha=".urlencode($_POST['fecha_paci'])."&nombre=".urlencode($_POST['nombre_paci'])."&solo_homoclave=0";
 }
 function eliminarExpediente()
 {
