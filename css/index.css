@@ -1,6 +1,6 @@
 
 html,body{ 
-  background: url(../img/background1.jpg) no-repeat center center fixed; 
+  background: url(../img/background.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,8 +9,14 @@ html,body{
   margin:0px;
   height:100%;
 }
+a{
+	font-size: 18px;
+}
+td{
+	font-size: 17px;
+}
 .login{
-	background: url(../img/fondox.jpg) no-repeat center center fixed; 
+	background: url(../img/background_login.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,6 +37,7 @@ html,body{
 	width:20%;
  	height: 100%;
  	padding: 20px;
+ 	opacity: 0.9;
 }
 .item-menu{
 	cursor: pointer;
@@ -47,6 +54,8 @@ html,body{
 	width:20%;
  	height: 100%;
  	padding: 20px;
+ 	opacity: 0.9;
+ 	font-size: 16px;
 }
 .item-box{
 	width: 100%;
@@ -89,7 +98,7 @@ html,body{
 	background-color: white;
 	width: 60%;
 	height: 89%;
-	opacity: 0.9;
+	opacity: 0.8;
 	overflow: scroll;
     overflow-x:hidden; 
     padding: 10px;
