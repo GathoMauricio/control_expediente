@@ -1,3 +1,57 @@
+CREATE TABLE `religion` (
+  `id_religion` int(11) NOT NULL,
+  `religion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `religion` (`id_religion`, `religion`) VALUES
+(1, 'Católica'),
+(2, 'Apóstolica'),
+(3, 'Romana'),
+(4, 'Pentecosté'),
+(5, 'Bautista'),
+(6, 'Presbiteriana'),
+(7, 'Espiritualista'),
+(8, 'Ortodoxa'),
+(9, 'Luteriano'),
+(10, 'Judia'),
+(11, 'Budista'),
+(12, 'Metodista'),
+(13, 'Luz del mundo'),
+(14, 'Cristiana'),
+(15, 'Nuevas expresiones'),
+(16, 'Hindú'),
+(17, 'Islámica'),
+(18, 'Anglicana'),
+(19, 'Mormones'),
+(20, 'Ejercito de salvación');
+ALTER TABLE `religion`
+  ADD PRIMARY KEY (`id_religion`);
+
+ALTER TABLE `religion`
+  MODIFY `id_religion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;COMMIT;
+CREATE TABLE `edo_civil` (
+  `id_edo_civil` int(11) NOT NULL,
+  `edo_civil` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `edo_civil`
+--
+
+INSERT INTO `edo_civil` (`id_edo_civil`, `edo_civil`) VALUES
+(1, 'Soltero/a.'),
+(2, 'Comprometido/a.'),
+(3, 'Casado/a.'),
+(4, 'Divorciado/a.'),
+(5, 'Viudo/a.');
+
+ALTER TABLE `edo_civil`
+  ADD PRIMARY KEY (`id_edo_civil`);
+ALTER TABLE `edo_civil`
+  MODIFY `id_edo_civil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 CREATE TABLE `archivo` (
   `id_archivo` bigint(255) NOT NULL,
   `id_paciente` bigint(255) NOT NULL,

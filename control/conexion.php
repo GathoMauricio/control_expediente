@@ -8,7 +8,7 @@ if(isset($_GET['e']))
 switch ($_GET['e']) {
 	case 'existeBD': $obj->existeBD(); break;
 	case 'crearBase': $obj->crearBase(); break;
-	case 'exportarBD': $obj->exportarBD('usuario,paciente,consulta,archivo'); break;
+	case 'exportarBD': $obj->exportarBD('usuario,paciente,consulta,archivo,religion,edo_civil'); break;
 	case 'importarBD': $obj->importarBD(); break;
 }	
 }
