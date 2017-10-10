@@ -89,7 +89,7 @@ if($_SESSION['tipo_usu']=='Doctor')
 <label>N° de expediente: </label> <?php echo $data['id_paciente']; ?>
 </td>
 <td>
-<label>N° de consulta: </label> <?php echo ($num_cons+1); ?>
+<label>N° de consulta: </label> <?php echo ($num_cons); ?>
 <input type="hidden" name="no_cons" value="<?php echo ($num_cons+1); ?>">
 </td>
 <td>
