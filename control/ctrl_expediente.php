@@ -250,7 +250,7 @@ function buscarExpediente()
 {
 	include "conexion.php";
 	$con = new Conexion();
-	$sql = "SELECT * FROM paciente WHERE nombre_paci LIKE '%$_POST[value]%' OR paterno_paci LIKE '%$_POST[value]%' OR materno_paci LIKE '%$_POST[value]%'";
+	$sql = "SELECT * FROM paciente WHERE nombre_paci  LIKE '%$_POST[value]%'  OR paterno_paci LIKE '%$_POST[value]%' OR materno_paci LIKE '%$_POST[value]%'";
 	$datos=$con->select($sql);
 	$contador=0;
 	while ($fila=mysqli_fetch_array($datos))
@@ -608,5 +608,16 @@ function nuevoExpediente()
 function CalcularEdad( $fecha ) {
     list($Y,$m,$d) = explode("-",$fecha);
     return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
+}
+
+function normaliza ($cadena){
+    $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ
+ßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuy
+bsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+    $cadena = utf8_decode($cadena);
+    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+    $cadena = strtolower($cadena);
+    return utf8_encode($cadena);
 }
  ?>

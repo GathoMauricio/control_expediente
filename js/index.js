@@ -63,6 +63,13 @@ function informacionGral(id_expediente)
 {
 	$.post('includes/informacion_gral.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
 }
+function informacionGralPase(id_expediente)
+{
+	$.post('includes/informacion_gral.php',{id_expediente:id_expediente},function(data){ 
+		$("#contenedor").html(data); 
+		window.location ="#id_pase";
+	});
+}
 function historiaClinica (id_expediente)
 {
 	$.post('includes/historia_clinica.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
@@ -102,7 +109,7 @@ function iniciarConsulta(id_expediente)
 			  closeOnConfirm: true
 			},
 			function(){
-				informacionGral(id_expediente);
+				informacionGralPase(id_expediente);
 			});	
 		}
 	});	
@@ -161,7 +168,7 @@ function agregarBuzon(insert_id)
 			  closeOnConfirm: true
 			},
 			function(){
-				informacionGral(insert_id);
+				informacionGralPase(insert_id);
 			});	
 		}
 	});	

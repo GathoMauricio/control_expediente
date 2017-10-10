@@ -1,17 +1,4 @@
-<script type="text/javascript">
-$(function(){
-	$("#frm_actualizar_consulta").submit(function(e){
-    e.preventDefault();
-    $.post('control/ctrl_consulta.php?e=actualizarConsulta',$("#frm_actualizar_consulta").serialize(),function(data){
-     	console.log(data);
-     	swal('Aviso',data);
-     	inicio();
-     	window.open("control/conexion.php?e=exportarBD");
-      	window.open("control/lista_excel.php");
-      });
-  	});
-});
-</script>
+
 <div style="background-color:white;padding:10px;">
 <?php 
 include "../control/conexion.php";
@@ -46,8 +33,49 @@ if($fila=mysqli_fetch_array($datos)) $num_pase = $fila['num_pase'];
  	$tipo_consulta="subsecuente";
  }
  ?>
-<br><br>
-
+<script type="text/javascript">
+$(function(){
+	$("#frm_actualizar_consulta").submit(function(e){
+    e.preventDefault();
+    $.post('control/ctrl_consulta.php?e=actualizarConsulta',$("#frm_actualizar_consulta").serialize(),function(data){
+     	console.log(data);
+     	swal('Aviso',data);
+     	abrirExpediente(<?php echo $data['id_paciente']; ?>);
+     	window.open("control/conexion.php?e=exportarBD");
+      	window.open("control/lista_excel.php");
+      });
+  	});
+});
+</script>
+<br>
+<center>
+<table style="width:100%;">
+<tr>
+<td> <button onclick="agregarBuzon(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Enviar a buzón</button> </td>
+<td> <button onclick="informacionGral(<?php echo $_POST['id_expediente']; ?>);" class="btn btn-primary" style="">Información Gral</button> </td>
+<?php 
+session_start();
+if($_SESSION['tipo_usu']=='Doctor')
+{
+  if($num_cons<=0)
+  {
+      echo'
+  <td> <button onclick="iniciarConsulta('.$data['id_paciente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="consultas('.$data['id_paciente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$data['id_paciente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }else{
+    echo'
+  <td> <button onclick="iniciarConsulta('.$data['id_paciente'].');" class="btn btn-primary" style="">Iniciar consulta</button> </td>
+  <td> <button onclick="historiaClinica('.$data['id_paciente'].');" class="btn btn-primary" style="">Historia clínica</button> </td>
+  <td> <button onclick="consultas('.$data['id_paciente'].');"  class="btn btn-primary" style="">Consultas</button> </td>
+  <td> <button onclick="archivos('.$data['id_paciente'].');"  class="btn btn-primary" style="">Archivos</button> </td>';
+  }
+  
+}
+ ?>
+</tr>
+</table>
+ </center>
  <h2>INFORMACIÓN DE CONSULTA MÉDICA</h2>
 <form class="form" id="frm_actualizar_consulta">
 <input type="hidden" name="tipo_consulta" value="<?php echo $tipo_consulta;?>">
@@ -99,29 +127,29 @@ if($fila=mysqli_fetch_array($datos)) $num_pase = $fila['num_pase'];
 <tr>
 <td>
 <label>Peso (kg)</label><br>
-<input type="number" name="hc_peso" class="form_control" value="<?php echo $data['hc_peso']; ?>" />
+<input type="text" name="hc_peso" class="form_control" value="<?php echo $data['hc_peso']; ?>" />
 </td>
 <td>
 <label>Talla (m,cm)</label><br>
-<input type="number" name="hc_talla" class="form_control" value="<?php echo $data['hc_talla']; ?>" />
+<input type="text" name="hc_talla" class="form_control" value="<?php echo $data['hc_talla']; ?>" />
 </td>
 <td>
 <label>T.A.</label><br>
-<input type="number" name="hc_ta" class="form_control" value="<?php echo $data['hc_ta']; ?>" />
+<input type="text" name="hc_ta" class="form_control" value="<?php echo $data['hc_ta']; ?>" />
 </td>
 </tr>
 <tr>
 <td>
 <label>F.C. /min</label><br>
-<input type="number" name="hc_fc" class="form_control" value="<?php echo $data['hc_fc']; ?>" />
+<input type="text" name="hc_fc" class="form_control" value="<?php echo $data['hc_fc']; ?>" />
 </td>
 <td>
 <label>F.R. /min</label><br>
-<input type="number" name="hc_fr" class="form_control" value="<?php echo $data['hc_fr']; ?>" />
+<input type="text" name="hc_fr" class="form_control" value="<?php echo $data['hc_fr']; ?>" />
 </td>
 <td>
 <label>Temperatura °C</label><br>
-<input type="number" name="hc_tem" class="form_control" value="<?php echo $data['hc_tem']; ?>" />
+<input type="text" name="hc_tem" class="form_control" value="<?php echo $data['hc_tem']; ?>" />
 </td>
 </tr>
 </table>

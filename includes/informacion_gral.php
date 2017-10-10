@@ -369,9 +369,9 @@ if($data['sex_paci']=='H'){
 </table>
 
 
-<tr>
+<tr >
 <td>
-<label>ID pase</label>
+<label id="id_pase">ID pase</label>
 <input type="text"  name="pase_id" value="<?php echo $data['pase_id']; ?>" placeholder="Si el pase esta vacio pasa a ser VIP..."  class="form-control">
 </td>
 <td>

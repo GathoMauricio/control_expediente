@@ -42,29 +42,29 @@ if($_SESSION['tipo_usu']=='Doctor')echo'
 <tr>
 <td>
 <label>Peso</label>
-<input type="number"  name="hc_peso" value="<?php echo $data['hc_peso']; ?>"  class="form-control">
+<input type="text"  name="hc_peso" value="<?php echo $data['hc_peso']; ?>"  class="form-control">
 </td>
 <td>
 <label>Talla</label>
-<input type="number"  name="hc_talla" value="<?php echo $data['hc_talla']; ?>"  class="form-control">
+<input type="text"  name="hc_talla" value="<?php echo $data['hc_talla']; ?>"  class="form-control">
 </td>
 <td>
 <label>T.A.</label>
-<input type="number"  name="hc_ta" value="<?php echo $data['hc_ta']; ?>"  class="form-control">
+<input type="text"  name="hc_ta" value="<?php echo $data['hc_ta']; ?>"  class="form-control">
 </td>
 </tr>
 <tr>
 <td>
 <label>F.C.</label>
-<input type="number"  name="hc_fc" value="<?php echo $data['hc_fc']; ?>"  class="form-control">
+<input type="text"  name="hc_fc" value="<?php echo $data['hc_fc']; ?>"  class="form-control">
 </td>
 <td>
 <label>F.R.</label>
-<input type="number"  name="hc_fr" value="<?php echo $data['hc_fr']; ?>"  class="form-control">
+<input type="text"  name="hc_fr" value="<?php echo $data['hc_fr']; ?>"  class="form-control">
 </td>
 <td>
 <label>Temperatura</label>
-<input type="number"  name="hc_tem" value="<?php echo $data['hc_tem']; ?>"  class="form-control">
+<input type="text"  name="hc_tem" value="<?php echo $data['hc_tem']; ?>"  class="form-control">
 </td>
 </tr>
 </table>
