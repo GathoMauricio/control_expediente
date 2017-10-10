@@ -197,7 +197,7 @@ if($num_cons<=0)
 <tr>
 <td>
 <label>Padecimiento actual</label><br>
-<textarea class="form-control" name="hc_pad">
+<textarea rows="9" class="form-control" name="hc_pad">
 <?php echo $data['hc_pad']; ?>
 </textarea>
 </td>
@@ -205,7 +205,7 @@ if($num_cons<=0)
 <tr>
 <td>
 <label>Exploracion fisica</label><br>
-<textarea class="form-control" name="hc_exp_fis">
+<textarea rows="6" class="form-control" name="hc_exp_fis">
 <?php echo $data['hc_exp_fis']; ?>
 </textarea>
 </td>
@@ -222,7 +222,7 @@ if($num_cons<=0)
 <tr>
 <td>
 <label>RX</label><br>
-<textarea class="form-control" name="hc_rx">
+<textarea rows="6" class="form-control" name="hc_rx">
 <?php echo $data['hc_rx']; ?>
 </textarea>
 </td>
@@ -230,7 +230,7 @@ if($num_cons<=0)
 <tr>
 <td>
 <label>Diagnóstico (DX)</label><br>
-<textarea class="form-control" name="hc_dx">
+<textarea rows="5" class="form-control" name="hc_dx">
 <?php echo $data['hc_dx']; ?>
 </textarea>
 </td>
@@ -238,7 +238,7 @@ if($num_cons<=0)
 <tr>
 <td>
 <label>Tratamiento (TX)</label><br>
-<textarea class="form-control" name="hc_tx">
+<textarea rows="5" class="form-control" name="hc_tx">
 <?php echo $data['hc_tx']; ?>
 </textarea>
 </td>
@@ -247,7 +247,7 @@ if($num_cons<=0)
 <?php if ($num_cons>0): ?>
 <center> <h3>EVOLUCIONES ANTERIORES</h3> </center>
 
-<div style="width:100%;padding:5px;height:200px;overflow:scroll;overflow-x:hidden;">
+<div id="txt_contenedor_evoluciones" style="width:100%;padding:5px;height:500px;overflow:scroll;overflow-x:hidden;">
 <table class="table" style="width:100%;">
 <?php 
 $sql="SELECT * FROM consulta WHERE id_paciente=$data[id_paciente] AND no_evo > 0 ORDER BY no_evo DESC";
@@ -256,7 +256,7 @@ $contador=0;
 while ($fila=mysqli_fetch_array($datos)) {
 	echo '<tr><td>
 			<label>Evolución n° '.$fila['no_evo'].' ('.$fila['fecha_cons'].')</label><br>
-			<textarea class="form-control" readonly>'.$fila['desc_evo'].'</textarea>
+			<textarea rows="5" class="form-control" readonly>'.$fila['desc_evo'].'</textarea>
 		</td></tr>';
 		$contador++;
 }
@@ -277,7 +277,7 @@ if($contador<=0)echo '<center>Aún no hay evoluciones</center>';
 <tr>
 <td colspan="2">
 <label>Descripción</label>
-<textarea class="form-control" name="desc_evo"><?php echo $dataC['desc_evo'] ?></textarea>
+<textarea rows="5" class="form-control" name="desc_evo"><?php echo $dataC['desc_evo'] ?></textarea>
 </td>
 </tr>
 </table>

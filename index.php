@@ -1,4 +1,4 @@
-<?php set_time_limit(3000); ?>
+<?php set_time_limit(30000); ?>
 <?php 
 session_start();
 if(isset($_SESSION['tipo_usu']))
