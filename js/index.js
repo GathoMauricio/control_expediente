@@ -11,6 +11,8 @@ function init()
 	$('.backdrop').click(function(){
 		close_box();
 	});
+
+	cargarNumBuzon();
 }
 function buscarExpediente(value)
 {
@@ -106,9 +108,19 @@ function iniciarConsulta(id_expediente)
 	});	
 }
 
+function cargarNumBuzon()
+{
+	$.post('control/ctrl_expediente.php?e=cargarNumBuzon',{},function(data){ 
+		if(document.title!='Acceso')
+		document.title= data+"Control expedientes";
+	});
+}
 
 function cargarBuzon(){
-	$.post('control/ctrl_expediente.php?e=cargarBuzon',{},function(data){ $("#buzon").html(data); });
+	$.post('control/ctrl_expediente.php?e=cargarBuzon',{},function(data){ 
+		$("#buzon").html(data); 
+		cargarNumBuzon();
+	});
 }
 
 function validarPase(id_expediente)

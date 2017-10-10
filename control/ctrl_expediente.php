@@ -3,6 +3,7 @@ date_default_timezone_set('America/Mexico_City');
 if(isset($_GET['e']))
 {
 	switch ($_GET['e']) {
+		case 'cargarNumBuzon': cargarNumBuzon(); break;
 		case 'calcularRfc': calcularRfc(); break;
 		case 'CalcularEdad': echo CalcularEdad($_POST['value']); break;
 		case 'eliminarExpediente': eliminarExpediente(); break;
@@ -16,7 +17,22 @@ if(isset($_GET['e']))
 		case 'nuevoExpediente': nuevoExpediente(); break;
 	}
 }
-
+function cargarNumBuzon()
+{
+	include 'conexion.php';
+	$con = new Conexion();
+	$sql="SELECT count(*) as contador FROM paciente WHERE ref_exp != '' ORDER BY ref_exp";
+	$datos=$con->select($sql);
+	$contador="";
+	while($fila=mysqli_fetch_array($datos))
+	{
+		if($fila['contador']>0)
+		{
+			$contador="( ".$fila['contador']." ) ";
+		}
+	}
+	echo $contador;
+}
 function calcularRfc()
 {
 	require_once 'Unirest.php';

@@ -16,7 +16,7 @@ if(isset($_SESSION['tipo_usu']))
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/font.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<title>Test Sistema</title>
+	<title>Acceso</title>
 </head>
 <body>
 	
