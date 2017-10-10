@@ -3,7 +3,7 @@
 <table class="table table-hover">
 <tr>
 <th>N° Expediente</th>
-<td>Nombre</th>
+<th>Nombre</th>
 <th>Fecha de nacimiento</th>
 <th>Edad</th>
 <th>Total de consulta</th>
