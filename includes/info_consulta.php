@@ -112,7 +112,11 @@ if($_SESSION['tipo_usu']=='Doctor')
 <label>Sexo: </label> <?php echo $data['sex_paci']; ?>
 </td>
 <td>
-<label>Fecha de nacimiento: </label> <?php echo $data['naci_paci']; ?>
+<?php 
+$fecha = explode('-', $data['naci_paci']);
+$fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+?>
+<label>Fecha de nacimiento: </label> <?php echo $fecha; ?>
 </td>
 <td>
 <label>Edad: </label><input type="number" name="edad_cons" value="<?php echo $dataC['edad_cons']; ?>" required>
