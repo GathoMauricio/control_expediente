@@ -94,7 +94,7 @@ function iniciarConsulta(id_expediente)
 		if(parseInt(json.pase) > 0)
 		{
 			$.post('includes/consulta.php?id_expediente='+id_expediente,{},function(data){ 
-				//removerBuzon(id_expediente);
+				removerBuzon(id_expediente);
 				$("#contenedor").html(data); 
 			});
 		}else{
@@ -357,6 +357,15 @@ function isAudio(extension)
     	extension.toLowerCase()=='vaw' || 
     	extension.toLowerCase()=='m4a'
     ) 
+    {
+    	return true;
+    }else{
+    	return false;
+    }
+}
+function isPdf(extension)
+{
+    if(extension.toLowerCase()=='pdf') 
     {
     	return true;
     }else{

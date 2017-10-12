@@ -1,2 +1,6 @@
-php_value upload_max_filesize 40M
-php_value post_max_size 40M
+php_value upload_max_filesize 1024M
+php_value post_max_size 1024M
+php_value max_execution_time 60000
+#Evitar q se vean los directorios del sistema
+#Options All -Indexes
+RedirectMatch 404 /\..*$

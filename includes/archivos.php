@@ -71,6 +71,7 @@ if($_SESSION['tipo_usu']=='Doctor')
           <input type="text" class="form-control" name="nom_arc" required>
           <label>Tipo de archivo</label>
           <select class="form-control" id="tipo_archivo" name="tipo_arc">
+            <option value="4">Pdf</option>
             <option value="1">Imagen</option>
             <option value="2">Video</option>
             <option value="3">Audio</option>
@@ -97,10 +98,12 @@ while($fila=mysqli_fetch_array($datos))
     case 1:$span = '<span class="icon-image"></span> Imagen'; $tipo='Imagen';break;
     case 2:$span = '<span class="icon-film"></span> Video'; $tipo='Video';break;
     case 3:$span = '<span class="icon-music"></span> Audio'; $tipo='Audio';break;
+    case 4:$span = '<span class="icon-file-pdf"></span> Pdf'; $tipo='Pdf';break;
   }
   $fecha = explode('-', $fila['fecha_arc']);
   $fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
-  echo "
+  if($fila['tipo_arc']<4){
+echo "
   <tr>
   <th>$fila[fecha_arc]</th>
   <th>$fila[nom_arc]</th>
@@ -112,6 +115,21 @@ while($fila=mysqli_fetch_array($datos))
   </th>
   </tr>
   ";
+  }else{
+    echo "
+  <tr>
+  <th>$fila[fecha_arc]</th>
+  <th>$fila[nom_arc]</th>
+  <th>$span</th>
+  <th>
+  <a href='#' onclick='window.open(\"archivos/$fila[ubi_arc]\");' style='color:blue'><span class='icon-download'></span> Abrir</a>
+  <a href='#' onclick='eliminarArchivo($fila[id_archivo],$id_expediente);' style='color:red'><span class='icon-bin'></span> Eliminar</a><br>
+
+  </th>
+  </tr>
+  ";
+  }
+  
 }
  ?>
 </table>
@@ -146,6 +164,13 @@ $(document).ready(function(){
         {
           e.preventDefault();
           swal("Tipo de audio inválido","Los formatos de audio permitidos son: mp3, oga, m4a y wav");
+        }
+      break;
+      case '4':
+        if(!isPdf(extension))
+        {
+          e.preventDefault();
+          swal("Tipo de PDF inválido","Los formatos de pdf permitidos son: .pdf");
         }
       break;
     }
