@@ -327,6 +327,9 @@ function cargarBuzon()
 			</table>
 			';
 		}
+		//Eliminar opción de iniciar consulta al asistente
+		session_start();
+		if($_SESSION['tipo_usu']=='Asistente')$opciones='';
 		$dateTime = explode(' ',$fila['ref_exp']);
 		$date =explode('-',$dateTime[0]);
 		$time = explode(':',$dateTime[1]);
