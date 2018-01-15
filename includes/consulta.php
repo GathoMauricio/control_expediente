@@ -9,6 +9,7 @@ $(function(){
      	abrirExpediente(json.id_expediente);
      	window.open("control/conexion.php?e=exportarBD");
       	window.open("control/lista_excel.php");
+        window.location.reload();
       });
   	});
   	$("#txt_contenedor_evoluciones").scrollTop($('#txt_contenedor_evoluciones')[0].scrollHeight);
