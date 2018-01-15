@@ -3,6 +3,7 @@ include '../control/conexion.php';
 $con = new Conexion();
 $sql = "SELECT * FROM religion ORDER BY religion";
 $datos = $con->select($sql);
+echo "<option value='Sin relligion' >~~Seleccione religión~~</option>";
 while($fila=mysqli_fetch_array($datos))
 {
 if(isset($_POST['selected']))

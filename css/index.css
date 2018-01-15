@@ -21,6 +21,9 @@ html,body{
   height:100%;
   -webkit-scrollbar-face-color: #1B86CE;
 }
+h2{
+	color:  #1B86CE;
+}
 a{
 	font-size: 18px;
 }

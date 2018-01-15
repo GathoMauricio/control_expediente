@@ -3,6 +3,7 @@ if(isset($_POST['selected']))include '../control/conexion.php';
 $con = new Conexion();
 $sql = "SELECT * FROM edo_civil ORDER BY edo_civil";
 $datos = $con->select($sql);
+echo "<option value='Sin estado civil' >~~Seleccione estado civil~~</option>";
 while($fila=mysqli_fetch_array($datos))
 {
 if(isset($_POST['selected']))
