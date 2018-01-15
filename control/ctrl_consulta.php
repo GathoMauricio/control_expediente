@@ -4,6 +4,7 @@ if(isset($_GET['e']))
 switch ($_GET['e']) {
 	case 'nuevaConsulta': nuevaConsulta(); break;
 	case 'actualizarConsulta': actualizarConsulta(); break;
+	case 'eliminarConsulta': eliminarConsulta(); break;
 }	
 }
 function actualizarConsulta()
@@ -136,4 +137,15 @@ function nuevaConsulta()
 	}
 	
 }
- ?>
+function eliminarConsulta()
+{
+	include 'conexion.php';
+	$con = new Conexion();
+	if($con->delete("DELETE FROM consulta WHERE id_consulta=".$_POST['id_consulta']))
+	{
+		echo "Registro eliminado";
+	}else{
+		echo "Ocurrió un error durante la operación";
+	}
+} 
+?>

@@ -81,6 +81,24 @@ function consultas (id_expediente)
 function infoConsulta(id_consulta){
 	$.post('includes/info_consulta.php',{id_consulta:id_consulta},function(data){ $("#contenedor").html(data); });
 }
+function eliminarConsulta(id_paciente,id_consulta)
+{
+	swal({
+	  title: "Aviso",
+	  text: "¿Realmente desea eliminar la consulta?",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-warning",
+	  confirmButtonText: "Eliminar",
+	  cancelButtonText:"Cancelar",
+	  closeOnConfirm: true
+	},
+	function(){
+	  $.post('control/ctrl_consulta.php?e=eliminarConsulta',{id_consulta:id_consulta},function(data){ 
+	  	swal('Aviso',data);
+	  	consultas(id_paciente);
+	 });
+	});	
+}
 function archivos(id_expediente)
 {
 	$.post('includes/archivos.php',{id_expediente:id_expediente},function(data){ $("#contenedor").html(data); });
@@ -175,7 +193,12 @@ function agregarBuzon(insert_id)
 } 
 function removerBuzon(id_expediente)
 {
-	swal({
+	
+	$.post('control/ctrl_expediente.php?e=removerBuzon',{id_expediente:id_expediente},function(data){ 
+	  	//swal('Aviso',data);
+		cargarBuzon();
+	 });
+	/*swal({
 	  title: "Aviso",
 	  text: "¿Remover del buzón sí se encuentra en espera?",
 	  showCancelButton: true,
@@ -189,7 +212,7 @@ function removerBuzon(id_expediente)
 	  	swal('Aviso',data);
 		cargarBuzon();
 	 });
-	});	
+	});	*/
 }
 function abrirExpediente(id_expediente)
 {

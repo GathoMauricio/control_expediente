@@ -72,6 +72,7 @@ while($fila=mysqli_fetch_array($datos))
   <th>$fila[no_cons]</th>
   <th>$fila[no_evo]</th>
   <th><button onclick='infoConsulta($fila[id_consulta]);' title='Abrir datos de la consulta...' class='btn btn-default'><span class='icon-folder'></span></button></th>
+  <th><button onclick='eliminarConsulta($fila[id_paciente],$fila[id_consulta]);' title='Eliminar la consulta...' class='btn btn-default'><span class='icon-bin'></span></button></th>
   </tr>";
 }
  ?>
