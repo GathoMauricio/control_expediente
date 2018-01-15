@@ -22,9 +22,9 @@ echo "
 <table width='100%'  border='1'cellspacing='0' cellpadding='0'>
   <tr style='background-color:#5858FA'>
     <td><strong>Fecha de registro</strong></td>
-    <td><strong>Nombre</strong></td>
     <td><strong>A. Paterno</strong></td>
     <td><strong>A.materno</strong></td>
+    <td><strong>Nombre</strong></td>
     <td><strong>Sexo</strong></td>
     <td><strong>Fecha de nacimiento</strong></td>
     <td><strong>Edad</strong></td>
@@ -113,21 +113,21 @@ echo "
     <td><strong>Dato K11</strong></td>
     <td><strong>Dato L12</strong></td>
     <td><strong>Dato M13</strong></td>
-    <td><strong>Dato N14</strong></td>
-    <td><strong>Dato O15</strong></td>
-    <td><strong>Dato P16</strong></td>
-    <td><strong>Dato Q17</strong></td>
-    <td><strong>Dato R18</strong></td>
-    <td><strong>Dato S19</strong></td>
-    <td><strong>Dato T20</strong></td>
-    <td><strong>Dato U21</strong></td>
-    <td><strong>Dato V22</strong></td>
-    <td><strong>Dato X23</strong></td>
-    <td><strong>Dato Y24</strong></td>
-    <td><strong>Dato Z25</strong></td>
-    <td><strong>Dato A26</strong></td>
-    <td><strong>Dato B27</strong></td>
-    <td><strong>Dato C28</strong></td>
+    <td><strong>Seguros Banorte</strong></td>
+    <td><strong>Seguros Bancomer</strong></td>
+    <td><strong>Mafre</strong></td>
+    <td><strong>Monterrey</strong></td>
+    <td><strong>Vitamédica ATA</strong></td>
+    <td><strong>Gastos Mayores</strong></td>
+    <td><strong>Red Plus</strong></td>
+    <td><strong>MediAccess</strong></td>
+    <td><strong>Vitamédica Monte de Piedad</strong></td>
+    <td><strong>Asis Admin</strong></td>
+    <td><strong>Código Postal</strong></td>
+    <td><strong>2da Opinión</strong></td>
+    <td><strong>Dirección Fiscal</strong></td>
+    <td><strong>Fecha-PASE</strong></td>
+    <td><strong>Vigencia-PASE</strong></td>
     <td><strong>Estado del expediente</strong></td>
     <td><strong>Referencia</strong></td>
     <td><strong>Peso</strong></td>
@@ -151,9 +151,9 @@ echo "
     echo 
 "<tr>
     <td>".$fila['fecha_reg']."</td>
-    <td>".$fila['nombre_paci']."</td>
     <td>".$fila['paterno_paci']."</td>
     <td>".$fila['materno_paci']."</td>
+    <td>".$fila['nombre_paci']."</td>
     <td>".$fila['sex_paci']."</td>
     <td>".$fila['naci_paci']."</td>
     <td>".$fila['edad_paci']."</td>

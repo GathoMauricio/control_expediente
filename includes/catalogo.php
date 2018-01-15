@@ -27,7 +27,7 @@ $fecha=$fecha[2].'-'.$fecha[1].'-'.$fecha[0];
 echo'
 <tr style="cursor:pointer;" onclick="abrirExpediente('.$fila['id_paciente'].');">
 <td>'.$fila['id_paciente'].'</td>
-<td>'.$fila['nombre_paci'].' '.$fila['paterno_paci'].' '.$fila['materno_paci'].'</td>
+<td>'.$fila['paterno_paci'].' '.$fila['materno_paci'].' '.$fila['nombre_paci'].'</td>
 <td>'.$fecha.'</td>
 <td>'.$fila['edad_paci'].'</td>
 <td>'.$numCons.'</td>

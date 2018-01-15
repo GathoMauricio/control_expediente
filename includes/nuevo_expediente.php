@@ -43,10 +43,7 @@ $(function(){
 <table class="table" style="width:100%">
   <tr><td colspan="3" style="text-align:center;"><label>Información general</label></td></tr>
 <tr>
-<td>
-<label>Nombre(s)</label>
-<input type="text" name="nombre_paci" id="txt_nombre_paci"  class="form-control" style="border:solid 3px green" required>
-</td>
+
 <td>
 <label>A. paterno</label>
 <input type="text" name="paterno_paci" id="txt_paterno_paci" class="form-control"style="border:solid 3px green"  required>
@@ -54,6 +51,10 @@ $(function(){
 <td>
 <label>A. materno</label>
 <input type="text" name="materno_paci" id="txt_materno_paci" class="form-control"style="border:solid 3px green"  required>
+</td>
+<td>
+<label>Nombre(s)</label>
+<input type="text" name="nombre_paci" id="txt_nombre_paci"  class="form-control" style="border:solid 3px green" required>
 </td>
 </tr>
 
@@ -635,69 +636,69 @@ $(function(){
 <input type="text" class="form-control" name="d_m13"/>
 </td>
 <td>
-<label>Dato N14</label>
+<label>Seguros Banorte</label>
 <input type="text" class="form-control" name="d_n14"/>
 </td>
 <td>
-<label>Dato O15</label>
+<label>Seguros Bancomer</label>
 <input type="text" class="form-control" name="d_o15"/>
 </td>
 <td>
-<label>Dato P16</label>
+<label>Mafre</label>
 <input type="text" class="form-control" name="d_p16"/>
 </td>
 </tr>
 <tr>
 <td>
-<label>Dato Q17</label>
+<label>Monterrey</label>
 <input type="text" class="form-control" name="d_q17"/>
 </td>
 <td>
-<label>Dato R18</label>
+<label>Vitamédica ATA</label>
 <input type="text" class="form-control" name="d_r18"/>
 </td>
 <td>
-<label>Dato S19</label>
+<label>Gastos Mayores</label>
 <input type="text" class="form-control" name="d_s19"/>
 </td>
 <td>
-<label>Dato T20</label>
+<label>Red Plus</label>
 <input type="text" class="form-control" name="d_t20"/>
 </td>
 </tr>
 <tr>
 <td>
-<label>Dato U21</label>
+<label>MediAccess</label>
 <input type="text" class="form-control" name="d_u21"/>
 </td>
 <td>
-<label>Dato V22</label>
+<label>Vitamédica Monte de Piedad</label>
 <input type="text" class="form-control" name="d_v22"/>
 </td>
 <td>
-<label>Dato X23</label>
+<label>Asis Admin</label>
 <input type="text" class="form-control" name="d_x23"/>
 </td>
 <td>
-<label>Dato Y24</label>
+<label>Código Postal</label>
 <input type="text" class="form-control" name="d_y24"/>
 </td>
 </tr>
 <tr>
 <td>
-<label>Dato Z25</label>
+<label>2da Opinión</label>
 <input type="text" class="form-control" name="d_z25"/>
 </td>
 <td>
-<label>Dato A26</label>
+<label>Dirección Fiscal</label>
 <input type="text" class="form-control" name="d_a26"/>
 </td>
 <td>
-<label>Dato B27</label>
+<label>Fecha-PASE</label>
 <input type="text" class="form-control" name="d_b27"/>
 </td>
 <td>
-<label>Dato C28</label>
+<label>Vigencia-PASE</label>
 <input type="text" class="form-control" name="d_c28"/>
 </td>
 </tr>
