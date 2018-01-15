@@ -136,21 +136,21 @@ if($data['sex_paci']=='H'){
 <tr>
 <td>
 <label>Teléfono de casa</label>
-<input type="number"  name="tel_cas" value="<?php echo $data['tel_cas']; ?>" class="form-control" >
+<input type="text"  name="tel_cas" value="<?php echo $data['tel_cas']; ?>" class="form-control" >
 </td>
 <td>
 <label>Teléfono celular</label>
-<input type="number"  name="tel_cel" value="<?php echo $data['tel_cel']; ?>" class="form-control" >
+<input type="text"  name="tel_cel" value="<?php echo $data['tel_cel']; ?>" class="form-control" >
 </td>
 </tr>
 <tr>
 <td>
 <label>Teléfono de oficina</label>
-<input type="number"  name="tel_ofi" value="<?php echo $data['tel_ofi']; ?>" class="form-control" >
+<input type="text"  name="tel_ofi" value="<?php echo $data['tel_ofi']; ?>" class="form-control" >
 </td>
 <td>
 <label>Teléfono otro</label>
-<input type="number"  name="tel_otro" value="<?php echo $data['tel_otro']; ?>" class="form-control" >
+<input type="text"  name="tel_otro" value="<?php echo $data['tel_otro']; ?>" class="form-control" >
 </td>
 </tr>
 </table>
@@ -198,7 +198,31 @@ if($data['sex_paci']=='H'){
 </td>
 <td>
 <label>Religión</label>
-<input type="text"  name="reli" value="<?php echo $data['reli']; ?>" class="form-control" >
+<select name="reli" class="form-control" id="cbo_religion_nuevo" onchange="agregarReligion(this.value);">
+<?php
+$con = new Conexion();
+$sql = "SELECT * FROM religion ORDER BY religion";
+$datos = $con->select($sql);
+echo "<option value='Sin relligion' >~~Seleccione religión~~</option>";
+while($fila=mysqli_fetch_array($datos))
+{
+if(isset($_POST['selected']))
+{
+  if($fila['religion']==$_POST['selected'])
+  {
+    echo "<option value='".utf8_encode($fila['religion'])."' selected>".utf8_encode($fila['religion'])."</option>";
+  }else{
+    echo "<option value='".utf8_encode($fila['religion'])."'>".utf8_encode($fila['religion'])."</option>";
+  }
+}else{
+  echo "<option value='".utf8_encode($fila['religion'])."' >".utf8_encode($fila['religion'])."</option>";
+}
+
+}
+ ?>
+ <option value="agregar">--Agregar religión--</option>
+?>
+</select>
 </td>
 </tr>
 <tr>
@@ -214,7 +238,31 @@ if($data['sex_paci']=='H'){
 <tr>
 <td>
 <label>Estado civil</label>
-<input type="text"  name="edo_civ" value="<?php echo $data['edo_civ']; ?>" class="form-control" >
+<select name="edo_civ" class="form-control" id="cbo_edo_civ_nuevo" onchange="agregarEdoCiv(this.value);">
+<?php 
+$con = new Conexion();
+$sql = "SELECT * FROM edo_civil ORDER BY edo_civil";
+$datos = $con->select($sql);
+echo "<option value='Sin estado civil' >~~Seleccione estado civil~~</option>";
+while($fila=mysqli_fetch_array($datos))
+{
+if(isset($_POST['selected']))
+{
+  if($fila['edo_civil']==$_POST['selected'])
+  {
+    echo "<option value='".utf8_encode($fila['edo_civil'])."' selected>".utf8_encode($fila['edo_civil'])."</option>";
+  }else{
+    echo "<option value='".utf8_encode($fila['edo_civil'])."'>".utf8_encode($fila['edo_civil'])."</option>";
+  }
+}else{
+  echo "<option value='".utf8_encode($fila['edo_civil'])."' >".utf8_encode($fila['edo_civil'])."</option>";
+}
+
+}
+ ?>
+ <option value="agregar">--Agregar estado civil--</option>
+?>
+</select>
 </td>
 <td>
 <label>Correo electrónico</label>

@@ -13,7 +13,6 @@
           <select class="form-control" id="cbo_tipo_usu_actualizar" name="tipo_usu">
             <option value="Asistente">Asistente</option>
             <option value="Doctor">Doctor</option>
-            <option value="Administrador">Administrador</option>
           </select>
           <label>Nombre de usuario</label>
           <input type="text" name="nom_usu" id="txt_nom_usu_actualizar" class="form-control" required>

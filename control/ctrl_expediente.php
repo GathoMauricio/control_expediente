@@ -485,9 +485,9 @@ function nuevoExpediente()
 
 	) VALUES (
 		'$_POST[fecha_reg]',
-		'".strtoupper($_POST['nombre_paci'])."',
-		'".strtoupper($_POST['paterno_paci'])."',
-		'".strtoupper($_POST['materno_paci'])."',
+		'".$_POST['nombre_paci']."',
+		'".$_POST['paterno_paci']."',
+		'".$_POST['materno_paci']."',
 		'$_POST[sex_paci]',
 		'$_POST[naci_paci]',
 		'$edad',
@@ -600,7 +600,7 @@ function nuevoExpediente()
 	//echo "Cons ".$insert_id;
 	if($insert_id > 0)
 	{
-		echo json_encode(array('error'=>0,'msg'=>'Se insertó el expediente con éxito<br>¿Desea enviar este expediente al buzón?','insert_id'=>$insert_id));
+		echo json_encode(array('error'=>0,'msg'=>'Se guardó el expediente con éxito<br>¿Desea enviar este expediente al buzón?','insert_id'=>$insert_id));
 	}else{
 		echo json_encode(array('error'=>1,'msg'=>'Ocurrió un error en la petición a la base de datos: '.$sql,'insert_id'=>0));
 	}

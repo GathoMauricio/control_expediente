@@ -18,7 +18,7 @@ $(function(){
 		  showCancelButton: true,
 		  confirmButtonClass: "btn-primary",
 		  confirmButtonText: "Enviar",
-		  cancelButtonText:"Cancelar",
+		  cancelButtonText:"No-Buzón",
 		  closeOnConfirm: true
 		},
 		function(){
@@ -103,21 +103,21 @@ $(function(){
 <tr>
 <td>
 <label>Teléfono de casa</label>
-<input type="number"  name="tel_cas" class="form-control" >
+<input type="text"  name="tel_cas" class="form-control" >
 </td>
 <td>
 <label>Teléfono celular</label>
-<input type="number"  name="tel_cel" class="form-control" >
+<input type="text"  name="tel_cel" class="form-control" >
 </td>
 </tr>
 <tr>
 <td>
 <label>Teléfono de oficina</label>
-<input type="number"  name="tel_ofi" class="form-control" >
+<input type="text"  name="tel_ofi" class="form-control" >
 </td>
 <td>
 <label>Teléfono otro</label>
-<input type="number"  name="tel_otro" class="form-control" >
+<input type="text"  name="tel_otro" class="form-control" >
 </td>
 </tr>
 </table>

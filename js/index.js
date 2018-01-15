@@ -217,7 +217,10 @@ function removerBuzon(id_expediente)
 function abrirExpediente(id_expediente)
 {
 	$("#id_expediente").prop('value',id_expediente);
-	$.post('includes/expediente.php?id_expediente='+id_expediente,{},function(data){ $("#contenedor").html(data); $(".busqueda").css('display','none');});
+	$.post('includes/expediente.php?id_expediente='+id_expediente,{},function(data){ 
+		$("#contenedor").html(data); $(".busqueda").css('display','none');
+		$("#tags").prop('value','');
+	});
 }
 function cerrarExpediente()
 {
