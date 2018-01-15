@@ -1,4 +1,15 @@
-
+/*::-webkit-scrollbar {
+    width: 20px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}*/	
 html,body{ 
   background: url(../img/background.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -8,6 +19,7 @@ html,body{
   background-color: black;
   margin:0px;
   height:100%;
+  -webkit-scrollbar-face-color: #1B86CE;
 }
 a{
 	font-size: 18px;
@@ -102,6 +114,7 @@ td{
 	overflow: scroll;
     overflow-x:hidden; 
     padding: 10px;
+    -webkit-scrollbar-face-color: #1B86CE;
 }
 .busqueda{
 	position: absolute;

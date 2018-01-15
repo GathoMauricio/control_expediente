@@ -76,7 +76,7 @@ if($_SESSION['tipo_usu']=='Doctor')
 </tr>
 </table>
  </center>
- <h2>INFORMACIÓN DE CONSULTA MÉDICA</h2>
+<center><h2 id="up">INFORMACIÓN DE CONSULTA MÉDICA.</h2></center>
 <form class="form" id="frm_actualizar_consulta">
 <input type="hidden" name="tipo_consulta" value="<?php echo $tipo_consulta;?>">
 <input type="hidden" name="id_consulta" value="<?php echo $_POST['id_consulta'];?>">

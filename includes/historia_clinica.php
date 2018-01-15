@@ -27,7 +27,7 @@ if($_SESSION['tipo_usu']=='Doctor')echo'
  ?>
  </tr>
 </table>
-<h4>Historia clínica.</h4>
+<center><h2 id="up">HISTORIA CLÍNICA.</h2></center>
 <form class="form" id="form_historia_clinica">
 <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">
 <table class="table" style="width:100%" id="historia_clinica">

@@ -59,6 +59,7 @@ if($_SESSION['tipo_usu']=='Doctor')
   }
   
 }
+echo '<td> <button onclick="cerrarExpediente();"  class="btn btn-primary" style="">Cerrar expediente</button> </td>';
  ?>
  </tr>
 </table>
@@ -67,10 +68,10 @@ if($_SESSION['tipo_usu']=='Doctor')
  <?php 
  if($num_cons<=0)
  {
- 	echo '<h2>PRIMER CONSULTA MÉDICA</h2>';
+ 	echo '<center><h2>PRIMER CONSULTA MÉDICA</h2></center>';
  	$tipo_consulta="primera";
  }else{
- 	echo '<h2>CONSULTA MÉDICA SUBSECUENTE</h2>';
+ 	echo '<center><h2>CONSULTA MÉDICA SUBSECUENTE</h2></center>';
  	$tipo_consulta="subsecuente";
  }
  ?>

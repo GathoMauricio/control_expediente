@@ -50,10 +50,11 @@ if($_SESSION['tipo_usu']=='Doctor')
   }
   
 }
+echo '<td> <button onclick="cerrarExpediente();"  class="btn btn-primary" style="">Cerrar expediente</button> </td>';
  ?>
  </tr>
 </table>
-<h4>Consultas.</h4>
+<center><h2 id="up">CONSULTAS.</h2></center>
 <br>
 <label>Paciente: </label> <?php echo $data['nombre_paci']." ".$data['paterno_paci']." ".$data['materno_paci']; ?>
 <br>

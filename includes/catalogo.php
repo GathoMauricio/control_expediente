@@ -1,5 +1,5 @@
 <br><br>
-<center> <h3>CATÁLOGO DE EXPEDIENTES</h3> </center>
+<center><h2 id="up">CATÁLOGO DE EXPEDIENTES.</h2></center>
 <table class="table table-hover">
 <tr>
 <th>N° Expediente</th>

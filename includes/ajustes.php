@@ -12,7 +12,7 @@
 <center>
 <br><br><br><br>
 <div class="ajustes">
-<h4>Menú de administración.</h4>
+<center><h2 id="up">MENÚ DE ADMINISTRACIÓN.</h2></center>
 Estas son las opciones que tenemos disponibles para el menú de administración.
 <br><br><br>
 <button style="width:100%;" class="btn btn-primary" onclick="openNuevoUsuario();"> 

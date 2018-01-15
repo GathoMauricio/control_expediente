@@ -17,7 +17,7 @@ $num_pase;
 if($fila=mysqli_fetch_array($datos)) $num_pase = $fila['num_pase'].' de '.$data['pase_tot'];
  ?>
 <center>
-<h2>EXPEDIENTE</h2>
+<center><h2 id="up">EXPEDIENTE.</h2></center>
 <div class="expediente">
 <table style="width:100%;">
 <tr>
@@ -42,6 +42,7 @@ if($_SESSION['tipo_usu']=='Doctor')
 	}
 	
 }
+echo '<td> <button onclick="cerrarExpediente();"  class="btn btn-primary" style="">Cerrar expediente</button> </td>';
  ?>
  </tr>
 </table>

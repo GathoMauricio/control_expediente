@@ -40,10 +40,11 @@ if($_SESSION['tipo_usu']=='Doctor')
   }
   
 }
+echo '<td> <button onclick="cerrarExpediente();"  class="btn btn-primary" style="">Cerrar expediente</button> </td>';
  ?>
  </tr>
 </table>
-<h4>Información general.</h4>
+<center><h2 id="up">INFORMACIÓN GENERAL.</h2></center>
 <form class="form" id="form_actualizar_paciente_doctor">
   <input type="hidden" name="id_paciente" value="<?php echo $data['id_paciente']; ?>">
 Estatus del expediente:

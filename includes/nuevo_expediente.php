@@ -33,7 +33,8 @@ $(function(){
   	});
 });
 </script>
-<h4 id="up">NUEVO EXPEDIENTE.</h4>
+<center><h2 id="up">NUEVO EXPEDIENTE.</h2></center>
+
 <form class="form" id="form_nuevo_paciente">
 <input type="hidden" name="edo_exp" value="Activo">
 <label>Fecha de registro</label><br>
